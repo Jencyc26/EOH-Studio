@@ -1,10 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EOH Studio</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      background:#0f172a;
+      color:white;
+      font-family:Arial, sans-serif;
+    }
+
+    nav{
+      display:flex;
+      justify-content:space-between;
+      padding:20px 50px;
+      background:#111827;
+    }
+
+    nav h1{
+      color:#3b82f6;
+    }
+
+    nav ul{
+      display:flex;
+      gap:20px;
+      list-style:none;
+    }
+
+    .hero{
+      height:90vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+    }
+
+    .hero h2{
+      font-size:60px;
+      margin-bottom:20px;
+    }
+
+    .hero p{
+      color:#94a3b8;
+      font-size:20px;
+      margin-bottom:30px;
+    }
+
+    button{
+      padding:14px 30px;
+      border:none;
+      border-radius:10px;
+      background:#2563eb;
+      color:white;
+      font-size:18px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#1d4ed8;
+    }
+
+  </style>
 </head>
+
 <body>
-  <h1>EOH Studio</h1>
-  <p>Website is live 🚀</p>
+
+  <nav>
+    <h1>EOH Studio</h1>
+
+    <ul>
+      <li>Home</li>
+      <li>Projects</li>
+      <li>About</li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h2>Create Beyond Limits</h2>
+
+    <p>Creative Engineering & AI Platform</p>
+
+    <button>Launch</button>
+  </section>
+
 </body>
 </html>
