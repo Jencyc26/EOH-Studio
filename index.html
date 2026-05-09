@@ -2,97 +2,178 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EOH Studio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
+<title>EOH Studio</title>
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+<style>
 
-    body{
-      background:#0f172a;
-      color:white;
-      font-family:Arial, sans-serif;
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-    nav{
-      display:flex;
-      justify-content:space-between;
-      padding:20px 50px;
-      background:#111827;
-    }
+body{
+background:#0a0a0a;
+color:white;
+font-family:Arial,sans-serif;
+}
 
-    nav h1{
-      color:#3b82f6;
-    }
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 50px;
+border-bottom:1px solid #d4af37;
+}
 
-    nav ul{
-      display:flex;
-      gap:20px;
-      list-style:none;
-    }
+nav h1{
+color:#d4af37;
+font-size:32px;
+}
 
-    .hero{
-      height:90vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-    }
+nav ul{
+display:flex;
+gap:25px;
+list-style:none;
+}
 
-    .hero h2{
-      font-size:60px;
-      margin-bottom:20px;
-    }
+nav li{
+cursor:pointer;
+color:#f5f5f5;
+}
 
-    .hero p{
-      color:#94a3b8;
-      font-size:20px;
-      margin-bottom:30px;
-    }
+.hero{
+height:90vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
 
-    button{
-      padding:14px 30px;
-      border:none;
-      border-radius:10px;
-      background:#2563eb;
-      color:white;
-      font-size:18px;
-      cursor:pointer;
-    }
+.hero h2{
+font-size:70px;
+color:#d4af37;
+margin-bottom:20px;
+}
 
-    button:hover{
-      background:#1d4ed8;
-    }
+.hero p{
+font-size:22px;
+max-width:700px;
+color:#cccccc;
+margin-bottom:40px;
+line-height:1.6;
+}
 
-  </style>
+.buttons{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+button{
+padding:15px 30px;
+border:none;
+border-radius:12px;
+font-size:18px;
+cursor:pointer;
+background:#d4af37;
+color:black;
+font-weight:bold;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+background:#f5d76e;
+}
+
+.features{
+padding:80px 50px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.card{
+border:1px solid #d4af37;
+padding:30px;
+border-radius:20px;
+background:#111111;
+}
+
+.card h3{
+color:#d4af37;
+margin-bottom:15px;
+}
+
+.card p{
+color:#cccccc;
+line-height:1.5;
+}
+
+</style>
 </head>
 
 <body>
 
-  <nav>
-    <h1>EOH Studio</h1>
+<nav>
+<h1>EOH Studio</h1>
 
-    <ul>
-      <li>Home</li>
-      <li>Projects</li>
-      <li>About</li>
-    </ul>
-  </nav>
+<ul>
+<li>Home</li>
+<li>Studio</li>
+<li>Characters</li>
+<li>Voice Lab</li>
+<li>Generator</li>
+</ul>
+</nav>
 
-  <section class="hero">
-    <h2>Create Beyond Limits</h2>
+<section class="hero">
 
-    <p>Creative Engineering & AI Platform</p>
+<h2>Create Beyond Imagination</h2>
 
-    <button>Launch</button>
-  </section>
+<p>
+AI-powered anime and cinematic production studio for character continuity,
+voice modulation, visual generation, emotional expression,
+lip sync, and story development.
+</p>
+
+<div class="buttons">
+<button>Launch Studio</button>
+<button>Upload Reference</button>
+</div>
+
+</section>
+
+<section class="features">
+
+<div class="card">
+<h3>Character Continuity</h3>
+<p>Store facial habits, expressions, outfits, emotions and maintain consistency.</p>
+</div>
+
+<div class="card">
+<h3>Voice Lab</h3>
+<p>Control voice modulation, emotion tone and lip syncing workflow.</p>
+</div>
+
+<div class="card">
+<h3>Visual Generator</h3>
+<p>Generate scenes using image references, prompts and cinematic direction.</p>
+</div>
+
+<div class="card">
+<h3>Story Engine</h3>
+<p>Build anime arcs, timelines, dialogue flow and world building systems.</p>
+</div>
+
+</section>
 
 </body>
 </html>
