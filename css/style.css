@@ -3,5 +3,30 @@ background:black;
 color:gold;
 font-family:Arial;
 text-align:center;
-padding-top:100px;
+padding-top:50px;
+}
+
+.upload-box{
+width:400px;
+margin:auto;
+padding:30px;
+border:2px solid gold;
+border-radius:20px;
+background:#111;
+}
+
+h1{
+margin-bottom:40px;
+}
+
+input{
+margin-top:20px;
+color:white;
+}
+
+#preview img{
+width:100%;
+margin-top:20px;
+border-radius:15px;
+border:2px solid gold;
 }
