@@ -1,22 +1,24 @@
 const imageUpload = document.getElementById("imageUpload");
 const preview = document.getElementById("preview");
 
-imageUpload.addEventListener("change", function(){
+imageUpload.addEventListener("change", function () {
 
-const file = this.files[0];
+    const file = this.files[0];
 
-if(file){
+    if (file) {
 
-const reader = new FileReader();
+        const reader = new FileReader();
 
-reader.onload = function(e){
+        reader.onload = function (e) {
 
-preview.innerHTML = `<img src="${e.target.result}">`;
+            preview.innerHTML = `
+                <img src="${e.target.result}" width="300">
+            `;
 
-}
+        };
 
-reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
 
-}
+    }
 
 });
