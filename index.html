@@ -8,48 +8,67 @@
 
 <title>EOH Studio</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+/* RESET */
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins',sans-serif;
 }
 
 body{
+
+font-family:'Poppins',sans-serif;
+
 background:#050505;
 color:white;
-overflow-x:hidden;
+
+overflow:hidden;
 }
 
-/* HEADER */
+/* APP */
 
-header{
-
+.app{
 display:flex;
-justify-content:space-between;
-align-items:center;
-
-padding:25px 40px;
-
-border-bottom:
-1px solid rgba(212,175,55,0.15);
+height:100vh;
 }
+
+/* SIDEBAR */
+
+.sidebar{
+
+width:270px;
+
+background:#0d0d0d;
+
+border-right:
+1px solid rgba(212,175,55,0.15);
+
+padding:25px 20px;
+}
+
+/* LOGO */
 
 .logo{
 
 display:flex;
 align-items:center;
-gap:15px;
+gap:14px;
+
+margin-bottom:45px;
 }
 
 .logo-circle{
 
-width:60px;
-height:60px;
+width:58px;
+height:58px;
 
 border-radius:50%;
 
@@ -72,19 +91,88 @@ color:black;
 
 .logo-text h1{
 color:#d4af37;
-font-size:28px;
+font-size:26px;
 }
 
 .logo-text p{
+font-size:12px;
 color:#888;
-font-size:13px;
+}
+
+/* NAVIGATION */
+
+.nav ul{
+list-style:none;
+}
+
+.nav li{
+
+padding:14px 16px;
+
+margin-bottom:10px;
+
+border-radius:14px;
+
+cursor:pointer;
+
+transition:0.3s;
+
+color:#ccc;
+}
+
+.nav li:hover,
+.nav .active{
+
+background:
+linear-gradient(
+145deg,
+#d4af37,
+#f1cc56
+);
+
+color:black;
+font-weight:600;
+}
+
+/* MAIN */
+
+.main{
+
+flex:1;
+
+padding:35px;
+
+overflow-y:auto;
+}
+
+/* TOPBAR */
+
+.topbar{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+margin-bottom:40px;
+}
+
+.topbar h2{
+
+font-size:36px;
+color:#d4af37;
+
+margin-bottom:8px;
+}
+
+.topbar p{
+color:#888;
 }
 
 /* BUTTON */
 
-.create-btn{
+.primary-btn{
 
-padding:14px 20px;
+padding:14px 22px;
 
 border:none;
 
@@ -102,50 +190,26 @@ color:black;
 font-weight:600;
 
 cursor:pointer;
+
+transition:0.3s;
 }
 
-/* HERO */
-
-.hero{
-
-padding:80px 40px;
-text-align:center;
+.primary-btn:hover{
+transform:translateY(-3px);
 }
 
-.hero h2{
+/* PROJECT GRID */
 
-font-size:58px;
-
-color:#d4af37;
-
-margin-bottom:20px;
-}
-
-.hero p{
-
-max-width:800px;
-
-margin:auto;
-
-line-height:1.8;
-
-color:#999;
-
-font-size:17px;
-}
-
-/* GRID */
-
-.grid{
+.project-grid{
 
 display:grid;
 
 grid-template-columns:
-repeat(auto-fit,minmax(280px,1fr));
+repeat(auto-fit,minmax(300px,1fr));
 
 gap:25px;
 
-padding:40px;
+margin-bottom:35px;
 }
 
 /* CARD */
@@ -154,7 +218,7 @@ padding:40px;
 
 background:#111;
 
-padding:30px;
+padding:28px;
 
 border-radius:22px;
 
@@ -171,11 +235,43 @@ transform:translateY(-5px);
 border-color:#d4af37;
 }
 
+/* PLUS BOX */
+
+.plus{
+
+width:60px;
+height:60px;
+
+border-radius:16px;
+
+background:
+linear-gradient(
+145deg,
+#d4af37,
+#f1cc56
+);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:34px;
+font-weight:700;
+
+color:black;
+
+margin-bottom:18px;
+}
+
+/* CARD TEXT */
+
 .card h3{
 
 color:#d4af37;
 
-margin-bottom:15px;
+margin-bottom:12px;
+
+font-size:22px;
 }
 
 .card p{
@@ -183,17 +279,90 @@ margin-bottom:15px;
 color:#999;
 
 line-height:1.7;
+
+font-size:14px;
+}
+
+/* FEATURE GRID */
+
+.feature-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(240px,1fr));
+
+gap:20px;
+}
+
+.feature{
+
+background:#111;
+
+padding:22px;
+
+border-radius:18px;
+
+border:
+1px solid rgba(212,175,55,0.15);
+
+transition:0.3s;
+}
+
+.feature:hover{
+
+transform:translateY(-4px);
+
+border-color:#d4af37;
+}
+
+.feature h4{
+
+color:#d4af37;
+
+margin-bottom:10px;
+}
+
+.feature p{
+
+color:#999;
+
+font-size:14px;
+
+line-height:1.6;
 }
 
 /* FOOTER */
 
-footer{
+.footer{
 
-padding:30px;
+margin-top:50px;
 
 text-align:center;
 
 color:#666;
+
+font-size:13px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.sidebar{
+display:none;
+}
+
+.main{
+padding:20px;
+}
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:20px;
+}
+
 }
 
 </style>
@@ -202,7 +371,11 @@ color:#666;
 
 <body>
 
-<header>
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
 
 <div class="logo">
 
@@ -222,104 +395,197 @@ Turn your writing into visuals.
 
 </div>
 
-<button class="create-btn">
-Launch Studio
-</button>
+<nav class="nav">
 
-</header>
+<ul>
 
-<section class="hero">
+<li class="active">
+🏠 Dashboard
+</li>
+
+<li>
+📁 Projects
+</li>
+
+<li>
+👤 Characters
+</li>
+
+<li>
+🌍 World Engine
+</li>
+
+<li>
+📖 Story Engine
+</li>
+
+<li>
+🎬 Generator
+</li>
+
+<li>
+🎤 Voice Lab
+</li>
+
+<li>
+🖼 Assets
+</li>
+
+<li>
+⚙ Settings
+</li>
+
+</ul>
+
+</nav>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main">
+
+<div class="topbar">
+
+<div>
 
 <h2>
-AI Cinematic Creation Platform
+Creative Dashboard
 </h2>
 
 <p>
+AI cinematic creation workspace
+</p>
 
-Create anime worlds, cinematic stories,
-character continuity, emotions,
-voice systems, visual generation,
-and intelligent storytelling workflows.
+</div>
+
+<button class="primary-btn">
++ Create Project
+</button>
+
+</div>
+
+<!-- PROJECTS -->
+
+<section class="project-grid">
+
+<div class="card">
+
+<div class="plus">
++
+</div>
+
+<h3>
+Create Your Own Project
+</h3>
+
+<p>
+
+Store worlds, anime styles,
+stories, character emotions,
+continuity memory,
+background systems,
+and cinematic logic.
 
 </p>
+
+</div>
 
 </section>
 
-<section class="grid">
+<!-- FEATURES -->
 
-<div class="card">
+<section class="feature-grid">
 
-<h3>World Engine</h3>
+<div class="feature">
+
+<h4>
+🌍 World Engine
+</h4>
 
 <p>
-Create countries, timelines,
-cultures and environmental systems.
+Create timeline, cultures,
+countries and cinematic worlds.
 </p>
 
 </div>
 
-<div class="card">
+<div class="feature">
 
-<h3>Character Engine</h3>
+<h4>
+👤 Character Engine
+</h4>
 
 <p>
-Store emotions, outfits,
-habits and continuity logic.
+Store habits, emotions,
+expressions and continuity.
 </p>
 
 </div>
 
-<div class="card">
+<div class="feature">
 
-<h3>Story Engine</h3>
+<h4>
+📖 Story Engine
+</h4>
 
 <p>
-Write cinematic scripts,
-dialogues and timeline systems.
+Store scripts,
+dialogues and cinematic scenes.
 </p>
 
 </div>
 
-<div class="card">
+<div class="feature">
 
-<h3>Visual Generator</h3>
+<h4>
+🎬 Generator
+</h4>
 
 <p>
 Generate visuals and videos
-using continuity-aware systems.
+using AI continuity systems.
 </p>
 
 </div>
 
-<div class="card">
+<div class="feature">
 
-<h3>Voice Lab</h3>
+<h4>
+🎤 Voice Lab
+</h4>
 
 <p>
-Voice modulation,
-lip syncing and emotion workflows.
+English + Tamil voice support,
+emotion tone and lip sync.
 </p>
 
 </div>
 
-<div class="card">
+<div class="feature">
 
-<h3>Asset Storage</h3>
+<h4>
+🖼 Assets
+</h4>
 
 <p>
-Store references, backgrounds,
-PNG assets and cinematic data.
+Store PNG references,
+backgrounds and cinematic assets.
 </p>
 
 </div>
 
 </section>
 
-<footer>
+<div class="footer">
 
 EOH Studio © 2026
 
-</footer>
+</div>
+
+</main>
+
+</div>
 
 </body>
 
