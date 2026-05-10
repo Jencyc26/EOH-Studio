@@ -1,312 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>EOH Studio</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-background:#050505;
-color:white;
-}
-
-/* MAIN */
-
-.main{
-padding:40px;
-}
-
-/* TOP */
-
-.topbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:40px;
-}
-
-.logo h1{
-color:#d4af37;
-font-size:32px;
-}
-
-.logo p{
-color:#888;
-font-size:13px;
-margin-top:5px;
-}
-
-.create-btn{
-
-padding:14px 20px;
-
-border:none;
-
-border-radius:12px;
-
-background:
-linear-gradient(
-145deg,
-#d4af37,
-#f1cc56
-);
-
-color:black;
-
-font-weight:600;
-
-cursor:pointer;
-}
-
-/* PROJECT GRID */
-
-.project-grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(260px,1fr));
-
-gap:20px;
-}
-
-/* CARD */
-
-.card{
-
-background:#111;
-
-padding:25px;
-
-border-radius:18px;
-
-border:
-1px solid rgba(212,175,55,0.2);
-
-cursor:pointer;
-
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-4px);
-border-color:#d4af37;
-}
-
-.plus{
-
-width:55px;
-height:55px;
-
-border-radius:14px;
-
-background:
-linear-gradient(
-145deg,
-#d4af37,
-#f1cc56
-);
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-font-size:32px;
-font-weight:700;
-
-color:black;
-
-margin-bottom:15px;
-}
-
-.card h2{
-color:#d4af37;
-margin-bottom:10px;
-}
-
-.card p{
-color:#999;
-font-size:14px;
-line-height:1.6;
-}
-
-/* MODAL */
-
-.modal{
-
-position:fixed;
-
-top:0;
-left:0;
-
-width:100%;
-height:100%;
-
-background:rgba(0,0,0,0.7);
-
-display:none;
-
-justify-content:center;
-align-items:center;
-}
-
-.modal-box{
-
-width:350px;
-
-background:#111;
-
-padding:25px;
-
-border-radius:18px;
-
-border:
-1px solid rgba(212,175,55,0.25);
-}
-
-.modal-box h2{
-color:#d4af37;
-margin-bottom:20px;
-}
-
-.modal-box input,
-.modal-box select{
-
-width:100%;
-
-padding:12px;
-
-margin-bottom:12px;
-
-border:none;
-
-border-radius:10px;
-
-background:#1b1b1b;
-
-color:white;
-}
-
-.submit-btn{
-
-width:100%;
-
-padding:12px;
-
-border:none;
-
-border-radius:12px;
-
-background:
-linear-gradient(
-145deg,
-#d4af37,
-#f1cc56
-);
-
-color:black;
-
-font-weight:600;
-
-cursor:pointer;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="main">
-
-<!-- TOPBAR -->
-
-<div class="topbar">
-
-<div class="logo">
-
-<h1>EOH Studio</h1>
-
-<p>
-Turn your writing into visuals.
+Create stories, worlds, anime systems,
+continuity and cinematic projects.
 </p>
+</div>
+
+</section>
+
+<section class="feature-grid">
+
+<div class="feature-card">
+<h3>World Engine</h3>
+<p>Create timelines and cultures.</p>
+</div>
+
+<div class="feature-card">
+<h3>Character Engine</h3>
+<p>Store expressions and habits.</p>
+</div>
+
+<div class="feature-card">
+<h3>Story Engine</h3>
+<p>Write cinematic stories.</p>
+</div>
+
+<div class="feature-card">
+<h3>Generator</h3>
+<p>Generate visuals and videos.</p>
+</div>
+
+</section>
+
+</main>
 
 </div>
 
-<button class="create-btn" id="openModal">
-+ Create Project
-</button>
-
-</div>
-
-<!-- PROJECTS -->
-
-<div class="project-grid" id="projectGrid">
-
-<div class="card">
-
-<div class="plus">
-+
-</div>
-
-<h2>Create Universe</h2>
-
-<p>
-Build worlds, stories,
-characters and cinematic systems.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- MODAL -->
-
-<div class="modal" id="modal">
+<div class="modal" id="projectModal">
 
 <div class="modal-box">
 
-<h2>New Project</h2>
+<h2>Create New Project</h2>
 
-<input
-type="text"
-id="projectName"
-placeholder="Project Name"
->
+<input type="text" id="projectName" placeholder="Project Name">
 
 <select id="projectStyle">
-
 <option>Fantasy Anime</option>
 <option>Cyberpunk</option>
 <option>Realistic</option>
-
+<option>Dark Fantasy</option>
 </select>
 
 <select id="projectWorld">
-
 <option>Fictional</option>
 <option>Sci-Fi</option>
 <option>Historical</option>
-
 </select>
 
-<button class="submit-btn" id="createProject">
+<button id="createProject" class="primary-btn full-btn">
 Create Project
 </button>
 
@@ -314,144 +63,11 @@ Create Project
 
 </div>
 
-<script>
-
-/* ELEMENTS */
-
-const modal =
-document.getElementById("modal");
-
-const openModal =
-document.getElementById("openModal");
-
-const createProject =
-document.getElementById("createProject");
-
-const projectGrid =
-document.getElementById("projectGrid");
-
-/* STORAGE */
-
-let projects =
-JSON.parse(localStorage.getItem("eoh-projects"))
-|| [];
-
-/* RENDER */
-
-function renderProjects(){
-
-document.querySelectorAll(".generated")
-.forEach(card => card.remove());
-
-projects.forEach(project => {
-
-const card =
-document.createElement("div");
-
-card.classList.add(
-"card",
-"generated"
-);
-
-card.innerHTML = `
-
-<h2>${project.name}</h2>
-
-<p>
-${project.style}<br>
-${project.world}
-</p>
-
-`;
-
-/* OPEN PROJECT */
-
-card.onclick = () => {
-
-localStorage.setItem(
-"current-project",
-JSON.stringify(project)
-);
-
-window.location.href =
-"pages/project.html";
-
-};
-
-projectGrid.appendChild(card);
-
-});
-
-}
-
-/* INITIAL */
-
-renderProjects();
-
-/* OPEN MODAL */
-
-openModal.onclick = () => {
-
-modal.style.display = "flex";
-
-};
-
-/* CLOSE */
-
-window.onclick = (e) => {
-
-if(e.target === modal){
-
-modal.style.display = "none";
-
-}
-
-};
-
-/* CREATE */
-
-createProject.onclick = () => {
-
-const name =
-document.getElementById("projectName").value;
-
-const style =
-document.getElementById("projectStyle").value;
-
-const world =
-document.getElementById("projectWorld").value;
-
-if(name === ""){
-
-alert("Enter project name");
-
-return;
-
-}
-
-const newProject = {
-
-name,
-style,
-world
-
-};
-
-projects.push(newProject);
-
-localStorage.setItem(
-"eoh-projects",
-JSON.stringify(projects)
-);
-
-renderProjects();
-
-modal.style.display = "none";
-
-};
-
-</script>
+<script src="js/storage.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/projects.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/app.js"></script>
 
 </body>
-
 </html>
