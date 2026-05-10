@@ -22,47 +22,30 @@ box-sizing:border-box;
 }
 
 body{
-
 font-family:'Poppins',sans-serif;
-
 background:#050505;
 color:white;
-
 overflow:hidden;
 }
 
-/* MAIN */
-
 .workspace{
-
 padding:35px;
-
 height:100vh;
-
 overflow-y:auto;
 }
 
-/* TOPBAR */
-
 .topbar{
-
 display:flex;
 justify-content:space-between;
 align-items:center;
-
 margin-bottom:40px;
-
 flex-wrap:wrap;
-
 gap:15px;
 }
 
 .project-title h1{
-
 font-size:40px;
-
 color:#d4af37;
-
 margin-bottom:8px;
 }
 
@@ -70,189 +53,110 @@ margin-bottom:8px;
 color:#888;
 }
 
-/* BUTTONS */
-
 .button-group{
-
 display:flex;
 gap:12px;
-
 flex-wrap:wrap;
 }
 
 .btn{
-
 padding:14px 20px;
-
 border:none;
-
 border-radius:14px;
-
 cursor:pointer;
-
 font-weight:600;
-
 transition:0.3s;
 }
 
 .gold-btn{
-
-background:
-linear-gradient(
-145deg,
-#d4af37,
-#f1cc56
-);
-
+background:linear-gradient(145deg,#d4af37,#f1cc56);
 color:black;
 }
 
 .dark-btn{
-
 background:#151515;
-
 color:#d4af37;
-
-border:
-1px solid rgba(212,175,55,0.2);
+border:1px solid rgba(212,175,55,0.2);
 }
 
 .btn:hover{
 transform:translateY(-3px);
 }
 
-/* GRID */
-
 .module-grid{
-
 display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(260px,1fr));
-
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:24px;
-
 margin-bottom:40px;
 }
 
-/* MODULE CARD */
-
 .module{
-
 background:#111;
-
 padding:28px;
-
 border-radius:22px;
-
-border:
-1px solid rgba(212,175,55,0.15);
-
+border:1px solid rgba(212,175,55,0.15);
 transition:0.3s;
-
 cursor:pointer;
-
 position:relative;
 }
 
 .module:hover{
-
 transform:translateY(-5px);
-
 border-color:#d4af37;
 }
 
 .module h2{
-
 color:#d4af37;
-
 margin-bottom:14px;
-
 font-size:24px;
 }
 
 .module p{
-
 color:#999;
-
 line-height:1.7;
-
 font-size:14px;
 }
 
-/* STATUS */
-
 .status{
-
 display:inline-block;
-
 margin-top:18px;
-
 padding:8px 14px;
-
 border-radius:30px;
-
 background:#1b1b1b;
-
 color:#d4af37;
-
 font-size:12px;
 }
 
-/* INFO GRID */
-
 .info-grid{
-
 display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(240px,1fr));
-
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
 gap:20px;
 }
 
 .info-card{
-
 background:#111;
-
 padding:22px;
-
 border-radius:18px;
-
-border:
-1px solid rgba(212,175,55,0.15);
+border:1px solid rgba(212,175,55,0.15);
 }
 
 .info-card h3{
-
 color:#d4af37;
-
 margin-bottom:12px;
 }
 
 .info-card p{
-
 color:#999;
-
 line-height:1.7;
-
 font-size:14px;
 }
 
-/* FOOTER */
-
 .footer{
-
 margin-top:60px;
-
 text-align:center;
-
 color:#666;
-
 font-size:13px;
 }
-
-/* RESPONSIVE */
 
 @media(max-width:900px){
 
@@ -317,21 +221,20 @@ AI cinematic continuity workspace
 
 <section class="module-grid">
 
-<div class="module">
+<div class="module"
+onclick="openPage('world.html')">
 
 <h2>
 🌍 World Engine
 </h2>
 
 <p>
-
 Store cultures,
 countries,
 timelines,
 politics,
 environment
 and world rules.
-
 </p>
 
 <span class="status">
@@ -340,21 +243,20 @@ Core System
 
 </div>
 
-<div class="module">
+<div class="module"
+onclick="openPage('characters.html')">
 
 <h2>
 👤 Character Engine
 </h2>
 
 <p>
-
 Store emotions,
 habits,
 expressions,
 relationships,
 continuity
 and personalities.
-
 </p>
 
 <span class="status">
@@ -363,20 +265,19 @@ Character Database
 
 </div>
 
-<div class="module">
+<div class="module"
+onclick="openPage('story.html')">
 
 <h2>
 📖 Story Engine
 </h2>
 
 <p>
-
 Store screenplay,
 episodes,
 dialogues,
 scene flow
 and cinematic writing.
-
 </p>
 
 <span class="status">
@@ -385,20 +286,19 @@ Story Storage
 
 </div>
 
-<div class="module">
+<div class="module"
+onclick="openPage('timeline.html')">
 
 <h2>
 🕒 Timeline
 </h2>
 
 <p>
-
 Track events,
 history,
 scene order,
 world continuity
 and progression logic.
-
 </p>
 
 <span class="status">
@@ -407,21 +307,20 @@ Timeline Logic
 
 </div>
 
-<div class="module">
+<div class="module"
+onclick="openPage('assets.html')">
 
 <h2>
 🖼 Assets
 </h2>
 
 <p>
-
 Store PNG images,
 references,
 backgrounds,
 flags,
 costumes
 and environments.
-
 </p>
 
 <span class="status">
@@ -430,20 +329,19 @@ Asset Manager
 
 </div>
 
-<div class="module">
+<div class="module"
+onclick="openPage('generator.html')">
 
 <h2>
 🎬 Generator
 </h2>
 
 <p>
-
 Generate visuals,
 videos,
 image-to-video,
 AI cinematic scenes
 and continuity-aware outputs.
-
 </p>
 
 <span class="status">
@@ -452,19 +350,18 @@ AI Ready
 
 </div>
 
-<div class="module">
+<div class="module"
+onclick="openPage('voice.html')">
 
 <h2>
 🎤 Voice Lab
 </h2>
 
 <p>
-
 Tamil + English voice systems,
 emotion tones,
 voice cloning
 and lip sync workflow.
-
 </p>
 
 <span class="status">
@@ -473,20 +370,19 @@ Experimental
 
 </div>
 
-<div class="module">
+<div class="module"
+onclick="openPage('comic.html')">
 
 <h2>
 📚 Comic Studio
 </h2>
 
 <p>
-
 Create comic pages,
 panels,
 speech bubbles,
 layouts
 and manga flow systems.
-
 </p>
 
 <span class="status">
@@ -508,12 +404,10 @@ Creative System
 </h3>
 
 <p>
-
 Future AI memory system
 will track logic,
 scene continuity
 and emotional consistency.
-
 </p>
 
 </div>
@@ -525,11 +419,9 @@ and emotional consistency.
 </h3>
 
 <p>
-
 Google cloud integration
 can later protect
 projects and assets safely.
-
 </p>
 
 </div>
@@ -541,11 +433,9 @@ projects and assets safely.
 </h3>
 
 <p>
-
 Current version stores
 project structure locally
 inside browser memory.
-
 </p>
 
 </div>
@@ -553,9 +443,7 @@ inside browser memory.
 </section>
 
 <div class="footer">
-
 EOH Studio Workspace © 2026
-
 </div>
 
 </div>
@@ -580,9 +468,6 @@ currentProject.name;
 }
 
 /* UNDO / REDO */
-
-let undoStack = [];
-let redoStack = [];
 
 const undoBtn =
 document.getElementById("undoBtn");
@@ -612,6 +497,14 @@ function goBack(){
 
 window.location.href =
 "../index.html";
+
+}
+
+/* OPEN PAGE */
+
+function openPage(page){
+
+window.location.href = page;
 
 }
 
