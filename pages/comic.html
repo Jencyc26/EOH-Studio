@@ -1,1 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EOH Comic Engine</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#050505;
+color:white;
+}
+
+/* MAIN */
+
+.container{
+padding:35px;
+}
+
+/* TOPBAR */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:40px;
+flex-wrap:wrap;
+gap:15px;
+}
+
+.title h1{
+font-size:38px;
+color:#d4af37;
+margin-bottom:8px;
+}
+
+.title p{
+color:#888;
+}
+
+/* BUTTONS */
+
+.button-group{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:14px 18px;
+border:none;
+border-radius:14px;
+cursor:pointer;
+font-weight:600;
+transition:0.3s;
+}
+
+.gold-btn{
+background:linear-gradient(145deg,#d4af37,#f1cc56);
+color:black;
+}
+
+.dark-btn{
+background:#151515;
+color:#d4af37;
+border:1px solid rgba(212,175,55,0.2);
+}
+
+.btn:hover{
+transform:translateY(-3px);
+}
+
+/* LAYOUT */
+
+.comic-layout{
+display:grid;
+grid-template-columns:380px 1fr;
+gap:25px;
+}
+
+/* PANEL */
+
+.panel{
+background:#111;
+border-radius:24px;
+padding:25px;
+border:1px solid rgba(212,175,55,0.15);
+}
+
+/* TITLE */
+
+.section-title{
+font-size:22px;
+color:#d4af37;
+margin-bottom:18px;
+}
+
+/* INPUTS */
+
+textarea,
+input,
+select{
+
+width:100%;
+padding:14px;
+margin-bottom:14px;
+
+border:none;
+border-radius:14px;
+
+background:#1a1a1a;
+color:white;
+
+font-family:'Poppins',sans-serif;
+}
+
+textarea{
+resize:none;
+height:120px;
+}
+
+/* CANVAS */
+
+.comic-preview{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+}
+
+/* FRAME */
+
+.frame{
+background:#0d0d0d;
+border:2px solid rgba(212,175,55,0.15);
+border-radius:18px;
+padding:15px;
+min-height:260px;
+position:relative;
+overflow:hidden;
+transition:0.3s;
+}
+
+.frame:hover{
+border-color:#d4af37;
+}
+
+/* IMAGE */
+
+.frame-image{
+height:150px;
+border-radius:14px;
+background:linear-gradient(145deg,#1b1b1b,#0a0a0a);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+color:#666;
+font-size:13px;
+
+margin-bottom:14px;
+}
+
+/* DIALOGUE */
+
+.dialogue{
+background:white;
+color:black;
+padding:12px;
+border-radius:18px;
+font-size:13px;
+margin-bottom:10px;
+line-height:1.6;
+}
+
+/* NARRATION */
+
+.narration{
+background:#d4af37;
+color:black;
+padding:10px;
+border-radius:12px;
+font-size:12px;
+font-weight:600;
+}
+
+/* FOOTER */
+
+.footer{
+margin-top:50px;
+text-align:center;
+color:#666;
+font-size:13px;
+}
+
+@media(max-width:1000px){
+
+.comic-layout{
+grid-template-columns:1fr;
+}
+
+.comic-preview{
+grid-template-columns:1fr;
+}
+
+.container{
+padding:20px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+<div class="title">
+
+<h1>
+🖋 Comic Engine
+</h1>
+
+<p>
+Create manga panels and cinematic comic layouts
+</p>
+
+</div>
+
+<div class="button-group">
+
+<button
+class="btn dark-btn"
+onclick="goBack()">
+
+← Workspace
+
+</button>
+
+<button
+class="btn gold-btn"
+onclick="generateComic()">
+
+Generate Comic
+
+</button>
+
+</div>
+
+</div>
+
+<!-- LAYOUT -->
+
+<div class="comic-layout">
+
+<!-- LEFT -->
+
+<div class="panel">
+
+<h2 class="section-title">
+Comic Controls
+</h2>
+
+<input
+type="text"
+id="comicTitle"
+placeholder="Comic Chapter Title"
+>
+
+<select id="comicStyle">
+
+<option>Anime Style</option>
+<option>Manga Black & White</option>
+<option>Cinematic Comic</option>
+<option>Webtoon</option>
+
+</select>
+
+<select id="panelLayout">
+
+<option>2 Panel</option>
+<option>4 Panel</option>
+<option>Storyboard Layout</option>
+
+</select>
+
+<textarea
+id="sceneDescription"
+placeholder="Scene Description"
+></textarea>
+
+<input
+type="text"
+id="characters"
+placeholder="Characters"
+>
+
+<textarea
+id="dialogueText"
+placeholder="Dialogue"
+></textarea>
+
+<textarea
+id="narrationText"
+placeholder="Narration"
+></textarea>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="panel">
+
+<h2 class="section-title">
+Comic Preview
+</h2>
+
+<div
+class="comic-preview"
+id="comicPreview">
+
+<div class="frame">
+
+<div class="frame-image">
+EOH Visual Frame
+</div>
+
+<div class="dialogue">
+Dialogue appears here
+</div>
+
+<div class="narration">
+Narration appears here
+</div>
+
+</div>
+
+<div class="frame">
+
+<div class="frame-image">
+Continuity Frame
+</div>
+
+<div class="dialogue">
+Character emotion
+</div>
+
+<div class="narration">
+Cinematic pacing
+</div>
+
+</div>
+
+<div class="frame">
+
+<div class="frame-image">
+Storyboarding
+</div>
+
+<div class="dialogue">
+Scene movement
+</div>
+
+<div class="narration">
+World continuity
+</div>
+
+</div>
+
+<div class="frame">
+
+<div class="frame-image">
+Final Frame
+</div>
+
+<div class="dialogue">
+Ending panel
+</div>
+
+<div class="narration">
+Transition setup
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+EOH Comic Engine © 2026
+</div>
+
+</div>
+
+<script>
+
+/* BACK */
+
+function goBack(){
+
+window.location.href =
+"project.html";
+
+}
+
+/* GENERATE */
+
+function generateComic(){
+
+const title =
+document.getElementById("comicTitle")
+.value;
+
+const style =
+document.getElementById("comicStyle")
+.value;
+
+const scene =
+document.getElementById("sceneDescription")
+.value;
+
+const characters =
+document.getElementById("characters")
+.value;
+
+const dialogue =
+document.getElementById("dialogueText")
+.value;
+
+const narration =
+document.getElementById("narrationText")
+.value;
+
+const preview =
+document.getElementById("comicPreview");
+
+preview.innerHTML = `
+
+<div class="frame">
+
+<div class="frame-image">
+${style}
+</div>
+
+<div class="dialogue">
+${dialogue || "Dialogue"}
+</div>
+
+<div class="narration">
+${narration || "Narration"}
+</div>
+
+</div>
+
+<div class="frame">
+
+<div class="frame-image">
+${characters || "Characters"}
+</div>
+
+<div class="dialogue">
+${scene || "Scene"}
+</div>
+
+<div class="narration">
+EOH continuity applied
+</div>
+
+</div>
+
+<div class="frame">
+
+<div class="frame-image">
+Cinematic Camera
+</div>
+
+<div class="dialogue">
+Emotion tracking enabled
+</div>
+
+<div class="narration">
+Timeline synchronized
+</div>
+
+</div>
+
+<div class="frame">
+
+<div class="frame-image">
+Final Composition
+</div>
+
+<div class="dialogue">
+${title || "Comic"}
+</div>
+
+<div class="narration">
+Ready for export
+</div>
+
+</div>
+
+`;
+
+}
+
+</script>
+
+</body>
+
+</html>
