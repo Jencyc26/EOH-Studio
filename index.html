@@ -168,7 +168,12 @@ margin-bottom:8px;
 color:#888;
 }
 
-/* BUTTON */
+/* BUTTONS */
+
+.button-group{
+display:flex;
+gap:12px;
+}
 
 .primary-btn{
 
@@ -196,6 +201,26 @@ transition:0.3s;
 
 .primary-btn:hover{
 transform:translateY(-3px);
+}
+
+.undo-btn{
+
+padding:14px 18px;
+
+border:none;
+
+border-radius:14px;
+
+background:#1b1b1b;
+
+color:#d4af37;
+
+font-weight:600;
+
+cursor:pointer;
+
+border:
+1px solid rgba(212,175,55,0.2);
 }
 
 /* PROJECT GRID */
@@ -227,7 +252,7 @@ border:
 
 transition:0.3s;
 
-cursor:pointer;
+position:relative;
 }
 
 .card:hover{
@@ -237,7 +262,29 @@ transform:translateY(-5px);
 border-color:#d4af37;
 }
 
-/* PLUS BOX */
+/* DELETE */
+
+.delete-btn{
+
+position:absolute;
+
+top:18px;
+right:18px;
+
+background:#2a0000;
+
+border:none;
+
+color:#ff6b6b;
+
+padding:8px 10px;
+
+border-radius:10px;
+
+cursor:pointer;
+}
+
+/* PLUS */
 
 .plus{
 
@@ -265,7 +312,7 @@ color:black;
 margin-bottom:18px;
 }
 
-/* CARD TEXT */
+/* TEXT */
 
 .card h3{
 
@@ -285,7 +332,7 @@ line-height:1.7;
 font-size:14px;
 }
 
-/* FEATURE GRID */
+/* FEATURES */
 
 .feature-grid{
 
@@ -494,13 +541,21 @@ AI cinematic creation workspace
 
 </div>
 
+<div class="button-group">
+
+<button class="undo-btn" id="undoBtn">
+↩ Undo Delete
+</button>
+
 <button class="primary-btn" id="openModal">
 + Create Project
 </button>
 
 </div>
 
-<!-- PROJECTS -->
+</div>
+
+<!-- PROJECT GRID -->
 
 <section class="project-grid" id="projectGrid">
 
@@ -662,11 +717,27 @@ document.getElementById("createProject");
 const projectGrid =
 document.getElementById("projectGrid");
 
+const undoBtn =
+document.getElementById("undoBtn");
+
 /* STORAGE */
 
 let projects =
 JSON.parse(localStorage.getItem("eoh-projects"))
 || [];
+
+let deletedProject = null;
+
+/* SAVE */
+
+function saveProjects(){
+
+localStorage.setItem(
+"eoh-projects",
+JSON.stringify(projects)
+);
+
+}
 
 /* RENDER */
 
@@ -675,7 +746,7 @@ function renderProjects(){
 document.querySelectorAll(".generated")
 .forEach(card => card.remove());
 
-projects.forEach(project => {
+projects.forEach((project,index) => {
 
 const card =
 document.createElement("div");
@@ -687,6 +758,10 @@ card.classList.add(
 
 card.innerHTML = `
 
+<button class="delete-btn">
+✕
+</button>
+
 <h3>${project.name}</h3>
 
 <p>
@@ -695,6 +770,37 @@ ${project.world}
 </p>
 
 `;
+
+/* OPEN WORKSPACE */
+
+card.onclick = () => {
+
+localStorage.setItem(
+"current-project",
+JSON.stringify(project)
+);
+
+window.location.href =
+"pages/project.html";
+
+};
+
+/* DELETE */
+
+card.querySelector(".delete-btn")
+.onclick = (e) => {
+
+e.stopPropagation();
+
+deletedProject = project;
+
+projects.splice(index,1);
+
+saveProjects();
+
+renderProjects();
+
+};
 
 projectGrid.appendChild(card);
 
@@ -757,14 +863,29 @@ world
 
 projects.push(newProject);
 
-localStorage.setItem(
-"eoh-projects",
-JSON.stringify(projects)
-);
+saveProjects();
 
 renderProjects();
 
 modal.style.display = "none";
+
+};
+
+/* UNDO DELETE */
+
+undoBtn.onclick = () => {
+
+if(deletedProject){
+
+projects.push(deletedProject);
+
+saveProjects();
+
+renderProjects();
+
+deletedProject = null;
+
+}
 
 };
 
