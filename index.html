@@ -15,8 +15,6 @@
 
 <style>
 
-/* RESET */
-
 *{
 margin:0;
 padding:0;
@@ -99,7 +97,7 @@ font-size:12px;
 color:#888;
 }
 
-/* NAVIGATION */
+/* NAV */
 
 .nav ul{
 list-style:none;
@@ -253,6 +251,8 @@ border:
 transition:0.3s;
 
 position:relative;
+
+cursor:pointer;
 }
 
 .card:hover{
@@ -262,7 +262,7 @@ transform:translateY(-5px);
 border-color:#d4af37;
 }
 
-/* DELETE */
+/* DELETE BUTTON */
 
 .delete-btn{
 
@@ -276,6 +276,28 @@ background:#2a0000;
 border:none;
 
 color:#ff6b6b;
+
+padding:8px 10px;
+
+border-radius:10px;
+
+cursor:pointer;
+}
+
+/* DUPLICATE BUTTON */
+
+.duplicate-btn{
+
+position:absolute;
+
+top:18px;
+right:60px;
+
+background:#111827;
+
+border:none;
+
+color:#7dd3fc;
 
 padding:8px 10px;
 
@@ -762,6 +784,10 @@ card.innerHTML = `
 ✕
 </button>
 
+<button class="duplicate-btn">
+⧉
+</button>
+
 <h3>${project.name}</h3>
 
 <p>
@@ -795,6 +821,47 @@ e.stopPropagation();
 deletedProject = project;
 
 projects.splice(index,1);
+
+saveProjects();
+
+renderProjects();
+
+};
+
+/* DUPLICATE */
+
+card.querySelector(".duplicate-btn")
+.onclick = (e) => {
+
+e.stopPropagation();
+
+let copyName =
+project.name + " Copy";
+
+let counter = 2;
+
+while(
+projects.some(p =>
+p.name === copyName
+)
+){
+
+copyName =
+project.name + " Copy " + counter;
+
+counter++;
+
+}
+
+const duplicateProject = {
+
+...project,
+
+name: copyName
+
+};
+
+projects.push(duplicateProject);
 
 saveProjects();
 
@@ -837,13 +904,18 @@ modal.style.display = "none";
 createProject.onclick = () => {
 
 const name =
-document.getElementById("projectName").value;
+document.getElementById("projectName")
+.value.trim();
 
 const style =
-document.getElementById("projectStyle").value;
+document.getElementById("projectStyle")
+.value;
 
 const world =
-document.getElementById("projectWorld").value;
+document.getElementById("projectWorld")
+.value;
+
+/* EMPTY CHECK */
 
 if(name === ""){
 
@@ -852,6 +924,26 @@ alert("Enter project name");
 return;
 
 }
+
+/* DUPLICATE CHECK */
+
+const exists =
+projects.some(project =>
+project.name.toLowerCase()
+=== name.toLowerCase()
+);
+
+if(exists){
+
+alert(
+"Project name already exists"
+);
+
+return;
+
+}
+
+/* NEW PROJECT */
 
 const newProject = {
 
@@ -866,6 +958,11 @@ projects.push(newProject);
 saveProjects();
 
 renderProjects();
+
+/* RESET */
+
+document.getElementById("projectName")
+.value = "";
 
 modal.style.display = "none";
 
