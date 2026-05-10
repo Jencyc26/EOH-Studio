@@ -1,1 +1,57 @@
+.logo-box{
+display:flex;
+align-items:center;
+gap:15px;
+margin-bottom:40px;
+}
 
+.logo-circle{
+width:60px;
+height:60px;
+border-radius:50%;
+background:linear-gradient(145deg,#d4af37,#f1cc56);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+font-weight:700;
+color:black;
+}
+
+.logo-box h1{
+color:#d4af37;
+}
+
+.logo-box p{
+font-size:13px;
+color:#888;
+}
+
+.sidebar li{
+padding:14px;
+border-radius:14px;
+margin-bottom:10px;
+color:#ccc;
+cursor:pointer;
+transition:0.3s;
+}
+
+.sidebar li:hover,
+.sidebar .active{
+background:linear-gradient(145deg,#d4af37,#f1cc56);
+color:black;
+}
+
+.primary-btn{
+padding:14px 18px;
+border:none;
+border-radius:14px;
+background:linear-gradient(145deg,#d4af37,#f1cc56);
+color:black;
+font-weight:600;
+cursor:pointer;
+}
+
+.full-btn{
+width:100%;
+}
