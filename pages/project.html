@@ -25,33 +25,39 @@ body{
 font-family:'Poppins',sans-serif;
 background:#050505;
 color:white;
-overflow:hidden;
+overflow-x:hidden;
 }
 
-.workspace{
+/* MAIN */
+
+.container{
 padding:35px;
-height:100vh;
-overflow-y:auto;
 }
+
+/* TOPBAR */
 
 .topbar{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:40px;
+margin-bottom:45px;
 flex-wrap:wrap;
-gap:15px;
+gap:20px;
 }
 
-.project-title h1{
+.project-info h1{
 font-size:40px;
 color:#d4af37;
-margin-bottom:8px;
+margin-bottom:10px;
 }
 
-.project-title p{
+.project-info p{
 color:#888;
+font-size:14px;
+line-height:1.7;
 }
+
+/* BUTTONS */
 
 .button-group{
 display:flex;
@@ -66,6 +72,10 @@ border-radius:14px;
 cursor:pointer;
 font-weight:600;
 transition:0.3s;
+text-decoration:none;
+display:inline-flex;
+align-items:center;
+justify-content:center;
 }
 
 .gold-btn{
@@ -83,90 +93,123 @@ border:1px solid rgba(212,175,55,0.2);
 transform:translateY(-3px);
 }
 
-.module-grid{
+/* GRID */
+
+.workspace-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:24px;
-margin-bottom:40px;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
 }
 
-.module{
-background:#111;
+/* CARD */
+
+.workspace-card{
+background:linear-gradient(
+145deg,
+rgba(18,18,18,0.95),
+rgba(8,8,8,0.95)
+);
+
+border:1px solid rgba(212,175,55,0.15);
+
 padding:28px;
-border-radius:22px;
-border:1px solid rgba(212,175,55,0.15);
+
+border-radius:26px;
+
 transition:0.3s;
-cursor:pointer;
-position:relative;
+
+text-decoration:none;
+color:white;
+display:block;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.35);
 }
 
-.module:hover{
-transform:translateY(-5px);
+.workspace-card:hover{
+
+transform:translateY(-6px);
+
 border-color:#d4af37;
+
+box-shadow:
+0 0 30px rgba(212,175,55,0.15);
 }
 
-.module h2{
-color:#d4af37;
-margin-bottom:14px;
+.workspace-card h2{
 font-size:24px;
-}
-
-.module p{
-color:#999;
-line-height:1.7;
-font-size:14px;
-}
-
-.status{
-display:inline-block;
-margin-top:18px;
-padding:8px 14px;
-border-radius:30px;
-background:#1b1b1b;
+margin-bottom:14px;
 color:#d4af37;
-font-size:12px;
 }
 
-.info-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:20px;
+.workspace-card p{
+font-size:14px;
+line-height:1.8;
+color:#999;
 }
 
-.info-card{
+/* STATUS */
+
+.status-panel{
+margin-top:45px;
+
 background:#111;
-padding:22px;
-border-radius:18px;
+
 border:1px solid rgba(212,175,55,0.15);
+
+padding:30px;
+
+border-radius:26px;
 }
 
-.info-card h3{
+.status-panel h2{
 color:#d4af37;
-margin-bottom:12px;
+margin-bottom:18px;
 }
 
-.info-card p{
-color:#999;
-line-height:1.7;
-font-size:14px;
+.status-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
 }
+
+.status-box{
+background:#1a1a1a;
+padding:20px;
+border-radius:18px;
+}
+
+.status-box h3{
+color:#d4af37;
+margin-bottom:10px;
+font-size:16px;
+}
+
+.status-box p{
+font-size:13px;
+line-height:1.7;
+color:#999;
+}
+
+/* FOOTER */
 
 .footer{
-margin-top:60px;
+margin-top:50px;
 text-align:center;
-color:#666;
 font-size:13px;
+color:#666;
 }
+
+/* RESPONSIVE */
 
 @media(max-width:900px){
 
-.workspace{
+.container{
 padding:20px;
 }
 
-.topbar{
-flex-direction:column;
-align-items:flex-start;
+.project-info h1{
+font-size:30px;
 }
 
 }
@@ -177,270 +220,196 @@ align-items:flex-start;
 
 <body>
 
-<div class="workspace">
+<div class="container">
 
 <!-- TOPBAR -->
 
 <div class="topbar">
 
-<div class="project-title">
+<div class="project-info">
 
-<h1 id="projectName">
-Project Workspace
+<h1 id="projectTitle">
+EOH Workspace
 </h1>
 
 <p>
-AI cinematic continuity workspace
+Manage story logic, characters,
+world continuity, cinematic generation,
+voice systems and visual storytelling.
 </p>
 
 </div>
 
 <div class="button-group">
 
-<button class="btn dark-btn" id="undoBtn">
-↩ Undo
-</button>
+<a href="../index.html"
+class="btn dark-btn">
 
-<button class="btn dark-btn" id="redoBtn">
-↪ Redo
-</button>
-
-<button class="btn dark-btn" onclick="goBack()">
 ← Dashboard
+
+</a>
+
+<button
+class="btn gold-btn"
+onclick="exportProject()">
+
+Export Project
+
 </button>
 
-<button class="btn gold-btn">
-💾 Save
-</button>
-
 </div>
 
 </div>
 
-<!-- MODULES -->
+<!-- WORKSPACE -->
 
-<section class="module-grid">
+<div class="workspace-grid">
 
-<div class="module"
-onclick="openPage('world.html')">
+<a href="characters.html" class="workspace-card">
+
+<h2>👤 Character Engine</h2>
+
+<p>
+Create characters, emotions,
+behaviour, appearance and continuity.
+</p>
+
+</a>
+
+<a href="story.html" class="workspace-card">
+
+<h2>📖 Story Engine</h2>
+
+<p>
+Store screenplay, scenes,
+dialogues and cinematic writing.
+</p>
+
+</a>
+
+<a href="world.html" class="workspace-card">
+
+<h2>🌍 World Engine</h2>
+
+<p>
+Create cultures, countries,
+architecture and environmental logic.
+</p>
+
+</a>
+
+<a href="timeline.html" class="workspace-card">
+
+<h2>🕒 Timeline Engine</h2>
+
+<p>
+Track chronology, wars,
+flashbacks and continuity progression.
+</p>
+
+</a>
+
+<a href="assets.html" class="workspace-card">
+
+<h2>🖼 Asset Engine</h2>
+
+<p>
+Store references, villages,
+rooms, costumes and environments.
+</p>
+
+</a>
+
+<a href="generator.html" class="workspace-card">
+
+<h2>🎬 Generator Engine</h2>
+
+<p>
+Generate cinematic scenes,
+videos and continuity-aware visuals.
+</p>
+
+</a>
+
+<a href="comic.html" class="workspace-card">
+
+<h2>🖋 Comic Engine</h2>
+
+<p>
+Create manga panels,
+webtoon layouts and storyboards.
+</p>
+
+</a>
+
+<a href="voice.html" class="workspace-card">
+
+<h2>🎙 Voice Lab</h2>
+
+<p>
+Generate emotional voices,
+Tamil dubbing and lip sync systems.
+</p>
+
+</a>
+
+</div>
+
+<!-- STATUS -->
+
+<div class="status-panel">
 
 <h2>
-🌍 World Engine
+📡 EOH System Status
 </h2>
 
-<p>
-Store cultures,
-countries,
-timelines,
-politics,
-environment
-and world rules.
-</p>
+<div class="status-grid">
 
-<span class="status">
-Core System
-</span>
+<div class="status-box">
 
-</div>
-
-<div class="module"
-onclick="openPage('characters.html')">
-
-<h2>
-👤 Character Engine
-</h2>
+<h3>Project Memory</h3>
 
 <p>
-Store emotions,
-habits,
-expressions,
-relationships,
-continuity
-and personalities.
-</p>
-
-<span class="status">
-Character Database
-</span>
-
-</div>
-
-<div class="module"
-onclick="openPage('story.html')">
-
-<h2>
-📖 Story Engine
-</h2>
-
-<p>
-Store screenplay,
-episodes,
-dialogues,
-scene flow
-and cinematic writing.
-</p>
-
-<span class="status">
-Story Storage
-</span>
-
-</div>
-
-<div class="module"
-onclick="openPage('timeline.html')">
-
-<h2>
-🕒 Timeline
-</h2>
-
-<p>
-Track events,
-history,
-scene order,
-world continuity
-and progression logic.
-</p>
-
-<span class="status">
-Timeline Logic
-</span>
-
-</div>
-
-<div class="module"
-onclick="openPage('assets.html')">
-
-<h2>
-🖼 Assets
-</h2>
-
-<p>
-Store PNG images,
-references,
-backgrounds,
-flags,
-costumes
-and environments.
-</p>
-
-<span class="status">
-Asset Manager
-</span>
-
-</div>
-
-<div class="module"
-onclick="openPage('generator.html')">
-
-<h2>
-🎬 Generator
-</h2>
-
-<p>
-Generate visuals,
-videos,
-image-to-video,
-AI cinematic scenes
-and continuity-aware outputs.
-</p>
-
-<span class="status">
-AI Ready
-</span>
-
-</div>
-
-<div class="module"
-onclick="openPage('voice.html')">
-
-<h2>
-🎤 Voice Lab
-</h2>
-
-<p>
-Tamil + English voice systems,
-emotion tones,
-voice cloning
-and lip sync workflow.
-</p>
-
-<span class="status">
-Experimental
-</span>
-
-</div>
-
-<div class="module"
-onclick="openPage('comic.html')">
-
-<h2>
-📚 Comic Studio
-</h2>
-
-<p>
-Create comic pages,
-panels,
-speech bubbles,
-layouts
-and manga flow systems.
-</p>
-
-<span class="status">
-Creative System
-</span>
-
-</div>
-
-</section>
-
-<!-- INFO -->
-
-<section class="info-grid">
-
-<div class="info-card">
-
-<h3>
-🧠 AI Continuity
-</h3>
-
-<p>
-Future AI memory system
-will track logic,
-scene continuity
-and emotional consistency.
+Local continuity storage enabled.
+Characters and story systems connected.
 </p>
 
 </div>
 
-<div class="info-card">
+<div class="status-box">
 
-<h3>
-☁ Future Cloud Sync
-</h3>
+<h3>World Logic</h3>
 
 <p>
-Google cloud integration
-can later protect
-projects and assets safely.
+World continuity and timeline systems active.
 </p>
 
 </div>
 
-<div class="info-card">
+<div class="status-box">
 
-<h3>
-💾 Local Project Memory
-</h3>
+<h3>Generator Core</h3>
 
 <p>
-Current version stores
-project structure locally
-inside browser memory.
+Generator architecture prepared
+for Gemini integration.
 </p>
 
 </div>
 
-</section>
+<div class="status-box">
+
+<h3>Voice System</h3>
+
+<p>
+Tamil and English voice lab structure ready.
+</p>
+
+</div>
+
+</div>
+
+</div>
 
 <div class="footer">
 EOH Studio Workspace © 2026
@@ -450,61 +419,30 @@ EOH Studio Workspace © 2026
 
 <script>
 
-/* LOAD PROJECT */
+/* CURRENT PROJECT */
 
 const currentProject =
 JSON.parse(
 localStorage.getItem("current-project")
 );
 
-/* DISPLAY NAME */
+/* TITLE */
 
 if(currentProject){
 
-document.getElementById("projectName")
+document.getElementById("projectTitle")
 .innerText =
 currentProject.name;
 
 }
 
-/* UNDO / REDO */
+/* EXPORT */
 
-const undoBtn =
-document.getElementById("undoBtn");
-
-const redoBtn =
-document.getElementById("redoBtn");
-
-undoBtn.onclick = () => {
+function exportProject(){
 
 alert(
-"Undo system foundation ready"
+"Future update:\nProject export system will connect here."
 );
-
-};
-
-redoBtn.onclick = () => {
-
-alert(
-"Redo system foundation ready"
-);
-
-};
-
-/* BACK */
-
-function goBack(){
-
-window.location.href =
-"../index.html";
-
-}
-
-/* OPEN PAGE */
-
-function openPage(page){
-
-window.location.href = page;
 
 }
 
