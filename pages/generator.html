@@ -1,1 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EOH Generator Engine</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#050505;
+color:white;
+}
+
+/* MAIN */
+
+.container{
+padding:35px;
+}
+
+/* TOPBAR */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:40px;
+flex-wrap:wrap;
+gap:15px;
+}
+
+.title h1{
+font-size:38px;
+color:#d4af37;
+margin-bottom:8px;
+}
+
+.title p{
+color:#888;
+}
+
+/* GRID */
+
+.generator-layout{
+display:grid;
+grid-template-columns:1fr 400px;
+gap:25px;
+}
+
+/* PANEL */
+
+.panel{
+background:#111;
+border:1px solid rgba(212,175,55,0.15);
+border-radius:24px;
+padding:25px;
+}
+
+/* SECTION */
+
+.section-title{
+font-size:22px;
+color:#d4af37;
+margin-bottom:18px;
+}
+
+/* INPUTS */
+
+textarea,
+select,
+input{
+
+width:100%;
+padding:14px;
+margin-bottom:14px;
+
+border:none;
+border-radius:14px;
+
+background:#1a1a1a;
+color:white;
+
+font-family:'Poppins',sans-serif;
+}
+
+textarea{
+resize:none;
+height:180px;
+}
+
+/* BUTTONS */
+
+.button-group{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+margin-top:15px;
+}
+
+.btn{
+padding:14px 18px;
+border:none;
+border-radius:14px;
+cursor:pointer;
+font-weight:600;
+transition:0.3s;
+}
+
+.gold-btn{
+background:linear-gradient(145deg,#d4af37,#f1cc56);
+color:black;
+}
+
+.dark-btn{
+background:#151515;
+color:#d4af37;
+border:1px solid rgba(212,175,55,0.2);
+}
+
+.btn:hover{
+transform:translateY(-3px);
+}
+
+/* OUTPUT */
+
+.output-box{
+height:420px;
+border-radius:20px;
+background:#0d0d0d;
+border:1px dashed rgba(212,175,55,0.2);
+
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+
+padding:20px;
+
+color:#777;
+line-height:1.8;
+}
+
+/* TAGS */
+
+.tag-list{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:10px;
+}
+
+.tag{
+padding:10px 14px;
+border-radius:30px;
+background:#1b1b1b;
+color:#d4af37;
+font-size:13px;
+}
+
+/* FOOTER */
+
+.footer{
+margin-top:50px;
+text-align:center;
+color:#666;
+font-size:13px;
+}
+
+@media(max-width:1000px){
+
+.generator-layout{
+grid-template-columns:1fr;
+}
+
+.container{
+padding:20px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+<div class="title">
+
+<h1>
+🎬 Generator Engine
+</h1>
+
+<p>
+Continuity-aware cinematic generation system
+</p>
+
+</div>
+
+<div class="button-group">
+
+<button
+class="btn dark-btn"
+onclick="goBack()">
+
+← Workspace
+
+</button>
+
+<button
+class="btn gold-btn"
+onclick="simulateGeneration()">
+
+Generate
+
+</button>
+
+</div>
+
+</div>
+
+<!-- LAYOUT -->
+
+<div class="generator-layout">
+
+<!-- LEFT -->
+
+<div class="panel">
+
+<h2 class="section-title">
+Scene Generation
+</h2>
+
+<textarea
+id="prompt"
+placeholder="Describe your cinematic scene..."
+></textarea>
+
+<select id="frameType">
+
+<option>16:9 Cinematic</option>
+<option>1:1 Square</option>
+<option>9:16 Vertical</option>
+
+</select>
+
+<select id="quality">
+
+<option>Ultra Quality</option>
+<option>High Quality</option>
+<option>Medium Quality</option>
+
+</select>
+
+<select id="duration">
+
+<option>5 Seconds</option>
+<option>8 Seconds</option>
+<option>10 Seconds</option>
+<option>15 Seconds</option>
+<option>30 Seconds</option>
+
+</select>
+
+<input
+type="text"
+id="characters"
+placeholder="Characters Included"
+>
+
+<input
+type="text"
+id="background"
+placeholder="Background / Environment"
+>
+
+<input
+type="text"
+id="emotion"
+placeholder="Emotion / Mood"
+>
+
+<div class="button-group">
+
+<button class="btn gold-btn">
+Generate Image
+</button>
+
+<button class="btn gold-btn">
+Generate Video
+</button>
+
+<button class="btn dark-btn">
+Image → Video
+</button>
+
+<button class="btn dark-btn">
+Reference Adapt
+</button>
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="panel">
+
+<h2 class="section-title">
+AI Continuity Logic
+</h2>
+
+<div class="tag-list">
+
+<div class="tag">
+Character Memory
+</div>
+
+<div class="tag">
+World Logic
+</div>
+
+<div class="tag">
+Timeline Continuity
+</div>
+
+<div class="tag">
+Emotion Tracking
+</div>
+
+<div class="tag">
+Camera Logic
+</div>
+
+<div class="tag">
+Lighting System
+</div>
+
+<div class="tag">
+NPC Adaptation
+</div>
+
+<div class="tag">
+Scene Intelligence
+</div>
+
+</div>
+
+<div
+class="output-box"
+id="outputBox">
+
+Generated cinematic preview
+will appear here.
+
+EOH later connects with:
+Gemini AI,
+Video AI,
+Image Models,
+Voice Lab,
+Comic Engine
+and Continuity Systems.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+EOH Generator Engine © 2026
+</div>
+
+</div>
+
+<script>
+
+/* BACK */
+
+function goBack(){
+
+window.location.href =
+"project.html";
+
+}
+
+/* SIMULATION */
+
+function simulateGeneration(){
+
+const prompt =
+document.getElementById("prompt")
+.value;
+
+const characters =
+document.getElementById("characters")
+.value;
+
+const background =
+document.getElementById("background")
+.value;
+
+const emotion =
+document.getElementById("emotion")
+.value;
+
+const output =
+document.getElementById("outputBox");
+
+output.innerHTML = `
+
+🎬 GENERATION READY
+
+Prompt:
+${prompt}
+
+Characters:
+${characters}
+
+Background:
+${background}
+
+Emotion:
+${emotion}
+
+EOH continuity system prepared the cinematic structure.
+
+`;
+
+}
+
+</script>
+
+</body>
+
+</html>
