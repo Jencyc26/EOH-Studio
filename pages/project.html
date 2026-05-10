@@ -28,17 +28,21 @@ font-family:'Poppins',sans-serif;
 background:#050505;
 color:white;
 
-padding:40px;
+padding:35px;
 }
 
 /* HEADER */
 
 .header{
 
+display:flex;
+justify-content:space-between;
+align-items:center;
+
 margin-bottom:40px;
 }
 
-.header h1{
+.project-info h1{
 
 font-size:42px;
 
@@ -47,8 +51,32 @@ color:#d4af37;
 margin-bottom:10px;
 }
 
-.header p{
+.project-info p{
 color:#888;
+}
+
+/* BUTTON */
+
+.back-btn{
+
+padding:14px 20px;
+
+border:none;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+145deg,
+#d4af37,
+#f1cc56
+);
+
+color:black;
+
+font-weight:600;
+
+cursor:pointer;
 }
 
 /* GRID */
@@ -60,7 +88,7 @@ display:grid;
 grid-template-columns:
 repeat(auto-fit,minmax(260px,1fr));
 
-gap:20px;
+gap:22px;
 }
 
 /* CARD */
@@ -69,9 +97,9 @@ gap:20px;
 
 background:#111;
 
-padding:25px;
+padding:26px;
 
-border-radius:20px;
+border-radius:22px;
 
 border:
 1px solid rgba(212,175,55,0.15);
@@ -104,28 +132,36 @@ line-height:1.7;
 font-size:14px;
 }
 
-.open-btn{
+/* STATUS */
 
-margin-top:18px;
+.status{
 
-padding:12px 16px;
+margin-top:16px;
 
-border:none;
+display:inline-block;
 
-border-radius:12px;
+padding:8px 14px;
 
-background:
-linear-gradient(
-145deg,
-#d4af37,
-#f1cc56
-);
+border-radius:30px;
 
-color:black;
+background:#1b1b1b;
 
-font-weight:600;
+color:#d4af37;
 
-cursor:pointer;
+font-size:12px;
+}
+
+/* FOOTER */
+
+.footer{
+
+margin-top:60px;
+
+text-align:center;
+
+color:#666;
+
+font-size:13px;
 }
 
 </style>
@@ -136,15 +172,25 @@ cursor:pointer;
 
 <div class="header">
 
+<div class="project-info">
+
 <h1 id="projectTitle">
 Project Workspace
 </h1>
 
 <p>
-Cinematic continuity workspace
+AI continuity cinematic workspace
 </p>
 
 </div>
+
+<button class="back-btn" onclick="goBack()">
+← Dashboard
+</button>
+
+</div>
+
+<!-- WORKSPACE GRID -->
 
 <div class="grid">
 
@@ -155,13 +201,18 @@ Cinematic continuity workspace
 </h2>
 
 <p>
-Create timeline, countries,
-cultures and environmental systems.
+
+Create timeline,
+countries,
+cultures,
+world systems
+and environmental logic.
+
 </p>
 
-<button class="open-btn">
-Open
-</button>
+<span class="status">
+Ready
+</span>
 
 </div>
 
@@ -172,13 +223,17 @@ Open
 </h2>
 
 <p>
-Store habits, expressions,
-emotions and continuity logic.
+
+Store character emotions,
+habits,
+expressions,
+clothing and continuity.
+
 </p>
 
-<button class="open-btn">
-Open
-</button>
+<span class="status">
+Ready
+</span>
 
 </div>
 
@@ -189,13 +244,18 @@ Open
 </h2>
 
 <p>
+
 Store scripts,
-dialogues and cinematic scenes.
+scenes,
+dialogues,
+timeline flow
+and cinematic writing.
+
 </p>
 
-<button class="open-btn">
-Open
-</button>
+<span class="status">
+Ready
+</span>
 
 </div>
 
@@ -206,30 +266,17 @@ Open
 </h2>
 
 <p>
-Generate visuals and videos
-using AI continuity systems.
+
+Generate visuals,
+videos,
+frames
+and cinematic sequences.
+
 </p>
 
-<button class="open-btn">
-Open
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>
-🖼 Assets
-</h2>
-
-<p>
-Store references,
-backgrounds and cinematic resources.
-</p>
-
-<button class="open-btn">
-Open
-</button>
+<span class="status">
+AI Ready
+</span>
 
 </div>
 
@@ -240,15 +287,45 @@ Open
 </h2>
 
 <p>
-Tamil and English
-voice modulation and lip sync.
+
+Tamil + English voice support,
+emotion control
+and lip syncing systems.
+
 </p>
 
-<button class="open-btn">
-Open
-</button>
+<span class="status">
+Experimental
+</span>
 
 </div>
+
+<div class="card">
+
+<h2>
+🖼 Assets
+</h2>
+
+<p>
+
+Store PNG assets,
+references,
+backgrounds
+and cinematic resources.
+
+</p>
+
+<span class="status">
+Storage Ready
+</span>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+EOH Studio Workspace © 2026
 
 </div>
 
@@ -261,10 +338,21 @@ JSON.parse(
 localStorage.getItem("current-project")
 );
 
+/* DISPLAY NAME */
+
 if(project){
 
 document.getElementById("projectTitle")
 .innerText = project.name;
+
+}
+
+/* BACK */
+
+function goBack(){
+
+window.location.href =
+"../index.html";
 
 }
 
