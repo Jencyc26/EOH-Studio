@@ -97,7 +97,7 @@ font-size:12px;
 color:#888;
 }
 
-/* NAV */
+/* NAVIGATION */
 
 .nav ul{
 list-style:none;
@@ -531,12 +531,10 @@ Turn your writing into visuals.
 
 <li class="active">🏠 Dashboard</li>
 <li>📁 Projects</li>
-<li>👤 Characters</li>
-<li>🌍 World Engine</li>
-<li>📖 Story Engine</li>
-<li>🎬 Generator</li>
-<li>🎤 Voice Lab</li>
-<li>🖼 Assets</li>
+<li>🕒 Recent</li>
+<li>☁ Cloud</li>
+<li>💾 Storage</li>
+<li>🔔 Notifications</li>
 <li>⚙ Settings</li>
 
 </ul>
@@ -558,7 +556,7 @@ Creative Dashboard
 </h2>
 
 <p>
-AI cinematic creation workspace
+Global cinematic AI workspace
 </p>
 
 </div>
@@ -577,7 +575,7 @@ AI cinematic creation workspace
 
 </div>
 
-<!-- PROJECT GRID -->
+<!-- PROJECTS -->
 
 <section class="project-grid" id="projectGrid">
 
@@ -593,11 +591,10 @@ Create Your Own Project
 
 <p>
 
-Store worlds, anime styles,
-stories, character emotions,
-continuity memory,
-background systems,
-and cinematic logic.
+Create separate cinematic worlds,
+stories, characters,
+cultures and timelines
+without affecting other projects.
 
 </p>
 
@@ -605,71 +602,75 @@ and cinematic logic.
 
 </section>
 
-<!-- FEATURES -->
+<!-- DASHBOARD FEATURES -->
 
 <section class="feature-grid">
 
 <div class="feature">
 
-<h4>🌍 World Engine</h4>
+<h4>⚡ Quick Draft</h4>
 
 <p>
-Create timeline, cultures,
-countries and cinematic worlds.
+Write quick scene ideas,
+dialogues and visual concepts.
 </p>
 
 </div>
 
 <div class="feature">
 
-<h4>👤 Character Engine</h4>
+<h4>🕒 Recent Projects</h4>
 
 <p>
-Store habits, emotions,
-expressions and continuity.
+Quickly continue
+your latest cinematic worlds.
 </p>
 
 </div>
 
 <div class="feature">
 
-<h4>📖 Story Engine</h4>
+<h4>☁ Cloud Backup</h4>
 
 <p>
-Store scripts and cinematic scenes.
+Future Google cloud sync
+and project safety systems.
 </p>
 
 </div>
 
 <div class="feature">
 
-<h4>🎬 Generator</h4>
+<h4>🧠 AI Memory</h4>
 
 <p>
-Generate visuals and videos
-using continuity systems.
+Continuity tracking,
+logic systems
+and future AI reasoning.
 </p>
 
 </div>
 
 <div class="feature">
 
-<h4>🎤 Voice Lab</h4>
+<h4>💾 Storage</h4>
 
 <p>
-English + Tamil voice support,
-emotion tone and lip sync.
+Monitor assets,
+videos,
+images and project size.
 </p>
 
 </div>
 
 <div class="feature">
 
-<h4>🖼 Assets</h4>
+<h4>🔔 Notifications</h4>
 
 <p>
-Store PNG references,
-backgrounds and cinematic assets.
+Project updates,
+AI process alerts
+and collaboration notices.
 </p>
 
 </div>
@@ -797,7 +798,7 @@ ${project.world}
 
 `;
 
-/* OPEN WORKSPACE */
+/* OPEN PROJECT */
 
 card.onclick = () => {
 
@@ -875,7 +876,7 @@ projectGrid.appendChild(card);
 
 }
 
-/* INITIAL */
+/* INITIAL LOAD */
 
 renderProjects();
 
@@ -915,7 +916,7 @@ const world =
 document.getElementById("projectWorld")
 .value;
 
-/* EMPTY CHECK */
+/* EMPTY */
 
 if(name === ""){
 
@@ -925,7 +926,7 @@ return;
 
 }
 
-/* DUPLICATE CHECK */
+/* DUPLICATE */
 
 const exists =
 projects.some(project =>
@@ -936,14 +937,14 @@ project.name.toLowerCase()
 if(exists){
 
 alert(
-"Project name already exists"
+"Project already exists"
 );
 
 return;
 
 }
 
-/* NEW PROJECT */
+/* NEW */
 
 const newProject = {
 
@@ -968,7 +969,7 @@ modal.style.display = "none";
 
 };
 
-/* UNDO DELETE */
+/* UNDO */
 
 undoBtn.onclick = () => {
 
