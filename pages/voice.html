@@ -1,1 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EOH Voice Lab</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#050505;
+color:white;
+}
+
+/* MAIN */
+
+.container{
+padding:35px;
+}
+
+/* TOPBAR */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:40px;
+flex-wrap:wrap;
+gap:15px;
+}
+
+.title h1{
+font-size:38px;
+color:#d4af37;
+margin-bottom:8px;
+}
+
+.title p{
+color:#888;
+}
+
+/* BUTTONS */
+
+.button-group{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:14px 18px;
+border:none;
+border-radius:14px;
+cursor:pointer;
+font-weight:600;
+transition:0.3s;
+}
+
+.gold-btn{
+background:linear-gradient(145deg,#d4af37,#f1cc56);
+color:black;
+}
+
+.dark-btn{
+background:#151515;
+color:#d4af37;
+border:1px solid rgba(212,175,55,0.2);
+}
+
+.btn:hover{
+transform:translateY(-3px);
+}
+
+/* LAYOUT */
+
+.voice-layout{
+display:grid;
+grid-template-columns:400px 1fr;
+gap:25px;
+}
+
+/* PANEL */
+
+.panel{
+background:#111;
+border-radius:24px;
+padding:25px;
+border:1px solid rgba(212,175,55,0.15);
+}
+
+/* SECTION */
+
+.section-title{
+font-size:22px;
+color:#d4af37;
+margin-bottom:18px;
+}
+
+/* INPUTS */
+
+textarea,
+input,
+select{
+
+width:100%;
+padding:14px;
+margin-bottom:14px;
+
+border:none;
+border-radius:14px;
+
+background:#1a1a1a;
+color:white;
+
+font-family:'Poppins',sans-serif;
+}
+
+textarea{
+resize:none;
+height:160px;
+}
+
+/* OUTPUT */
+
+.voice-preview{
+
+height:500px;
+
+background:#0d0d0d;
+
+border-radius:24px;
+
+border:1px dashed rgba(212,175,55,0.2);
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+text-align:center;
+
+padding:30px;
+
+color:#777;
+}
+
+/* WAVE */
+
+.wave{
+
+display:flex;
+align-items:flex-end;
+gap:6px;
+
+height:120px;
+
+margin-bottom:30px;
+}
+
+.bar{
+width:10px;
+background:#d4af37;
+border-radius:10px;
+animation:wave 1s infinite ease-in-out;
+}
+
+.bar:nth-child(1){height:30px;}
+.bar:nth-child(2){height:70px;}
+.bar:nth-child(3){height:50px;}
+.bar:nth-child(4){height:90px;}
+.bar:nth-child(5){height:40px;}
+.bar:nth-child(6){height:80px;}
+.bar:nth-child(7){height:60px;}
+
+@keyframes wave{
+
+0%{
+transform:scaleY(1);
+}
+
+50%{
+transform:scaleY(1.4);
+}
+
+100%{
+transform:scaleY(1);
+}
+
+}
+
+/* TAGS */
+
+.tag-list{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:20px;
+justify-content:center;
+}
+
+.tag{
+padding:10px 14px;
+border-radius:30px;
+background:#1b1b1b;
+color:#d4af37;
+font-size:13px;
+}
+
+/* FOOTER */
+
+.footer{
+margin-top:50px;
+text-align:center;
+color:#666;
+font-size:13px;
+}
+
+@media(max-width:1000px){
+
+.voice-layout{
+grid-template-columns:1fr;
+}
+
+.container{
+padding:20px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+<div class="title">
+
+<h1>
+🎙 Voice Lab
+</h1>
+
+<p>
+Emotion-aware cinematic voice system
+</p>
+
+</div>
+
+<div class="button-group">
+
+<button
+class="btn dark-btn"
+onclick="goBack()">
+
+← Workspace
+
+</button>
+
+<button
+class="btn gold-btn"
+onclick="generateVoice()">
+
+Generate Voice
+
+</button>
+
+</div>
+
+</div>
+
+<!-- LAYOUT -->
+
+<div class="voice-layout">
+
+<!-- LEFT -->
+
+<div class="panel">
+
+<h2 class="section-title">
+Voice Controls
+</h2>
+
+<input
+type="text"
+id="characterName"
+placeholder="Character Name"
+>
+
+<select id="language">
+
+<option>English</option>
+<option>Tamil</option>
+
+</select>
+
+<select id="emotion">
+
+<option>Calm</option>
+<option>Sad</option>
+<option>Angry</option>
+<option>Fear</option>
+<option>Happy</option>
+<option>Whisper</option>
+
+</select>
+
+<select id="voiceType">
+
+<option>Female Soft</option>
+<option>Female Deep</option>
+<option>Male Calm</option>
+<option>Male Strong</option>
+<option>Anime Voice</option>
+
+</select>
+
+<textarea
+id="voiceScript"
+placeholder="Enter dialogue / script"
+></textarea>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="panel">
+
+<h2 class="section-title">
+Voice Preview
+</h2>
+
+<div
+class="voice-preview"
+id="voicePreview">
+
+<div class="wave">
+
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+
+</div>
+
+<p>
+
+EOH Voice Lab Preview
+
+Future integrations:
+Lip Sync,
+AI Dubbing,
+Tamil Voice AI,
+Emotion Tracking,
+Voice Memory,
+Character Voice Identity
+
+</p>
+
+<div class="tag-list">
+
+<div class="tag">
+Lip Sync
+</div>
+
+<div class="tag">
+Emotion AI
+</div>
+
+<div class="tag">
+Tamil Support
+</div>
+
+<div class="tag">
+Voice Memory
+</div>
+
+<div class="tag">
+Dub System
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+EOH Voice Lab © 2026
+</div>
+
+</div>
+
+<script>
+
+/* BACK */
+
+function goBack(){
+
+window.location.href =
+"project.html";
+
+}
+
+/* GENERATE */
+
+function generateVoice(){
+
+const character =
+document.getElementById("characterName")
+.value;
+
+const language =
+document.getElementById("language")
+.value;
+
+const emotion =
+document.getElementById("emotion")
+.value;
+
+const voice =
+document.getElementById("voiceType")
+.value;
+
+const script =
+document.getElementById("voiceScript")
+.value;
+
+const preview =
+document.getElementById("voicePreview");
+
+preview.innerHTML = `
+
+<div class="wave">
+
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+
+</div>
+
+<p>
+
+🎙 Voice Ready
+
+Character:
+${character}
+
+Language:
+${language}
+
+Emotion:
+${emotion}
+
+Voice:
+${voice}
+
+Script:
+${script}
+
+EOH prepared emotional voice modulation.
+
+</p>
+
+<div class="tag-list">
+
+<div class="tag">
+Lip Sync Ready
+</div>
+
+<div class="tag">
+Emotion Detected
+</div>
+
+<div class="tag">
+Voice Memory Applied
+</div>
+
+</div>
+
+`;
+
+}
+
+</script>
+
+</body>
+
+</html>
