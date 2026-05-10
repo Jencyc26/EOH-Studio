@@ -4,10 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EOH Studio - Workspace</title>
 
-<title>EOH Studio - Project Engine</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -16,113 +15,144 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins',sans-serif;
 }
 
 body{
+font-family:'Poppins',sans-serif;
 background:#050505;
 color:white;
 overflow:hidden;
 }
 
-/* HEADER */
-.header{
+/* LAYOUT */
+.container{
 display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px;
-border-bottom:1px solid rgba(212,175,55,0.2);
+height:100vh;
 }
 
-.header h1{
+/* LEFT PANEL */
+.sidebar{
+width:300px;
+background:#0d0d0d;
+border-right:1px solid rgba(212,175,55,0.2);
+padding:20px;
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+.title{
 color:#d4af37;
 font-size:22px;
 }
 
-.back-btn{
-background:linear-gradient(145deg,#d4af37,#f1cc56);
-border:none;
-padding:10px 14px;
-border-radius:10px;
-font-weight:600;
-cursor:pointer;
-}
-
-/* LAYOUT */
-.container{
-display:grid;
-grid-template-columns:300px 1fr;
-height:calc(100vh - 70px);
-}
-
-/* SIDEBAR */
-.sidebar{
-background:#0d0d0d;
+/* PROJECT INFO */
+.info-box{
 padding:15px;
-border-right:1px solid rgba(212,175,55,0.15);
-overflow:auto;
-}
-
-.tab{
-padding:12px;
-margin-bottom:10px;
 background:#111;
-border-radius:10px;
-cursor:pointer;
-border:1px solid rgba(212,175,55,0.1);
-}
-
-.tab:hover{
-border-color:#d4af37;
-}
-
-/* MAIN */
-.main{
-padding:20px;
-overflow:auto;
-}
-
-/* BOX */
-.box{
-background:#111;
-padding:15px;
 border-radius:12px;
-margin-bottom:15px;
-border:1px solid rgba(212,175,55,0.15);
+border:1px solid rgba(212,175,55,0.2);
 }
 
-input,textarea,select{
-width:100%;
-padding:10px;
-margin-top:8px;
-margin-bottom:10px;
-background:#0a0a0a;
-border:none;
-color:white;
-border-radius:8px;
+.info-box p{
+font-size:13px;
+color:#aaa;
+line-height:1.6;
 }
 
-button{
+/* BUTTON */
+.btn{
 background:linear-gradient(145deg,#d4af37,#f1cc56);
 border:none;
-padding:10px;
+padding:12px;
 border-radius:10px;
 font-weight:600;
 cursor:pointer;
+color:black;
 }
 
-/* CHARACTER CARD */
-.char{
+/* MAIN AREA */
+.main{
+flex:1;
+display:flex;
+flex-direction:column;
+}
+
+/* HEADER */
+.header{
+padding:20px;
+border-bottom:1px solid rgba(212,175,55,0.15);
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.header h2{
+color:#d4af37;
+}
+
+/* WORK AREA */
+.workspace{
+flex:1;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+padding:15px;
+}
+
+/* EDITORS */
+.panel{
+background:#111;
+border:1px solid rgba(212,175,55,0.15);
+border-radius:12px;
+padding:15px;
+display:flex;
+flex-direction:column;
+}
+
+.panel h3{
+color:#d4af37;
+margin-bottom:10px;
+}
+
+/* TEXTAREA */
+textarea{
+flex:1;
 background:#0a0a0a;
-padding:10px;
-border-radius:8px;
-margin-top:8px;
-border:1px solid rgba(212,175,55,0.1);
+border:none;
+outline:none;
+color:white;
+padding:12px;
+border-radius:10px;
+resize:none;
+font-size:14px;
+line-height:1.5;
 }
 
-.small{
-font-size:12px;
-color:#aaa;
+/* CHARACTER LIST */
+.char-list{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-top:10px;
+}
+
+.char{
+padding:10px;
+background:#0a0a0a;
+border-radius:8px;
+border:1px solid rgba(212,175,55,0.1);
+font-size:13px;
+color:#ccc;
+}
+
+.small-input{
+padding:10px;
+background:#0a0a0a;
+border:1px solid rgba(212,175,55,0.2);
+border-radius:8px;
+color:white;
+margin-bottom:10px;
 }
 
 </style>
@@ -131,82 +161,48 @@ color:#aaa;
 
 <body>
 
-<div class="header">
-
-<h1 id="projectName">Project</h1>
-
-<button class="back-btn" onclick="goBack()">Back</button>
-
-</div>
-
 <div class="container">
 
-<!-- SIDEBAR -->
+<!-- LEFT -->
 <div class="sidebar">
 
-<div class="tab" onclick="show('world')">🌍 World</div>
-<div class="tab" onclick="show('story')">📖 Story</div>
-<div class="tab" onclick="show('characters')">🧍 Characters</div>
+<h2 class="title">EOH Workspace</h2>
+
+<div class="info-box">
+<p id="projectInfo">Loading project...</p>
+</div>
+
+<button class="btn" onclick="saveProject()">Save Project</button>
+
+<button class="btn" onclick="goBack()">← Back</button>
 
 </div>
 
 <!-- MAIN -->
 <div class="main">
 
-<!-- WORLD -->
-<div id="world" class="section">
-
-<div class="box">
-
-<h3>World Engine / உலகம்</h3>
-
-<input id="country" placeholder="Country">
-
-<input id="culture" placeholder="Culture">
-
-<select id="type">
-<option>Fictional</option>
-<option>Non-Fictional</option>
-<option>Sci-Fi</option>
-</select>
-
-<textarea id="worldDesc" placeholder="World Description"></textarea>
-
-<button onclick="save()">Save World</button>
-
+<div class="header">
+<h2 id="projectName">Project</h2>
 </div>
 
-</div>
+<div class="workspace">
 
 <!-- STORY -->
-<div id="story" class="section" style="display:none">
-
-<div class="box">
-
-<h3>Story Engine / கதை</h3>
-
-<textarea id="storyText" placeholder="Write story..."></textarea>
-
-<button onclick="save()">Save Story</button>
-
-</div>
-
+<div class="panel">
+<h3>Story Editor</h3>
+<textarea id="storyBox" placeholder="Write your story..."></textarea>
 </div>
 
 <!-- CHARACTERS -->
-<div id="characters" class="section" style="display:none">
+<div class="panel">
 
-<div class="box">
+<h3>Characters</h3>
 
-<h3>Character Engine / கதாபாத்திரம்</h3>
+<input class="small-input" id="charName" placeholder="Character Name">
 
-<input id="charName" placeholder="Name">
-<input id="charAge" placeholder="Age">
-<input id="charTrait" placeholder="Personality trait">
+<button class="btn" onclick="addCharacter()">Add Character</button>
 
-<button onclick="addChar()">Add Character</button>
-
-<div id="charList"></div>
+<div class="char-list" id="charList"></div>
 
 </div>
 
@@ -219,117 +215,87 @@ color:#aaa;
 <script>
 
 /* LOAD PROJECT */
-let project = JSON.parse(localStorage.getItem("current_project"));
+let project = JSON.parse(localStorage.getItem("current-project"));
 
 if(!project){
 alert("No project found");
-window.location.href="../index.html";
+window.location.href = "../index.html";
 }
 
-project.worldData = project.worldData || {};
-project.characters = project.characters || [];
+/* INIT DEFAULT FIELDS */
 project.story = project.story || "";
+project.characters = project.characters || [];
 
-/* TITLE */
+/* UI ELEMENTS */
+const storyBox = document.getElementById("storyBox");
+const charList = document.getElementById("charList");
+
+/* SET DATA */
 document.getElementById("projectName").innerText = project.name;
 
-/* SECTION SWITCH */
-function show(id){
+document.getElementById("projectInfo").innerHTML =
+`Style: ${project.style}<br>World: ${project.world}`;
 
-document.querySelectorAll(".section").forEach(s=>{
-s.style.display="none";
-});
-
-document.getElementById(id).style.display="block";
-
-}
-
-/* BACK */
-function goBack(){
-window.location.href="../index.html";
-}
-
-/* SAVE WORLD + STORY */
-function save(){
-
-project.worldData = {
-country: document.getElementById("country").value,
-culture: document.getElementById("culture").value,
-type: document.getElementById("type").value,
-description: document.getElementById("worldDesc").value
-};
-
-project.story = document.getElementById("storyText").value;
-
-updateStorage();
-
-alert("Saved!");
-
-}
-
-/* ADD CHARACTER */
-function addChar(){
-
-let name = document.getElementById("charName").value;
-let age = document.getElementById("charAge").value;
-let trait = document.getElementById("charTrait").value;
-
-if(!name) return;
-
-project.characters.push({
-name,
-age,
-trait
-});
-
-document.getElementById("charName").value="";
-document.getElementById("charAge").value="";
-document.getElementById("charTrait").value="";
-
-renderChars();
-
-updateStorage();
-
-}
+storyBox.value = project.story;
 
 /* RENDER CHARACTERS */
 function renderChars(){
 
-let list = document.getElementById("charList");
-list.innerHTML="";
+charList.innerHTML = "";
 
-project.characters.forEach(c=>{
+project.characters.forEach((c,index)=>{
 
-let div = document.createElement("div");
-div.className="char";
-div.innerHTML = `
-<b>${c.name}</b><br>
-<span class="small">${c.age} / ${c.trait}</span>
-`;
+const div = document.createElement("div");
+div.className = "char";
+div.innerText = c;
 
-list.appendChild(div);
+charList.appendChild(div);
 
 });
 
 }
 
-/* UPDATE STORAGE */
-function updateStorage(){
+/* ADD CHARACTER */
+function addCharacter(){
 
-let all = JSON.parse(localStorage.getItem("eoh_projects")) || [];
+const name = document.getElementById("charName").value;
 
-let index = all.findIndex(p=>p.id===project.id);
+if(!name) return;
+
+project.characters.push(name);
+
+document.getElementById("charName").value = "";
+
+renderChars();
+
+}
+
+/* SAVE */
+function saveProject(){
+
+project.story = storyBox.value;
+
+let all = JSON.parse(localStorage.getItem("eoh-projects")) || [];
+
+let index = all.findIndex(p => p.name === project.name);
 
 if(index !== -1){
 all[index] = project;
 }
 
-localStorage.setItem("eoh_projects",JSON.stringify(all));
-localStorage.setItem("current_project",JSON.stringify(project));
+localStorage.setItem("eoh-projects", JSON.stringify(all));
+localStorage.setItem("current-project", JSON.stringify(project));
+
+alert("Project Saved!");
 
 }
 
-/* INIT */
+/* BACK */
+function goBack(){
+window.location.href = "../index.html";
+}
+
+/* AUTO LOAD */
 renderChars();
 
 </script>
