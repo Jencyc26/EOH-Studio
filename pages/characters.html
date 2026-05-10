@@ -1,1 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EOH Character Engine</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:'Poppins',sans-serif;
+
+background:#050505;
+color:white;
+}
+
+/* MAIN */
+
+.container{
+padding:35px;
+}
+
+/* TOPBAR */
+
+.topbar{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+margin-bottom:40px;
+
+flex-wrap:wrap;
+gap:15px;
+}
+
+.title h1{
+
+font-size:38px;
+
+color:#d4af37;
+
+margin-bottom:8px;
+}
+
+.title p{
+color:#888;
+}
+
+/* BUTTONS */
+
+.button-group{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.btn{
+
+padding:14px 20px;
+
+border:none;
+
+border-radius:14px;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:0.3s;
+}
+
+.gold-btn{
+
+background:
+linear-gradient(
+145deg,
+#d4af37,
+#f1cc56
+);
+
+color:black;
+}
+
+.dark-btn{
+
+background:#151515;
+
+color:#d4af37;
+
+border:
+1px solid rgba(212,175,55,0.2);
+}
+
+.btn:hover{
+transform:translateY(-3px);
+}
+
+/* GRID */
+
+.character-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(320px,1fr));
+
+gap:25px;
+}
+
+/* CARD */
+
+.character-card{
+
+background:#111;
+
+padding:26px;
+
+border-radius:22px;
+
+border:
+1px solid rgba(212,175,55,0.15);
+
+position:relative;
+
+transition:0.3s;
+}
+
+.character-card:hover{
+
+transform:translateY(-5px);
+
+border-color:#d4af37;
+}
+
+.character-card h2{
+
+color:#d4af37;
+
+margin-bottom:12px;
+}
+
+.character-card p{
+
+color:#999;
+
+line-height:1.8;
+
+font-size:14px;
+}
+
+/* ROLE */
+
+.role{
+
+display:inline-block;
+
+margin-top:15px;
+
+padding:8px 14px;
+
+border-radius:30px;
+
+background:#1a1a1a;
+
+color:#d4af37;
+
+font-size:12px;
+}
+
+/* ACTIONS */
+
+.card-actions{
+
+position:absolute;
+
+top:18px;
+right:18px;
+
+display:flex;
+gap:8px;
+}
+
+.action-btn{
+
+border:none;
+
+padding:8px 10px;
+
+border-radius:10px;
+
+cursor:pointer;
+}
+
+.delete-btn{
+background:#2a0000;
+color:#ff7070;
+}
+
+.edit-btn{
+background:#111827;
+color:#7dd3fc;
+}
+
+/* MODAL */
+
+.modal{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.75);
+
+display:none;
+
+justify-content:center;
+align-items:center;
+
+padding:20px;
+}
+
+.modal-box{
+
+width:500px;
+
+max-height:90vh;
+
+overflow-y:auto;
+
+background:#111;
+
+padding:30px;
+
+border-radius:24px;
+
+border:
+1px solid rgba(212,175,55,0.2);
+}
+
+.modal-box h2{
+
+color:#d4af37;
+
+margin-bottom:20px;
+}
+
+.modal-box input,
+.modal-box select,
+.modal-box textarea{
+
+width:100%;
+
+padding:14px;
+
+margin-bottom:14px;
+
+border:none;
+
+border-radius:12px;
+
+background:#1b1b1b;
+
+color:white;
+
+font-family:'Poppins',sans-serif;
+}
+
+textarea{
+resize:none;
+height:90px;
+}
+
+/* FOOTER */
+
+.footer{
+
+margin-top:50px;
+
+text-align:center;
+
+color:#666;
+
+font-size:13px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:700px){
+
+.container{
+padding:20px;
+}
+
+.modal-box{
+width:100%;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+<div class="title">
+
+<h1>
+👤 Character Engine
+</h1>
+
+<p>
+Create and store continuity-aware characters
+</p>
+
+</div>
+
+<div class="button-group">
+
+<button class="btn dark-btn"
+onclick="goBack()">
+
+← Workspace
+
+</button>
+
+<button class="btn dark-btn"
+id="undoBtn">
+
+↩ Undo Delete
+
+</button>
+
+<button class="btn gold-btn"
+id="openModal">
+
++ Create Character
+
+</button>
+
+</div>
+
+</div>
+
+<!-- CHARACTER GRID -->
+
+<section class="character-grid"
+id="characterGrid">
+
+</section>
+
+<div class="footer">
+EOH Character Engine © 2026
+</div>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal"
+id="modal">
+
+<div class="modal-box">
+
+<h2>Create Character</h2>
+
+<input
+type="text"
+id="charName"
+placeholder="Character Name"
+>
+
+<input
+type="number"
+id="charAge"
+placeholder="Age"
+>
+
+<input
+type="text"
+id="charHeight"
+placeholder="Height"
+>
+
+<input
+type="text"
+id="charNationality"
+placeholder="Nationality"
+>
+
+<select id="charRole">
+
+<option>Main Character</option>
+<option>Sub Character</option>
+<option>NPC</option>
+
+</select>
+
+<input
+type="text"
+id="charHair"
+placeholder="Hair Color / Style"
+>
+
+<input
+type="text"
+id="charEyes"
+placeholder="Eye Color"
+>
+
+<textarea
+id="charHabit"
+placeholder="Habits / Mannerisms"
+></textarea>
+
+<textarea
+id="charEmotion"
+placeholder="Emotion Details"
+></textarea>
+
+<textarea
+id="charScars"
+placeholder="Scars / Moles (Optional)"
+></textarea>
+
+<input
+type="file"
+id="charImage"
+accept="image/*"
+>
+
+<button class="btn gold-btn"
+style="width:100%;margin-top:10px;"
+id="saveCharacter">
+
+Save Character
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+/* CURRENT PROJECT */
+
+const currentProject =
+JSON.parse(
+localStorage.getItem("current-project")
+);
+
+/* STORAGE KEY */
+
+const storageKey =
+"characters-" + currentProject.name;
+
+/* STORAGE */
+
+let characters =
+JSON.parse(
+localStorage.getItem(storageKey)
+) || [];
+
+let deletedCharacter = null;
+
+let editingIndex = null;
+
+/* ELEMENTS */
+
+const modal =
+document.getElementById("modal");
+
+const openModal =
+document.getElementById("openModal");
+
+const saveCharacter =
+document.getElementById("saveCharacter");
+
+const characterGrid =
+document.getElementById("characterGrid");
+
+/* OPEN MODAL */
+
+openModal.onclick = () => {
+
+modal.style.display = "flex";
+
+};
+
+/* CLOSE MODAL */
+
+window.onclick = (e) => {
+
+if(e.target === modal){
+
+modal.style.display = "none";
+
+}
+
+};
+
+/* SAVE STORAGE */
+
+function saveStorage(){
+
+localStorage.setItem(
+storageKey,
+JSON.stringify(characters)
+);
+
+}
+
+/* RENDER */
+
+function renderCharacters(){
+
+characterGrid.innerHTML = "";
+
+characters.forEach((char,index) => {
+
+const card =
+document.createElement("div");
+
+card.classList.add("character-card");
+
+card.innerHTML = `
+
+<div class="card-actions">
+
+<button class="action-btn edit-btn">
+✎
+</button>
+
+<button class="action-btn delete-btn">
+✕
+</button>
+
+</div>
+
+<h2>${char.name}</h2>
+
+<p>
+
+Age: ${char.age}<br>
+Height: ${char.height}<br>
+Nationality: ${char.nationality}<br>
+Hair: ${char.hair}<br>
+Eyes: ${char.eyes}<br><br>
+
+Habit:
+${char.habit}<br><br>
+
+Emotion:
+${char.emotion}
+
+</p>
+
+<span class="role">
+${char.role}
+</span>
+
+`;
+
+/* DELETE */
+
+card.querySelector(".delete-btn")
+.onclick = () => {
+
+deletedCharacter = char;
+
+characters.splice(index,1);
+
+saveStorage();
+
+renderCharacters();
+
+};
+
+/* EDIT */
+
+card.querySelector(".edit-btn")
+.onclick = () => {
+
+editingIndex = index;
+
+document.getElementById("charName")
+.value = char.name;
+
+document.getElementById("charAge")
+.value = char.age;
+
+document.getElementById("charHeight")
+.value = char.height;
+
+document.getElementById("charNationality")
+.value = char.nationality;
+
+document.getElementById("charRole")
+.value = char.role;
+
+document.getElementById("charHair")
+.value = char.hair;
+
+document.getElementById("charEyes")
+.value = char.eyes;
+
+document.getElementById("charHabit")
+.value = char.habit;
+
+document.getElementById("charEmotion")
+.value = char.emotion;
+
+document.getElementById("charScars")
+.value = char.scars;
+
+modal.style.display = "flex";
+
+};
+
+characterGrid.appendChild(card);
+
+});
+
+}
+
+/* INITIAL */
+
+renderCharacters();
+
+/* SAVE CHARACTER */
+
+saveCharacter.onclick = () => {
+
+const name =
+document.getElementById("charName")
+.value.trim();
+
+const age =
+document.getElementById("charAge")
+.value;
+
+const height =
+document.getElementById("charHeight")
+.value;
+
+const nationality =
+document.getElementById("charNationality")
+.value;
+
+const role =
+document.getElementById("charRole")
+.value;
+
+const hair =
+document.getElementById("charHair")
+.value;
+
+const eyes =
+document.getElementById("charEyes")
+.value;
+
+const habit =
+document.getElementById("charHabit")
+.value;
+
+const emotion =
+document.getElementById("charEmotion")
+.value;
+
+const scars =
+document.getElementById("charScars")
+.value;
+
+/* VALIDATION */
+
+if(name === ""){
+
+alert("Enter character name");
+
+return;
+
+}
+
+/* DUPLICATE */
+
+const duplicate =
+characters.some((char,i)=>
+
+char.name.toLowerCase()
+=== name.toLowerCase()
+
+&& i !== editingIndex
+
+);
+
+if(duplicate){
+
+alert(
+"Character already exists"
+);
+
+return;
+
+}
+
+/* OBJECT */
+
+const newCharacter = {
+
+name,
+age,
+height,
+nationality,
+role,
+hair,
+eyes,
+habit,
+emotion,
+scars
+
+};
+
+/* EDIT */
+
+if(editingIndex !== null){
+
+characters[editingIndex] =
+newCharacter;
+
+editingIndex = null;
+
+}
+
+/* NEW */
+
+else{
+
+characters.push(newCharacter);
+
+}
+
+/* SAVE */
+
+saveStorage();
+
+renderCharacters();
+
+/* RESET */
+
+document.getElementById("charName").value = "";
+document.getElementById("charAge").value = "";
+document.getElementById("charHeight").value = "";
+document.getElementById("charNationality").value = "";
+document.getElementById("charHair").value = "";
+document.getElementById("charEyes").value = "";
+document.getElementById("charHabit").value = "";
+document.getElementById("charEmotion").value = "";
+document.getElementById("charScars").value = "";
+
+modal.style.display = "none";
+
+};
+
+/* UNDO */
+
+document.getElementById("undoBtn")
+.onclick = () => {
+
+if(deletedCharacter){
+
+characters.push(deletedCharacter);
+
+saveStorage();
+
+renderCharacters();
+
+deletedCharacter = null;
+
+}
+
+};
+
+/* BACK */
+
+function goBack(){
+
+window.location.href =
+"project.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
