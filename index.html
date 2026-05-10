@@ -2,114 +2,532 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>EOH Studio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 /* RESET */
-*{margin:0;padding:0;box-sizing:border-box;}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
 body{
+
 font-family:'Poppins',sans-serif;
-background:#050505;
+
+background:
+radial-gradient(circle at top right,
+rgba(212,175,55,0.08),
+transparent 30%),
+
+radial-gradient(circle at bottom left,
+rgba(212,175,55,0.05),
+transparent 25%),
+
+#050505;
+
 color:white;
+
 overflow:hidden;
 }
 
 /* LAYOUT */
-.app-layout{display:flex;height:100vh;}
+
+.app-layout{
+display:flex;
+height:100vh;
+}
 
 /* SIDEBAR */
+
 .sidebar{
+
 width:280px;
-background:#0d0d0d;
-border-right:1px solid rgba(212,175,55,0.2);
-padding:20px;
+
+background:
+rgba(10,10,10,0.95);
+
+border-right:
+1px solid rgba(212,175,55,0.15);
+
+padding:30px 20px;
+
+display:flex;
+flex-direction:column;
+
+backdrop-filter:blur(10px);
+}
+
+/* LOGO */
+
+.logo-area{
+display:flex;
+align-items:center;
+gap:15px;
+margin-bottom:50px;
+}
+
+.logo-circle{
+
+width:65px;
+height:65px;
+
+border-radius:50%;
+
+background:
+linear-gradient(
+145deg,
+#d4af37,
+#f1cc56
+);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:30px;
+font-weight:700;
+
+color:black;
+
+box-shadow:
+0 0 25px rgba(212,175,55,0.35),
+inset 0 0 12px rgba(255,255,255,0.25);
+}
+
+.logo-text h1{
+font-size:28px;
+color:#d4af37;
+margin-bottom:5px;
+}
+
+.logo-text p{
+font-size:13px;
+color:#999;
+line-height:1.5;
+}
+
+/* NAVIGATION */
+
+.sidebar-nav{
+flex:1;
+}
+
+.sidebar-nav ul{
+list-style:none;
+}
+
+.sidebar-nav li{
+
+padding:16px 18px;
+
+margin-bottom:12px;
+
+border-radius:16px;
+
+cursor:pointer;
+
+transition:0.3s;
+
+color:#ccc;
+font-size:15px;
+}
+
+.sidebar-nav li:hover,
+.sidebar-nav .active{
+
+background:
+linear-gradient(
+145deg,
+#d4af37,
+#f1cc56
+);
+
+color:black;
+font-weight:600;
+
+box-shadow:
+0 0 20px rgba(212,175,55,0.25);
 }
 
 /* MAIN */
+
 .main-content{
 flex:1;
-padding:30px;
+padding:35px;
 overflow-y:auto;
 }
 
-/* HEADER */
+/* TOPBAR */
+
 .topbar{
+
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:30px;
+
+margin-bottom:45px;
 }
+
+.topbar h2{
+font-size:36px;
+margin-bottom:10px;
+}
+
+.topbar p{
+font-size:14px;
+color:#888;
+}
+
+/* BUTTON */
 
 .primary-btn{
-background:linear-gradient(145deg,#d4af37,#f1cc56);
+
+background:
+linear-gradient(
+145deg,
+#d4af37,
+#f1cc56
+);
+
+color:black;
+
 border:none;
-padding:12px 18px;
-border-radius:12px;
+
+padding:15px 25px;
+
+border-radius:16px;
+
+font-size:15px;
 font-weight:600;
+
 cursor:pointer;
+
+transition:0.3s;
+
+box-shadow:
+0 0 20px rgba(212,175,55,0.25);
 }
 
-/* GRID */
+.primary-btn:hover{
+transform:translateY(-3px);
+}
+
+/* PROJECT GRID */
+
 .project-grid{
+
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+grid-template-columns:
+repeat(auto-fit,minmax(320px,1fr));
+
+gap:25px;
+
+margin-bottom:40px;
+}
+
+/* PROJECT CARD */
+
+.project-card{
+
+background:
+linear-gradient(
+145deg,
+rgba(20,20,20,0.95),
+rgba(8,8,8,0.95)
+);
+
+border:
+1px solid rgba(212,175,55,0.15);
+
+padding:30px;
+
+border-radius:28px;
+
+transition:0.3s;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.4),
+inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+.project-card:hover{
+
+transform:translateY(-5px);
+
+border-color:#d4af37;
+
+box-shadow:
+0 0 30px rgba(212,175,55,0.15);
+}
+
+/* PLUS BOX */
+
+.plus-box{
+
+width:65px;
+height:65px;
+
+border-radius:20px;
+
+background:
+linear-gradient(
+145deg,
+#d4af37,
+#f1cc56
+);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:42px;
+font-weight:700;
+
+color:black;
+
+margin-bottom:20px;
+
+box-shadow:
+0 0 25px rgba(212,175,55,0.25);
+}
+
+/* TEXT */
+
+.project-card h3,
+.feature-card h3{
+
+font-size:22px;
+
+margin-bottom:15px;
+
+color:#d4af37;
+}
+
+.project-card p,
+.feature-card p{
+
+font-size:14px;
+line-height:1.7;
+
+color:#999;
+}
+
+/* STATUS TAG */
+
+.status-tag{
+
+display:inline-block;
+
+margin-top:20px;
+
+padding:8px 14px;
+
+border-radius:30px;
+
+background:
+linear-gradient(
+145deg,
+#d4af37,
+#f1cc56
+);
+
+color:black;
+
+font-size:12px;
+font-weight:600;
+}
+
+/* FEATURES */
+
+.feature-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
 gap:20px;
 }
 
-/* CARD */
-.project-card{
-background:#111;
-padding:20px;
-border-radius:16px;
-border:1px solid rgba(212,175,55,0.2);
-cursor:pointer;
+.feature-card{
+
+background:
+linear-gradient(
+145deg,
+rgba(18,18,18,0.95),
+rgba(8,8,8,0.95)
+);
+
+padding:25px;
+
+border-radius:24px;
+
+border:
+1px solid rgba(212,175,55,0.15);
+
+transition:0.3s;
+
+box-shadow:
+0 5px 20px rgba(0,0,0,0.3);
+}
+
+.feature-card:hover{
+
+transform:translateY(-4px);
+
+border-color:#d4af37;
 }
 
 /* MODAL */
+
 .modal-overlay{
+
 position:fixed;
-inset:0;
-background:rgba(0,0,0,0.7);
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.75);
+
 display:none;
+
 justify-content:center;
 align-items:center;
+
+z-index:999;
 }
 
 .modal-box{
-background:#111;
-padding:25px;
-border-radius:16px;
-width:350px;
+
+width:420px;
+
+background:
+linear-gradient(
+145deg,
+#111,
+#090909
+);
+
+border:
+1px solid rgba(212,175,55,0.2);
+
+padding:35px;
+
+border-radius:28px;
+
+box-shadow:
+0 0 40px rgba(0,0,0,0.5);
+}
+
+.modal-box h2{
+
+margin-bottom:25px;
+
+color:#d4af37;
 }
 
 .modal-box input,
 .modal-box select{
+
 width:100%;
-padding:10px;
-margin-bottom:10px;
-background:#1a1a1a;
+
+padding:15px;
+
+margin-bottom:18px;
+
 border:none;
+
+outline:none;
+
+border-radius:14px;
+
+background:#1a1a1a;
+
 color:white;
+
+font-size:14px;
 }
 
 .create-project-btn{
+
 width:100%;
-padding:10px;
-background:linear-gradient(145deg,#d4af37,#f1cc56);
+
+padding:15px;
+
 border:none;
-border-radius:10px;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+145deg,
+#d4af37,
+#f1cc56
+);
+
+color:black;
+
 font-weight:600;
+
+font-size:15px;
+
 cursor:pointer;
 }
 
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+width:10px;
+}
+
+::-webkit-scrollbar-track{
+background:#050505;
+}
+
+::-webkit-scrollbar-thumb{
+background:#d4af37;
+border-radius:20px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.sidebar{
+display:none;
+}
+
+.main-content{
+padding:20px;
+}
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:20px;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
@@ -117,30 +535,151 @@ cursor:pointer;
 <div class="app-layout">
 
 <!-- SIDEBAR -->
+
 <aside class="sidebar">
-<h2>EOH Studio</h2>
-<p>Turn ideas into visuals</p>
+
+<div class="logo-area">
+
+<div class="logo-circle">
+E
+</div>
+
+<div class="logo-text">
+
+<h1>EOH Studio</h1>
+
+<p>
+Turn your writing into visuals.
+</p>
+
+</div>
+
+</div>
+
+<nav class="sidebar-nav">
+
+<ul>
+
+<li class="active">Dashboard</li>
+<li>Projects</li>
+<li>Characters</li>
+<li>World Engine</li>
+<li>Story Engine</li>
+<li>Voice Lab</li>
+<li>Assets</li>
+<li>Generator</li>
+<li>Settings</li>
+
+</ul>
+
+</nav>
+
 </aside>
 
 <!-- MAIN -->
+
 <main class="main-content">
 
-<div class="topbar">
+<header class="topbar">
+
 <div>
-<h2>Dashboard / டாஷ்போர்டு</h2>
-<p>Create cinematic projects</p>
+
+<h2>Creative Dashboard</h2>
+
+<p>
+Build cinematic worlds with continuity and intelligence.
+</p>
+
 </div>
 
 <button class="primary-btn" id="openProjectModal">
 + Create Project
 </button>
-</div>
+
+</header>
+
+<!-- PROJECTS -->
 
 <section class="project-grid">
 
 <div class="project-card">
-<h3>+ New Project</h3>
-<p>Start your story</p>
+
+<div class="plus-box">
++
+</div>
+
+<h3>Create Your Own Project</h3>
+
+<p>
+
+Store stories, anime styles,
+characters, world logic,
+emotional continuity,
+and cinematic systems.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- FEATURES -->
+
+<section class="feature-grid">
+
+<div class="feature-card">
+
+<h3>World Engine</h3>
+
+<p>
+
+Create timelines, countries,
+cultures, architecture
+and environmental systems.
+
+</p>
+
+</div>
+
+<div class="feature-card">
+
+<h3>Character Engine</h3>
+
+<p>
+
+Store habits, emotions,
+expressions, personality
+and visual identity.
+
+</p>
+
+</div>
+
+<div class="feature-card">
+
+<h3>Visual Generator</h3>
+
+<p>
+
+Generate cinematic visuals
+using continuity-aware systems.
+
+</p>
+
+</div>
+
+<div class="feature-card">
+
+<h3>Voice Lab</h3>
+
+<p>
+
+Voice modulation,
+lip syncing and
+emotion workflows.
+
+</p>
+
 </div>
 
 </section>
@@ -149,29 +688,39 @@ cursor:pointer;
 
 </div>
 
-<!-- MODAL -->
+<!-- PROJECT MODAL -->
+
 <div class="modal-overlay" id="projectModal">
 
 <div class="modal-box">
 
-<h3>Create Project / திட்டம்</h3>
+<h2>Create New Project</h2>
 
-<input id="projectName" placeholder="Project Name">
+<input type="text" id="projectName" placeholder="Project Name">
 
 <select id="projectStyle">
+
 <option>Anime Style</option>
+<option>Fantasy Anime</option>
 <option>Cyberpunk</option>
-<option>Fantasy</option>
+<option>Realistic</option>
+<option>Ghibli Inspired</option>
+<option>Dark Fantasy</option>
+
 </select>
 
 <select id="projectWorld">
+
+<option>World Type</option>
 <option>Fictional</option>
+<option>Non Fictional</option>
 <option>Sci-Fi</option>
 <option>Historical</option>
+
 </select>
 
 <button class="create-project-btn" id="createProject">
-Create
+Create Project
 </button>
 
 </div>
@@ -180,60 +729,168 @@ Create
 
 <script>
 
-const modal = document.getElementById("projectModal");
-const openBtn = document.getElementById("openProjectModal");
-const createBtn = document.getElementById("createProject");
-const grid = document.querySelector(".project-grid");
+console.log("EOH Studio Initialized");
 
-let projects = JSON.parse(localStorage.getItem("eoh-projects")) || [];
+/* ELEMENTS */
 
-/* RENDER */
-function render(){
-document.querySelectorAll(".generated").forEach(e=>e.remove());
+const modal =
+document.getElementById("projectModal");
 
-projects.forEach(p=>{
-const div = document.createElement("div");
-div.className="project-card generated";
-div.innerHTML = `<h3>${p.name}</h3><p>${p.style} / ${p.world}</p>`;
+const openBtn =
+document.getElementById("openProjectModal");
 
-div.onclick = ()=>{
-localStorage.setItem("current-project",JSON.stringify(p));
-window.location.href="pages/project.html";
+const createBtn =
+document.getElementById("createProject");
+
+const projectGrid =
+document.querySelector(".project-grid");
+
+/* LOAD PROJECTS */
+
+let projects =
+JSON.parse(localStorage.getItem("eoh-projects")) || [];
+
+/* RENDER PROJECTS */
+
+function renderProjects(){
+
+/* REMOVE OLD PROJECTS */
+
+document.querySelectorAll(".generated-project")
+.forEach(card => card.remove());
+
+/* GENERATE PROJECT CARDS */
+
+projects.forEach(project => {
+
+const card =
+document.createElement("div");
+
+card.classList.add(
+"project-card",
+"generated-project"
+);
+
+/* CARD CONTENT */
+
+card.innerHTML = `
+
+<h3>${project.name}</h3>
+
+<p>
+Style: ${project.style}<br>
+World: ${project.world}
+</p>
+
+<span class="status-tag">
+Saved Project
+</span>
+
+`;
+
+/* OPEN PROJECT */
+
+card.onclick = () => {
+
+localStorage.setItem(
+"current-project",
+JSON.stringify(project)
+);
+
+/* OPEN WORKSPACE PAGE */
+
+window.location.href =
+"pages/project.html";
+
 };
 
-grid.appendChild(div);
+projectGrid.appendChild(card);
+
 });
+
 }
 
-render();
+/* INITIAL LOAD */
+
+renderProjects();
 
 /* OPEN MODAL */
-openBtn.onclick=()=>modal.style.display="flex";
 
-/* CREATE */
-createBtn.onclick=()=>{
+openBtn.onclick = () => {
 
-const name = document.getElementById("projectName").value;
-const style = document.getElementById("projectStyle").value;
-const world = document.getElementById("projectWorld").value;
+modal.style.display = "flex";
 
-if(!name) return alert("Enter name");
+};
 
-projects.push({
+/* CLOSE MODAL */
+
+window.onclick = (e) => {
+
+if(e.target === modal){
+
+modal.style.display = "none";
+
+}
+
+};
+
+/* CREATE PROJECT */
+
+createBtn.onclick = () => {
+
+const name =
+document.getElementById("projectName").value;
+
+const style =
+document.getElementById("projectStyle").value;
+
+const world =
+document.getElementById("projectWorld").value;
+
+/* VALIDATION */
+
+if(name === ""){
+
+alert("Enter project name");
+
+return;
+
+}
+
+/* NEW PROJECT */
+
+const newProject = {
+
 name,
 style,
-world,
-story:"",
-characters:[]
-});
+world
 
-localStorage.setItem("eoh-projects",JSON.stringify(projects));
+};
 
-render();
-modal.style.display="none";
+/* SAVE PROJECT */
+
+projects.push(newProject);
+
+localStorage.setItem(
+"eoh-projects",
+JSON.stringify(projects)
+);
+
+/* REFRESH UI */
+
+renderProjects();
+
+/* RESET */
+
+document.getElementById("projectName").value = "";
+
+modal.style.display = "none";
+
 };
 
 </script>
 
 </body>
+
 </html>
+
