@@ -782,6 +782,20 @@ Saved Project
 
 `;
 
+/* OPEN PROJECT */
+
+card.onclick = () => {
+
+localStorage.setItem(
+"current-project",
+JSON.stringify(project)
+);
+
+window.location.href =
+"pages/project.html";
+
+}; 
+
 projectGrid.appendChild(card);
 
 });
