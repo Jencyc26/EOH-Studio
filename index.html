@@ -24,6 +24,7 @@ box-sizing:border-box;
 }
 
 body{
+
 font-family:'Poppins',sans-serif;
 
 background:
@@ -38,6 +39,7 @@ transparent 25%),
 #050505;
 
 color:white;
+
 overflow:hidden;
 }
 
@@ -51,9 +53,14 @@ height:100vh;
 /* SIDEBAR */
 
 .sidebar{
+
 width:280px;
-background:rgba(10,10,10,0.95);
-border-right:1px solid rgba(212,175,55,0.15);
+
+background:
+rgba(10,10,10,0.95);
+
+border-right:
+1px solid rgba(212,175,55,0.15);
 
 padding:30px 20px;
 
@@ -73,8 +80,10 @@ margin-bottom:50px;
 }
 
 .logo-circle{
+
 width:65px;
 height:65px;
+
 border-radius:50%;
 
 background:
@@ -121,8 +130,11 @@ list-style:none;
 }
 
 .sidebar-nav li{
+
 padding:16px 18px;
+
 margin-bottom:12px;
+
 border-radius:16px;
 
 cursor:pointer;
@@ -161,9 +173,11 @@ overflow-y:auto;
 /* TOPBAR */
 
 .topbar{
+
 display:flex;
 justify-content:space-between;
 align-items:center;
+
 margin-bottom:45px;
 }
 
@@ -180,6 +194,7 @@ color:#888;
 /* BUTTON */
 
 .primary-btn{
+
 background:
 linear-gradient(
 145deg,
@@ -213,7 +228,9 @@ transform:translateY(-3px);
 /* PROJECT GRID */
 
 .project-grid{
+
 display:grid;
+
 grid-template-columns:
 repeat(auto-fit,minmax(320px,1fr));
 
@@ -375,6 +392,105 @@ transform:translateY(-4px);
 border-color:#d4af37;
 }
 
+/* MODAL */
+
+.modal-overlay{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.75);
+
+display:none;
+
+justify-content:center;
+align-items:center;
+
+z-index:999;
+}
+
+.modal-box{
+
+width:420px;
+
+background:
+linear-gradient(
+145deg,
+#111,
+#090909
+);
+
+border:
+1px solid rgba(212,175,55,0.2);
+
+padding:35px;
+
+border-radius:28px;
+
+box-shadow:
+0 0 40px rgba(0,0,0,0.5);
+}
+
+.modal-box h2{
+
+margin-bottom:25px;
+
+color:#d4af37;
+}
+
+.modal-box input,
+.modal-box select{
+
+width:100%;
+
+padding:15px;
+
+margin-bottom:18px;
+
+border:none;
+
+outline:none;
+
+border-radius:14px;
+
+background:#1a1a1a;
+
+color:white;
+
+font-size:14px;
+}
+
+.create-project-btn{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+145deg,
+#d4af37,
+#f1cc56
+);
+
+color:black;
+
+font-weight:600;
+
+font-size:15px;
+
+cursor:pointer;
+}
+
 /* SCROLLBAR */
 
 ::-webkit-scrollbar{
@@ -464,8 +580,6 @@ Turn your writing into visuals.
 
 <main class="main-content">
 
-<!-- TOPBAR -->
-
 <header class="topbar">
 
 <div>
@@ -478,7 +592,7 @@ Build cinematic worlds with continuity and intelligence.
 
 </div>
 
-<button class="primary-btn">
+<button class="primary-btn" id="openProjectModal">
 + Create Project
 </button>
 
@@ -504,25 +618,6 @@ emotional continuity,
 and cinematic systems.
 
 </p>
-
-</div>
-
-<div class="project-card">
-
-<h3>The Stars</h3>
-
-<p>
-
-Political anime universe with
-world memory, emotional logic,
-cinematic storytelling
-and continuity systems.
-
-</p>
-
-<span class="status-tag">
-Active Project
-</span>
 
 </div>
 
@@ -593,9 +688,144 @@ emotion workflows.
 
 </div>
 
+<!-- PROJECT MODAL -->
+
+<div class="modal-overlay" id="projectModal">
+
+<div class="modal-box">
+
+<h2>Create New Project</h2>
+
+<input type="text" id="projectName" placeholder="Project Name">
+
+<select id="projectStyle">
+
+<option>Anime Style</option>
+<option>Fantasy Anime</option>
+<option>Cyberpunk</option>
+<option>Realistic</option>
+<option>Ghibli Inspired</option>
+<option>Dark Fantasy</option>
+
+</select>
+
+<select id="projectWorld">
+
+<option>World Type</option>
+<option>Fictional</option>
+<option>Non Fictional</option>
+<option>Sci-Fi</option>
+<option>Historical</option>
+
+</select>
+
+<button class="create-project-btn" id="createProject">
+Create Project
+</button>
+
+</div>
+
+</div>
+
 <script>
 
 console.log("EOH Studio Initialized");
+
+/* MODAL */
+
+const modal =
+document.getElementById("projectModal");
+
+const openBtn =
+document.getElementById("openProjectModal");
+
+const createBtn =
+document.getElementById("createProject");
+
+/* OPEN */
+
+openBtn.onclick = () => {
+
+modal.style.display = "flex";
+
+};
+
+/* CLOSE */
+
+window.onclick = (e) => {
+
+if(e.target === modal){
+
+modal.style.display = "none";
+
+}
+
+};
+
+/* CREATE PROJECT */
+
+createBtn.onclick = () => {
+
+const name =
+document.getElementById("projectName").value;
+
+const style =
+document.getElementById("projectStyle").value;
+
+const world =
+document.getElementById("projectWorld").value;
+
+if(name === ""){
+
+alert("Enter project name");
+
+return;
+
+}
+
+const projectGrid =
+document.querySelector(".project-grid");
+
+const newCard =
+document.createElement("div");
+
+newCard.classList.add("project-card");
+
+newCard.innerHTML = `
+
+<h3>${name}</h3>
+
+<p>
+Style: ${style}<br>
+World: ${world}
+</p>
+
+<span class="status-tag">
+New Project
+</span>
+
+`;
+
+projectGrid.appendChild(newCard);
+
+/* SAVE */
+
+localStorage.setItem(
+"eoh-last-project",
+JSON.stringify({
+name,
+style,
+world
+})
+);
+
+/* RESET */
+
+document.getElementById("projectName").value = "";
+
+modal.style.display = "none";
+
+};
 
 </script>
 
