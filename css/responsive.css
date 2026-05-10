@@ -1,1 +1,17 @@
+@media(max-width:900px){
 
+.dashboard-layout{
+flex-direction:column;
+}
+
+.sidebar{
+width:100%;
+}
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:20px;
+}
+
+}
