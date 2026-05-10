@@ -1,212 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>EOH Workspace</title>
 
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+<link rel="stylesheet" href="../css/responsive.css">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-background:#050505;
-color:white;
-padding:40px;
-}
-
-/* HEADER */
-
-.header{
-margin-bottom:40px;
-}
-
-.header h1{
-font-size:42px;
-color:#d4af37;
-margin-bottom:10px;
-}
-
-.header p{
-color:#888;
-}
-
-/* GRID */
-
-.grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(260px,1fr));
-
-gap:20px;
-}
-
-/* CARD */
-
-.box{
-
-background:#111;
-
-padding:25px;
-
-border-radius:18px;
-
-border:
-1px solid rgba(212,175,55,0.2);
-
-transition:0.3s;
-}
-
-.box:hover{
-transform:translateY(-4px);
-border-color:#d4af37;
-}
-
-.box h2{
-color:#d4af37;
-margin-bottom:12px;
-}
-
-.box p{
-color:#999;
-font-size:14px;
-line-height:1.6;
-}
-
-.open-btn{
-
-margin-top:15px;
-
-padding:10px 16px;
-
-border:none;
-
-border-radius:10px;
-
-background:
-linear-gradient(
-145deg,
-#d4af37,
-#f1cc56
-);
-
-color:black;
-
-font-weight:600;
-
-cursor:pointer;
-}
-
-</style>
-
 </head>
 
 <body>
 
-<div class="header">
+<div class="workspace-page">
 
-<h1 id="projectTitle">
-Project
-</h1>
-
-<p>
-Cinematic continuity workspace
-</p>
-
+<div class="workspace-header">
+<h1 id="workspaceTitle">Project</h1>
+<p>Cinematic continuity workspace</p>
 </div>
 
-<div class="grid">
+<div class="workspace-grid">
 
-<div class="box">
-
+<div class="workspace-card">
 <h2>World Engine</h2>
-
-<p>
-Create countries, cultures,
-timeline and environmental systems.
-</p>
-
-<button class="open-btn">
-Open
-</button>
-
+<p>Create world logic and cultures.</p>
+<button class="primary-btn">Open</button>
 </div>
 
-<div class="box">
-
+<div class="workspace-card">
 <h2>Character Engine</h2>
-
-<p>
-Store emotions, outfits,
-habits and continuity logic.
-</p>
-
-<button class="open-btn">
-Open
-</button>
-
+<p>Store habits and emotions.</p>
+<button class="primary-btn">Open</button>
 </div>
 
-<div class="box">
-
+<div class="workspace-card">
 <h2>Story Engine</h2>
-
-<p>
-Write scripts, dialogues,
-timeline and cinematic scenes.
-</p>
-
-<button class="open-btn">
-Open
-</button>
-
+<p>Write scripts and timelines.</p>
+<button class="primary-btn">Open</button>
 </div>
 
-<div class="box">
-
+<div class="workspace-card">
 <h2>Visual Generator</h2>
-
-<p>
-Generate images and videos
-using continuity systems.
-</p>
-
-<button class="open-btn">
-Open
-</button>
+<p>Generate cinematic visuals.</p>
+<button class="primary-btn">Open</button>
+</div>
 
 </div>
 
 </div>
 
 <script>
-
-/* LOAD PROJECT */
-
-const project =
-JSON.parse(localStorage.getItem("current-project"));
+const project = JSON.parse(localStorage.getItem("current-project"));
 
 if(project){
-
-document.getElementById("projectTitle")
-.innerText = project.name;
-
+document.getElementById("workspaceTitle").innerText = project.name;
 }
-
 </script>
 
 </body>
-
 </html>
