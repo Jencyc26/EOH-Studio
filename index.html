@@ -2,14 +2,9 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>EOH Studio</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>EOH Studio - Workspace</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -24,221 +19,140 @@ box-sizing:border-box;
 
 body{
 font-family:'Poppins',sans-serif;
-background:
-radial-gradient(circle at top right, rgba(212,175,55,0.08), transparent 30%),
-radial-gradient(circle at bottom left, rgba(212,175,55,0.05), transparent 25%),
-#050505;
+background:#050505;
 color:white;
 overflow:hidden;
 }
 
 /* LAYOUT */
-.app-layout{
+.container{
 display:flex;
 height:100vh;
 }
 
-/* SIDEBAR */
+/* LEFT PANEL */
 .sidebar{
-width:280px;
-background:rgba(10,10,10,0.95);
-border-right:1px solid rgba(212,175,55,0.15);
-padding:30px 20px;
+width:300px;
+background:#0d0d0d;
+border-right:1px solid rgba(212,175,55,0.2);
+padding:20px;
 display:flex;
 flex-direction:column;
-backdrop-filter:blur(10px);
-}
-
-/* LOGO */
-.logo-area{
-display:flex;
-align-items:center;
-gap:15px;
-margin-bottom:50px;
-}
-
-.logo-circle{
-width:65px;
-height:65px;
-border-radius:50%;
-background:linear-gradient(145deg,#d4af37,#f1cc56);
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:30px;
-font-weight:700;
-color:black;
-box-shadow:0 0 25px rgba(212,175,55,0.35);
-}
-
-.logo-text h1{
-font-size:28px;
-color:#d4af37;
-margin-bottom:5px;
-}
-
-.logo-text p{
-font-size:13px;
-color:#999;
-}
-
-/* NAV */
-.sidebar-nav ul{
-list-style:none;
-}
-
-.sidebar-nav li{
-padding:16px 18px;
-margin-bottom:12px;
-border-radius:16px;
-cursor:pointer;
-transition:0.3s;
-color:#ccc;
-}
-
-.sidebar-nav li:hover,
-.sidebar-nav .active{
-background:linear-gradient(145deg,#d4af37,#f1cc56);
-color:black;
-font-weight:600;
-}
-
-/* MAIN */
-.main-content{
-flex:1;
-padding:35px;
-overflow-y:auto;
-}
-
-/* TOP */
-.topbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:45px;
-}
-
-.topbar h2{
-font-size:36px;
-}
-
-.topbar p{
-font-size:14px;
-color:#888;
-}
-
-/* BUTTON */
-.primary-btn{
-background:linear-gradient(145deg,#d4af37,#f1cc56);
-color:black;
-border:none;
-padding:15px 25px;
-border-radius:16px;
-font-weight:600;
-cursor:pointer;
-}
-
-/* GRID */
-.project-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:25px;
-margin-bottom:40px;
-}
-
-/* CARD */
-.project-card{
-background:rgba(15,15,15,0.95);
-border:1px solid rgba(212,175,55,0.15);
-padding:30px;
-border-radius:28px;
-cursor:pointer;
-transition:0.3s;
-}
-
-.project-card:hover{
-transform:translateY(-5px);
-border-color:#d4af37;
-}
-
-.plus-box{
-width:65px;
-height:65px;
-border-radius:20px;
-background:linear-gradient(145deg,#d4af37,#f1cc56);
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:42px;
-font-weight:700;
-color:black;
-margin-bottom:20px;
-}
-
-.status-tag{
-display:inline-block;
-margin-top:20px;
-padding:8px 14px;
-border-radius:30px;
-background:linear-gradient(145deg,#d4af37,#f1cc56);
-color:black;
-font-size:12px;
-}
-
-/* FEATURE */
-.feature-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
 }
 
-.feature-card{
-background:rgba(12,12,12,0.95);
-padding:25px;
-border-radius:24px;
-border:1px solid rgba(212,175,55,0.15);
+.title{
+color:#d4af37;
+font-size:22px;
 }
 
-/* MODAL */
-.modal-overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.75);
-display:none;
-justify-content:center;
-align-items:center;
-}
-
-.modal-box{
-width:420px;
+/* PROJECT INFO */
+.info-box{
+padding:15px;
 background:#111;
-padding:35px;
-border-radius:28px;
+border-radius:12px;
 border:1px solid rgba(212,175,55,0.2);
 }
 
-.modal-box input,
-.modal-box select{
-width:100%;
-padding:15px;
-margin-bottom:18px;
-border:none;
-border-radius:14px;
-background:#1a1a1a;
-color:white;
+.info-box p{
+font-size:13px;
+color:#aaa;
+line-height:1.6;
 }
 
-.create-project-btn{
-width:100%;
-padding:15px;
-border:none;
-border-radius:14px;
+/* BUTTON */
+.btn{
 background:linear-gradient(145deg,#d4af37,#f1cc56);
+border:none;
+padding:12px;
+border-radius:10px;
 font-weight:600;
 cursor:pointer;
+color:black;
+}
+
+/* MAIN AREA */
+.main{
+flex:1;
+display:flex;
+flex-direction:column;
+}
+
+/* HEADER */
+.header{
+padding:20px;
+border-bottom:1px solid rgba(212,175,55,0.15);
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.header h2{
+color:#d4af37;
+}
+
+/* WORK AREA */
+.workspace{
+flex:1;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+padding:15px;
+}
+
+/* EDITORS */
+.panel{
+background:#111;
+border:1px solid rgba(212,175,55,0.15);
+border-radius:12px;
+padding:15px;
+display:flex;
+flex-direction:column;
+}
+
+.panel h3{
+color:#d4af37;
+margin-bottom:10px;
+}
+
+/* TEXTAREA */
+textarea{
+flex:1;
+background:#0a0a0a;
+border:none;
+outline:none;
+color:white;
+padding:12px;
+border-radius:10px;
+resize:none;
+font-size:14px;
+line-height:1.5;
+}
+
+/* CHARACTER LIST */
+.char-list{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-top:10px;
+}
+
+.char{
+padding:10px;
+background:#0a0a0a;
+border-radius:8px;
+border:1px solid rgba(212,175,55,0.1);
+font-size:13px;
+color:#ccc;
+}
+
+.small-input{
+padding:10px;
+background:#0a0a0a;
+border:1px solid rgba(212,175,55,0.2);
+border-radius:8px;
+color:white;
+margin-bottom:10px;
 }
 
 </style>
@@ -247,97 +161,52 @@ cursor:pointer;
 
 <body>
 
-<div class="app-layout">
+<div class="container">
 
-<aside class="sidebar">
+<!-- LEFT -->
+<div class="sidebar">
 
-<div class="logo-area">
-<div class="logo-circle">E</div>
-<div class="logo-text">
-<h1>EOH Studio</h1>
-<p>Turn your writing into visuals.</p>
-</div>
-</div>
+<h2 class="title">EOH Workspace</h2>
 
-<nav class="sidebar-nav">
-<ul>
-<li class="active">Dashboard</li>
-<li>Projects</li>
-<li>Characters</li>
-<li>World Engine</li>
-<li>Story Engine</li>
-<li>Voice Lab</li>
-<li>Assets</li>
-<li>Settings</li>
-</ul>
-</nav>
-
-</aside>
-
-<main class="main-content">
-
-<header class="topbar">
-
-<div>
-<h2>Creative Dashboard</h2>
-<p>Build cinematic worlds with continuity and intelligence.</p>
+<div class="info-box">
+<p id="projectInfo">Loading project...</p>
 </div>
 
-<button class="primary-btn" id="openProjectModal">
-+ Create Project
-</button>
+<button class="btn" onclick="saveProject()">Save Project</button>
 
-</header>
-
-<section class="project-grid">
-
-<div class="project-card">
-<div class="plus-box">+</div>
-<h3>Create Your Own Project</h3>
-<p>Store stories, characters, worlds and cinematic systems.</p>
-</div>
-
-</section>
-
-<section class="feature-grid">
-
-<div class="feature-card"><h3>World Engine</h3></div>
-<div class="feature-card"><h3>Character Engine</h3></div>
-<div class="feature-card"><h3>Visual Generator</h3></div>
-<div class="feature-card"><h3>Voice Lab</h3></div>
-
-</section>
-
-</main>
+<button class="btn" onclick="goBack()">← Back</button>
 
 </div>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="projectModal">
+<!-- MAIN -->
+<div class="main">
 
-<div class="modal-box">
+<div class="header">
+<h2 id="projectName">Project</h2>
+</div>
 
-<h2>Create New Project</h2>
+<div class="workspace">
 
-<input type="text" id="projectName" placeholder="Project Name">
+<!-- STORY -->
+<div class="panel">
+<h3>Story Editor</h3>
+<textarea id="storyBox" placeholder="Write your story..."></textarea>
+</div>
 
-<select id="projectStyle">
-<option>Anime Style</option>
-<option>Fantasy Anime</option>
-<option>Cyberpunk</option>
-<option>Realistic</option>
-<option>Ghibli Inspired</option>
-</select>
+<!-- CHARACTERS -->
+<div class="panel">
 
-<select id="projectWorld">
-<option>Fictional</option>
-<option>Sci-Fi</option>
-<option>Historical</option>
-</select>
+<h3>Characters</h3>
 
-<button class="create-project-btn" id="createProject">
-Create Project
-</button>
+<input class="small-input" id="charName" placeholder="Character Name">
+
+<button class="btn" onclick="addCharacter()">Add Character</button>
+
+<div class="char-list" id="charList"></div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -345,90 +214,89 @@ Create Project
 
 <script>
 
-const modal = document.getElementById("projectModal");
-const openBtn = document.getElementById("openProjectModal");
-const createBtn = document.getElementById("createProject");
-const projectGrid = document.querySelector(".project-grid");
+/* LOAD PROJECT */
+let project = JSON.parse(localStorage.getItem("current-project"));
 
-/* SAFE LOAD */
-let projects = JSON.parse(localStorage.getItem("eoh-projects"));
-if(!projects) projects = [];
+if(!project){
+alert("No project found");
+window.location.href = "../index.html";
+}
 
-/* RENDER */
-function renderProjects(){
+/* INIT DEFAULT FIELDS */
+project.story = project.story || "";
+project.characters = project.characters || [];
 
-document.querySelectorAll(".generated").forEach(e=>e.remove());
+/* UI ELEMENTS */
+const storyBox = document.getElementById("storyBox");
+const charList = document.getElementById("charList");
 
-projects.forEach((p)=>{
+/* SET DATA */
+document.getElementById("projectName").innerText = project.name;
 
-const card = document.createElement("div");
-card.className = "project-card generated";
+document.getElementById("projectInfo").innerHTML =
+`Style: ${project.style}<br>World: ${project.world}`;
 
-card.innerHTML = `
-<h3>${p.name}</h3>
-<p>${p.style} <br> ${p.world}</p>
-<span class="status-tag">Saved</span>
-`;
+storyBox.value = project.story;
 
-card.onclick = ()=>{
-localStorage.setItem("current-project", JSON.stringify(p));
-window.location.href = "pages/project.html";
-};
+/* RENDER CHARACTERS */
+function renderChars(){
 
-projectGrid.appendChild(card);
+charList.innerHTML = "";
+
+project.characters.forEach((c,index)=>{
+
+const div = document.createElement("div");
+div.className = "char";
+div.innerText = c;
+
+charList.appendChild(div);
 
 });
 
 }
 
-renderProjects();
+/* ADD CHARACTER */
+function addCharacter(){
 
-/* OPEN MODAL */
-openBtn.onclick = ()=> modal.style.display="flex";
+const name = document.getElementById("charName").value;
 
-/* CLOSE MODAL */
-window.onclick = (e)=>{
-if(e.target===modal) modal.style.display="none";
-};
+if(!name) return;
 
-/* ESC CLOSE */
-window.addEventListener("keydown",(e)=>{
-if(e.key==="Escape") modal.style.display="none";
-});
+project.characters.push(name);
 
-/* CREATE */
-createBtn.onclick = ()=>{
+document.getElementById("charName").value = "";
 
-const name = document.getElementById("projectName").value;
-const style = document.getElementById("projectStyle").value;
-const world = document.getElementById("projectWorld").value;
+renderChars();
 
-if(!name){
-alert("Enter project name");
-return;
 }
 
-/* NEW STRUCTURE (IMPORTANT) */
-const newProject = {
-name,
-style,
-world,
-story:"",
-characters:[],
-timeline:[],
-scenes:[]
-};
+/* SAVE */
+function saveProject(){
 
-projects.push(newProject);
+project.story = storyBox.value;
 
-localStorage.setItem("eoh-projects", JSON.stringify(projects));
+let all = JSON.parse(localStorage.getItem("eoh-projects")) || [];
 
-renderProjects();
+let index = all.findIndex(p => p.name === project.name);
 
-document.getElementById("projectName").value="";
-modal.style.display="none";
+if(index !== -1){
+all[index] = project;
+}
 
-};
+localStorage.setItem("eoh-projects", JSON.stringify(all));
+localStorage.setItem("current-project", JSON.stringify(project));
+
+alert("Project Saved!");
+
+}
+
+/* BACK */
+function goBack(){
+window.location.href = "../index.html";
+}
+
+/* AUTO LOAD */
+renderChars();
 
 </script>
 
