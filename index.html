@@ -754,12 +754,10 @@ JSON.parse(localStorage.getItem("eoh-projects")) || [];
 
 function renderProjects(){
 
-/* REMOVE OLD PROJECTS */
-
 document.querySelectorAll(".generated-project")
 .forEach(card => card.remove());
 
-/* GENERATE PROJECT CARDS */
+projects.forEach(project => {
 
 projects.forEach(project => {
 
@@ -770,8 +768,6 @@ card.classList.add(
 "project-card",
 "generated-project"
 );
-
-/* CARD CONTENT */
 
 card.innerHTML = `
 
@@ -797,8 +793,6 @@ localStorage.setItem(
 JSON.stringify(project)
 );
 
-/* OPEN WORKSPACE PAGE */
-
 window.location.href =
 "pages/project.html";
 
@@ -807,6 +801,7 @@ window.location.href =
 projectGrid.appendChild(card);
 
 });
+
 
 }
 
@@ -867,7 +862,7 @@ world
 
 };
 
-/* SAVE PROJECT */
+/* SAVE */
 
 projects.push(newProject);
 
@@ -876,7 +871,7 @@ localStorage.setItem(
 JSON.stringify(projects)
 );
 
-/* REFRESH UI */
+/* RELOAD UI */
 
 renderProjects();
 
@@ -893,4 +888,3 @@ modal.style.display = "none";
 </body>
 
 </html>
-
