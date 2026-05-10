@@ -6,10 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>EOH Project Workspace</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>EOH Workspace</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -19,111 +16,84 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-
-font-family:'Poppins',sans-serif;
-
 background:#050505;
-
 color:white;
-
 padding:40px;
 }
 
 /* HEADER */
 
-.workspace-header{
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
+.header{
 margin-bottom:40px;
 }
 
-.workspace-title h1{
-
+.header h1{
 font-size:42px;
-
 color:#d4af37;
-
 margin-bottom:10px;
 }
 
-.workspace-title p{
-
+.header p{
 color:#888;
 }
 
 /* GRID */
 
-.workspace-grid{
+.grid{
 
 display:grid;
 
 grid-template-columns:
-repeat(auto-fit,minmax(280px,1fr));
+repeat(auto-fit,minmax(260px,1fr));
 
-gap:25px;
+gap:20px;
 }
 
 /* CARD */
 
-.workspace-card{
+.box{
 
-background:
-linear-gradient(
-145deg,
-#111,
-#080808
-);
+background:#111;
 
-padding:30px;
+padding:25px;
 
-border-radius:26px;
+border-radius:18px;
 
 border:
-1px solid rgba(212,175,55,0.15);
+1px solid rgba(212,175,55,0.2);
 
 transition:0.3s;
 }
 
-.workspace-card:hover{
-
-transform:translateY(-5px);
-
+.box:hover{
+transform:translateY(-4px);
 border-color:#d4af37;
 }
 
-.workspace-card h2{
-
+.box h2{
 color:#d4af37;
-
-margin-bottom:15px;
+margin-bottom:12px;
 }
 
-.workspace-card p{
-
+.box p{
 color:#999;
-
-line-height:1.7;
-
 font-size:14px;
+line-height:1.6;
 }
 
-/* BUTTON */
+.open-btn{
 
-.workspace-btn{
+margin-top:15px;
 
-margin-top:20px;
-
-padding:12px 18px;
+padding:10px 16px;
 
 border:none;
 
-border-radius:14px;
+border-radius:10px;
 
 background:
 linear-gradient(
@@ -145,9 +115,7 @@ cursor:pointer;
 
 <body>
 
-<header class="workspace-header">
-
-<div class="workspace-title">
+<div class="header">
 
 <h1 id="projectTitle">
 Project
@@ -159,83 +127,81 @@ Cinematic continuity workspace
 
 </div>
 
-</header>
+<div class="grid">
 
-<section class="workspace-grid">
-
-<div class="workspace-card">
+<div class="box">
 
 <h2>World Engine</h2>
 
 <p>
 Create countries, cultures,
-timelines and environmental logic.
+timeline and environmental systems.
 </p>
 
-<button class="workspace-btn">
-Open World Engine
+<button class="open-btn">
+Open
 </button>
 
 </div>
 
-<div class="workspace-card">
+<div class="box">
 
 <h2>Character Engine</h2>
 
 <p>
-Store emotions, habits,
-appearance and continuity.
+Store emotions, outfits,
+habits and continuity logic.
 </p>
 
-<button class="workspace-btn">
-Open Character Engine
+<button class="open-btn">
+Open
 </button>
 
 </div>
 
-<div class="workspace-card">
+<div class="box">
 
 <h2>Story Engine</h2>
 
 <p>
-Write scripts, timelines,
-dialogues and scene flow.
+Write scripts, dialogues,
+timeline and cinematic scenes.
 </p>
 
-<button class="workspace-btn">
-Open Story Engine
+<button class="open-btn">
+Open
 </button>
 
 </div>
 
-<div class="workspace-card">
+<div class="box">
 
 <h2>Visual Generator</h2>
 
 <p>
 Generate images and videos
-using continuity-aware systems.
+using continuity systems.
 </p>
 
-<button class="workspace-btn">
-Open Generator
+<button class="open-btn">
+Open
 </button>
 
 </div>
 
-</section>
+</div>
 
 <script>
 
-/* LOAD CURRENT PROJECT */
+/* LOAD PROJECT */
 
-const currentProject =
+const project =
 JSON.parse(localStorage.getItem("current-project"));
 
-if(currentProject){
+if(project){
 
 document.getElementById("projectTitle")
-.innerText = currentProject.name;
+.innerText = project.name;
 
 }
 
