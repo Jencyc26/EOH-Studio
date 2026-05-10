@@ -731,7 +731,7 @@ Create Project
 
 console.log("EOH Studio Initialized");
 
-/* MODAL */
+/* ELEMENTS */
 
 const modal =
 document.getElementById("projectModal");
@@ -742,7 +742,57 @@ document.getElementById("openProjectModal");
 const createBtn =
 document.getElementById("createProject");
 
-/* OPEN */
+const projectGrid =
+document.querySelector(".project-grid");
+
+/* LOAD PROJECTS */
+
+let projects =
+JSON.parse(localStorage.getItem("eoh-projects")) || [];
+
+/* RENDER PROJECTS */
+
+function renderProjects(){
+
+document.querySelectorAll(".generated-project")
+.forEach(card => card.remove());
+
+projects.forEach(project => {
+
+const card =
+document.createElement("div");
+
+card.classList.add(
+"project-card",
+"generated-project"
+);
+
+card.innerHTML = `
+
+<h3>${project.name}</h3>
+
+<p>
+Style: ${project.style}<br>
+World: ${project.world}
+</p>
+
+<span class="status-tag">
+Saved Project
+</span>
+
+`;
+
+projectGrid.appendChild(card);
+
+});
+
+}
+
+/* INITIAL LOAD */
+
+renderProjects();
+
+/* OPEN MODAL */
 
 openBtn.onclick = () => {
 
@@ -750,7 +800,7 @@ modal.style.display = "flex";
 
 };
 
-/* CLOSE */
+/* CLOSE MODAL */
 
 window.onclick = (e) => {
 
@@ -775,6 +825,8 @@ document.getElementById("projectStyle").value;
 const world =
 document.getElementById("projectWorld").value;
 
+/* VALIDATION */
+
 if(name === ""){
 
 alert("Enter project name");
@@ -783,41 +835,28 @@ return;
 
 }
 
-const projectGrid =
-document.querySelector(".project-grid");
+/* NEW PROJECT */
 
-const newCard =
-document.createElement("div");
+const newProject = {
 
-newCard.classList.add("project-card");
-
-newCard.innerHTML = `
-
-<h3>${name}</h3>
-
-<p>
-Style: ${style}<br>
-World: ${world}
-</p>
-
-<span class="status-tag">
-New Project
-</span>
-
-`;
-
-projectGrid.appendChild(newCard);
-
-/* SAVE */
-
-localStorage.setItem(
-"eoh-last-project",
-JSON.stringify({
 name,
 style,
 world
-})
+
+};
+
+/* SAVE */
+
+projects.push(newProject);
+
+localStorage.setItem(
+"eoh-projects",
+JSON.stringify(projects)
 );
+
+/* RELOAD UI */
+
+renderProjects();
 
 /* RESET */
 
