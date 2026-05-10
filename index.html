@@ -226,6 +226,8 @@ border:
 1px solid rgba(212,175,55,0.15);
 
 transition:0.3s;
+
+cursor:pointer;
 }
 
 .card:hover{
@@ -332,6 +334,65 @@ font-size:14px;
 line-height:1.6;
 }
 
+/* MODAL */
+
+.modal{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.7);
+
+display:none;
+
+justify-content:center;
+align-items:center;
+}
+
+.modal-box{
+
+width:380px;
+
+background:#111;
+
+padding:28px;
+
+border-radius:20px;
+
+border:
+1px solid rgba(212,175,55,0.2);
+}
+
+.modal-box h2{
+
+color:#d4af37;
+
+margin-bottom:20px;
+}
+
+.modal-box input,
+.modal-box select{
+
+width:100%;
+
+padding:14px;
+
+margin-bottom:14px;
+
+border:none;
+
+border-radius:12px;
+
+background:#1b1b1b;
+
+color:white;
+}
+
 /* FOOTER */
 
 .footer{
@@ -399,41 +460,15 @@ Turn your writing into visuals.
 
 <ul>
 
-<li class="active">
-🏠 Dashboard
-</li>
-
-<li>
-📁 Projects
-</li>
-
-<li>
-👤 Characters
-</li>
-
-<li>
-🌍 World Engine
-</li>
-
-<li>
-📖 Story Engine
-</li>
-
-<li>
-🎬 Generator
-</li>
-
-<li>
-🎤 Voice Lab
-</li>
-
-<li>
-🖼 Assets
-</li>
-
-<li>
-⚙ Settings
-</li>
+<li class="active">🏠 Dashboard</li>
+<li>📁 Projects</li>
+<li>👤 Characters</li>
+<li>🌍 World Engine</li>
+<li>📖 Story Engine</li>
+<li>🎬 Generator</li>
+<li>🎤 Voice Lab</li>
+<li>🖼 Assets</li>
+<li>⚙ Settings</li>
 
 </ul>
 
@@ -459,7 +494,7 @@ AI cinematic creation workspace
 
 </div>
 
-<button class="primary-btn">
+<button class="primary-btn" id="openModal">
 + Create Project
 </button>
 
@@ -467,7 +502,7 @@ AI cinematic creation workspace
 
 <!-- PROJECTS -->
 
-<section class="project-grid">
+<section class="project-grid" id="projectGrid">
 
 <div class="card">
 
@@ -499,9 +534,7 @@ and cinematic logic.
 
 <div class="feature">
 
-<h4>
-🌍 World Engine
-</h4>
+<h4>🌍 World Engine</h4>
 
 <p>
 Create timeline, cultures,
@@ -512,9 +545,7 @@ countries and cinematic worlds.
 
 <div class="feature">
 
-<h4>
-👤 Character Engine
-</h4>
+<h4>👤 Character Engine</h4>
 
 <p>
 Store habits, emotions,
@@ -525,35 +556,28 @@ expressions and continuity.
 
 <div class="feature">
 
-<h4>
-📖 Story Engine
-</h4>
+<h4>📖 Story Engine</h4>
 
 <p>
-Store scripts,
-dialogues and cinematic scenes.
+Store scripts and cinematic scenes.
 </p>
 
 </div>
 
 <div class="feature">
 
-<h4>
-🎬 Generator
-</h4>
+<h4>🎬 Generator</h4>
 
 <p>
 Generate visuals and videos
-using AI continuity systems.
+using continuity systems.
 </p>
 
 </div>
 
 <div class="feature">
 
-<h4>
-🎤 Voice Lab
-</h4>
+<h4>🎤 Voice Lab</h4>
 
 <p>
 English + Tamil voice support,
@@ -564,9 +588,7 @@ emotion tone and lip sync.
 
 <div class="feature">
 
-<h4>
-🖼 Assets
-</h4>
+<h4>🖼 Assets</h4>
 
 <p>
 Store PNG references,
@@ -578,14 +600,175 @@ backgrounds and cinematic assets.
 </section>
 
 <div class="footer">
-
 EOH Studio © 2026
-
 </div>
 
 </main>
 
 </div>
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<h2>Create New Project</h2>
+
+<input
+type="text"
+id="projectName"
+placeholder="Project Name"
+>
+
+<select id="projectStyle">
+
+<option>Fantasy Anime</option>
+<option>Cyberpunk</option>
+<option>Realistic</option>
+<option>Dark Fantasy</option>
+
+</select>
+
+<select id="projectWorld">
+
+<option>Fictional</option>
+<option>Sci-Fi</option>
+<option>Historical</option>
+
+</select>
+
+<button class="primary-btn" id="createProject">
+Create Project
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+/* ELEMENTS */
+
+const modal =
+document.getElementById("modal");
+
+const openModal =
+document.getElementById("openModal");
+
+const createProject =
+document.getElementById("createProject");
+
+const projectGrid =
+document.getElementById("projectGrid");
+
+/* STORAGE */
+
+let projects =
+JSON.parse(localStorage.getItem("eoh-projects"))
+|| [];
+
+/* RENDER */
+
+function renderProjects(){
+
+document.querySelectorAll(".generated")
+.forEach(card => card.remove());
+
+projects.forEach(project => {
+
+const card =
+document.createElement("div");
+
+card.classList.add(
+"card",
+"generated"
+);
+
+card.innerHTML = `
+
+<h3>${project.name}</h3>
+
+<p>
+${project.style}<br>
+${project.world}
+</p>
+
+`;
+
+projectGrid.appendChild(card);
+
+});
+
+}
+
+/* INITIAL */
+
+renderProjects();
+
+/* OPEN MODAL */
+
+openModal.onclick = () => {
+
+modal.style.display = "flex";
+
+};
+
+/* CLOSE MODAL */
+
+window.onclick = (e) => {
+
+if(e.target === modal){
+
+modal.style.display = "none";
+
+}
+
+};
+
+/* CREATE PROJECT */
+
+createProject.onclick = () => {
+
+const name =
+document.getElementById("projectName").value;
+
+const style =
+document.getElementById("projectStyle").value;
+
+const world =
+document.getElementById("projectWorld").value;
+
+if(name === ""){
+
+alert("Enter project name");
+
+return;
+
+}
+
+const newProject = {
+
+name,
+style,
+world
+
+};
+
+projects.push(newProject);
+
+localStorage.setItem(
+"eoh-projects",
+JSON.stringify(projects)
+);
+
+renderProjects();
+
+modal.style.display = "none";
+
+};
+
+</script>
 
 </body>
 
