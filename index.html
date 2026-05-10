@@ -759,8 +759,6 @@ document.querySelectorAll(".generated-project")
 
 projects.forEach(project => {
 
-projects.forEach(project => {
-
 const card =
 document.createElement("div");
 
@@ -784,24 +782,9 @@ Saved Project
 
 `;
 
-/* OPEN PROJECT */
-
-card.onclick = () => {
-
-localStorage.setItem(
-"current-project",
-JSON.stringify(project)
-);
-
-window.location.href =
-"pages/project.html";
-
-};
-
 projectGrid.appendChild(card);
 
 });
-
 
 }
 
@@ -888,3 +871,4 @@ modal.style.display = "none";
 </body>
 
 </html>
+
