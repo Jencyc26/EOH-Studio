@@ -1,10 +1,216 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>EOH Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#050505;
+color:white;
+overflow-x:hidden;
+}
+
+/* HEADER */
+
+header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:25px 40px;
+
+border-bottom:
+1px solid rgba(212,175,55,0.15);
+}
+
+.logo{
+
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.logo-circle{
+
+width:60px;
+height:60px;
+
+border-radius:50%;
+
+background:
+linear-gradient(
+145deg,
+#d4af37,
+#f1cc56
+);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:28px;
+font-weight:700;
+
+color:black;
+}
+
+.logo-text h1{
+color:#d4af37;
+font-size:28px;
+}
+
+.logo-text p{
+color:#888;
+font-size:13px;
+}
+
+/* BUTTON */
+
+.create-btn{
+
+padding:14px 20px;
+
+border:none;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+145deg,
+#d4af37,
+#f1cc56
+);
+
+color:black;
+
+font-weight:600;
+
+cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+
+padding:80px 40px;
+text-align:center;
+}
+
+.hero h2{
+
+font-size:58px;
+
+color:#d4af37;
+
+margin-bottom:20px;
+}
+
+.hero p{
+
+max-width:800px;
+
+margin:auto;
+
+line-height:1.8;
+
+color:#999;
+
+font-size:17px;
+}
+
+/* GRID */
+
+.grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(280px,1fr));
+
+gap:25px;
+
+padding:40px;
+}
+
+/* CARD */
+
+.card{
+
+background:#111;
+
+padding:30px;
+
+border-radius:22px;
+
+border:
+1px solid rgba(212,175,55,0.15);
+
+transition:0.3s;
+}
+
+.card:hover{
+
+transform:translateY(-5px);
+
+border-color:#d4af37;
+}
+
+.card h3{
+
+color:#d4af37;
+
+margin-bottom:15px;
+}
+
+.card p{
+
+color:#999;
+
+line-height:1.7;
+}
+
+/* FOOTER */
+
+footer{
+
+padding:30px;
+
+text-align:center;
+
+color:#666;
+}
+
+</style>
+
 </head>
 
-<body style="background:black;color:gold;font-family:Arial;padding:40px;">
+<body>
+
+<header>
+
+<div class="logo">
+
+<div class="logo-circle">
+E
+</div>
+
+<div class="logo-text">
 
 <h1>EOH Studio</h1>
 
@@ -12,5 +218,109 @@
 Turn your writing into visuals.
 </p>
 
+</div>
+
+</div>
+
+<button class="create-btn">
+Launch Studio
+</button>
+
+</header>
+
+<section class="hero">
+
+<h2>
+AI Cinematic Creation Platform
+</h2>
+
+<p>
+
+Create anime worlds, cinematic stories,
+character continuity, emotions,
+voice systems, visual generation,
+and intelligent storytelling workflows.
+
+</p>
+
+</section>
+
+<section class="grid">
+
+<div class="card">
+
+<h3>World Engine</h3>
+
+<p>
+Create countries, timelines,
+cultures and environmental systems.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Character Engine</h3>
+
+<p>
+Store emotions, outfits,
+habits and continuity logic.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Story Engine</h3>
+
+<p>
+Write cinematic scripts,
+dialogues and timeline systems.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Visual Generator</h3>
+
+<p>
+Generate visuals and videos
+using continuity-aware systems.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Voice Lab</h3>
+
+<p>
+Voice modulation,
+lip syncing and emotion workflows.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Asset Storage</h3>
+
+<p>
+Store references, backgrounds,
+PNG assets and cinematic data.
+</p>
+
+</div>
+
+</section>
+
+<footer>
+
+EOH Studio © 2026
+
+</footer>
+
 </body>
+
 </html>
