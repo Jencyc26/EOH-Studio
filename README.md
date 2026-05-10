@@ -1,21 +1,28 @@
-# EOH Studio
-
-EOH Studio is a creative engineering and AI-based platform project.
-
-## Current Progress
-- GitHub repository created
-- GitHub Pages deployed
-- First website launched
-
-## Next Goals
-- Improve UI
-- Add navigation bar
-- Add interactive features
-- Build first tool
-
-## Project Structure
-
 EOH-Studio/
+│
 ├── index.html
-├── README.md
-└── src/
+│
+├── css/
+│   ├── global.css
+│   ├── layout.css
+│   ├── dashboard.css
+│   └── components.css
+│
+├── js/
+│   ├── app.js
+│   ├── dashboard.js
+│   ├── projects.js
+│   └── storage.js
+│
+├── pages/
+│   ├── dashboard.html
+│   ├── project.html
+│   ├── characters.html
+│   └── world.html
+│
+├── assets/
+│   ├── icons/
+│   ├── images/
+│   └── fonts/
+│
+└── data/
