@@ -1,1 +1,59 @@
+.topbar{
+color:#d4af37;
+margin-bottom:12px;
+}
 
+.project-card p,
+.feature-card p,
+.workspace-card p{
+color:#999;
+line-height:1.6;
+font-size:14px;
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.75);
+display:none;
+justify-content:center;
+align-items:center;
+}
+
+.modal-box{
+width:360px;
+background:#111;
+padding:30px;
+border-radius:20px;
+border:1px solid rgba(212,175,55,0.2);
+}
+
+.modal-box h2{
+color:#d4af37;
+margin-bottom:20px;
+}
+
+.modal-box input,
+.modal-box select{
+width:100%;
+padding:14px;
+margin-bottom:14px;
+background:#1b1b1b;
+border:none;
+border-radius:12px;
+color:white;
+}
+
+.workspace-header{
+margin-bottom:40px;
+}
+
+.workspace-header h1{
+font-size:42px;
+color:#d4af37;
+margin-bottom:10px;
+}
+
+.workspace-header p{
+color:#888;
+}
