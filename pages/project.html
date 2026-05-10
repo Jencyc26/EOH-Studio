@@ -1,64 +1,275 @@
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>EOH Workspace</title>
 
-<link rel="stylesheet" href="../css/global.css">
-<link rel="stylesheet" href="../css/layout.css">
-<link rel="stylesheet" href="../css/components.css">
-<link rel="stylesheet" href="../css/dashboard.css">
-<link rel="stylesheet" href="../css/responsive.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:'Poppins',sans-serif;
+
+background:#050505;
+color:white;
+
+padding:40px;
+}
+
+/* HEADER */
+
+.header{
+
+margin-bottom:40px;
+}
+
+.header h1{
+
+font-size:42px;
+
+color:#d4af37;
+
+margin-bottom:10px;
+}
+
+.header p{
+color:#888;
+}
+
+/* GRID */
+
+.grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(260px,1fr));
+
+gap:20px;
+}
+
+/* CARD */
+
+.card{
+
+background:#111;
+
+padding:25px;
+
+border-radius:20px;
+
+border:
+1px solid rgba(212,175,55,0.15);
+
+transition:0.3s;
+
+cursor:pointer;
+}
+
+.card:hover{
+
+transform:translateY(-5px);
+
+border-color:#d4af37;
+}
+
+.card h2{
+
+color:#d4af37;
+
+margin-bottom:14px;
+}
+
+.card p{
+
+color:#999;
+
+line-height:1.7;
+
+font-size:14px;
+}
+
+.open-btn{
+
+margin-top:18px;
+
+padding:12px 16px;
+
+border:none;
+
+border-radius:12px;
+
+background:
+linear-gradient(
+145deg,
+#d4af37,
+#f1cc56
+);
+
+color:black;
+
+font-weight:600;
+
+cursor:pointer;
+}
+
+</style>
+
 </head>
 
 <body>
 
-<div class="workspace-page">
+<div class="header">
 
-<div class="workspace-header">
-<h1 id="workspaceTitle">Project</h1>
-<p>Cinematic continuity workspace</p>
+<h1 id="projectTitle">
+Project Workspace
+</h1>
+
+<p>
+Cinematic continuity workspace
+</p>
+
 </div>
 
-<div class="workspace-grid">
+<div class="grid">
 
-<div class="workspace-card">
-<h2>World Engine</h2>
-<p>Create world logic and cultures.</p>
-<button class="primary-btn">Open</button>
+<div class="card">
+
+<h2>
+🌍 World Engine
+</h2>
+
+<p>
+Create timeline, countries,
+cultures and environmental systems.
+</p>
+
+<button class="open-btn">
+Open
+</button>
+
 </div>
 
-<div class="workspace-card">
-<h2>Character Engine</h2>
-<p>Store habits and emotions.</p>
-<button class="primary-btn">Open</button>
+<div class="card">
+
+<h2>
+👤 Character Engine
+</h2>
+
+<p>
+Store habits, expressions,
+emotions and continuity logic.
+</p>
+
+<button class="open-btn">
+Open
+</button>
+
 </div>
 
-<div class="workspace-card">
-<h2>Story Engine</h2>
-<p>Write scripts and timelines.</p>
-<button class="primary-btn">Open</button>
+<div class="card">
+
+<h2>
+📖 Story Engine
+</h2>
+
+<p>
+Store scripts,
+dialogues and cinematic scenes.
+</p>
+
+<button class="open-btn">
+Open
+</button>
+
 </div>
 
-<div class="workspace-card">
-<h2>Visual Generator</h2>
-<p>Generate cinematic visuals.</p>
-<button class="primary-btn">Open</button>
+<div class="card">
+
+<h2>
+🎬 Generator
+</h2>
+
+<p>
+Generate visuals and videos
+using AI continuity systems.
+</p>
+
+<button class="open-btn">
+Open
+</button>
+
 </div>
+
+<div class="card">
+
+<h2>
+🖼 Assets
+</h2>
+
+<p>
+Store references,
+backgrounds and cinematic resources.
+</p>
+
+<button class="open-btn">
+Open
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>
+🎤 Voice Lab
+</h2>
+
+<p>
+Tamil and English
+voice modulation and lip sync.
+</p>
+
+<button class="open-btn">
+Open
+</button>
 
 </div>
 
 </div>
 
 <script>
-const project = JSON.parse(localStorage.getItem("current-project"));
+
+/* LOAD PROJECT */
+
+const project =
+JSON.parse(
+localStorage.getItem("current-project")
+);
 
 if(project){
-document.getElementById("workspaceTitle").innerText = project.name;
+
+document.getElementById("projectTitle")
+.innerText = project.name;
+
 }
+
 </script>
 
 </body>
+
 </html>
