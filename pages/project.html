@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>EOH Workspace</title>
+<title>EOH Project Workspace</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,42 +28,74 @@ font-family:'Poppins',sans-serif;
 background:#050505;
 color:white;
 
-padding:35px;
+overflow:hidden;
 }
 
-/* HEADER */
+/* MAIN */
 
-.header{
+.workspace{
+
+padding:35px;
+
+height:100vh;
+
+overflow-y:auto;
+}
+
+/* TOPBAR */
+
+.topbar{
 
 display:flex;
 justify-content:space-between;
 align-items:center;
 
 margin-bottom:40px;
+
+flex-wrap:wrap;
+
+gap:15px;
 }
 
-.project-info h1{
+.project-title h1{
 
-font-size:42px;
+font-size:40px;
 
 color:#d4af37;
 
-margin-bottom:10px;
+margin-bottom:8px;
 }
 
-.project-info p{
+.project-title p{
 color:#888;
 }
 
-/* BUTTON */
+/* BUTTONS */
 
-.back-btn{
+.button-group{
+
+display:flex;
+gap:12px;
+
+flex-wrap:wrap;
+}
+
+.btn{
 
 padding:14px 20px;
 
 border:none;
 
 border-radius:14px;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:0.3s;
+}
+
+.gold-btn{
 
 background:
 linear-gradient(
@@ -73,31 +105,43 @@ linear-gradient(
 );
 
 color:black;
+}
 
-font-weight:600;
+.dark-btn{
 
-cursor:pointer;
+background:#151515;
+
+color:#d4af37;
+
+border:
+1px solid rgba(212,175,55,0.2);
+}
+
+.btn:hover{
+transform:translateY(-3px);
 }
 
 /* GRID */
 
-.grid{
+.module-grid{
 
 display:grid;
 
 grid-template-columns:
 repeat(auto-fit,minmax(260px,1fr));
 
-gap:22px;
+gap:24px;
+
+margin-bottom:40px;
 }
 
-/* CARD */
+/* MODULE CARD */
 
-.card{
+.module{
 
 background:#111;
 
-padding:26px;
+padding:28px;
 
 border-radius:22px;
 
@@ -107,23 +151,27 @@ border:
 transition:0.3s;
 
 cursor:pointer;
+
+position:relative;
 }
 
-.card:hover{
+.module:hover{
 
 transform:translateY(-5px);
 
 border-color:#d4af37;
 }
 
-.card h2{
+.module h2{
 
 color:#d4af37;
 
 margin-bottom:14px;
+
+font-size:24px;
 }
 
-.card p{
+.module p{
 
 color:#999;
 
@@ -136,9 +184,9 @@ font-size:14px;
 
 .status{
 
-margin-top:16px;
-
 display:inline-block;
+
+margin-top:18px;
 
 padding:8px 14px;
 
@@ -149,6 +197,46 @@ background:#1b1b1b;
 color:#d4af37;
 
 font-size:12px;
+}
+
+/* INFO GRID */
+
+.info-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(240px,1fr));
+
+gap:20px;
+}
+
+.info-card{
+
+background:#111;
+
+padding:22px;
+
+border-radius:18px;
+
+border:
+1px solid rgba(212,175,55,0.15);
+}
+
+.info-card h3{
+
+color:#d4af37;
+
+margin-bottom:12px;
+}
+
+.info-card p{
+
+color:#999;
+
+line-height:1.7;
+
+font-size:14px;
 }
 
 /* FOOTER */
@@ -164,37 +252,72 @@ color:#666;
 font-size:13px;
 }
 
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.workspace{
+padding:20px;
+}
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+}
+
+}
+
 </style>
 
 </head>
 
 <body>
 
-<div class="header">
+<div class="workspace">
 
-<div class="project-info">
+<!-- TOPBAR -->
 
-<h1 id="projectTitle">
+<div class="topbar">
+
+<div class="project-title">
+
+<h1 id="projectName">
 Project Workspace
 </h1>
 
 <p>
-AI continuity cinematic workspace
+AI cinematic continuity workspace
 </p>
 
 </div>
 
-<button class="back-btn" onclick="goBack()">
+<div class="button-group">
+
+<button class="btn dark-btn" id="undoBtn">
+↩ Undo
+</button>
+
+<button class="btn dark-btn" id="redoBtn">
+↪ Redo
+</button>
+
+<button class="btn dark-btn" onclick="goBack()">
 ← Dashboard
+</button>
+
+<button class="btn gold-btn">
+💾 Save
 </button>
 
 </div>
 
-<!-- WORKSPACE GRID -->
+</div>
 
-<div class="grid">
+<!-- MODULES -->
 
-<div class="card">
+<section class="module-grid">
+
+<div class="module">
 
 <h2>
 🌍 World Engine
@@ -202,21 +325,22 @@ AI continuity cinematic workspace
 
 <p>
 
-Create timeline,
+Store cultures,
 countries,
-cultures,
-world systems
-and environmental logic.
+timelines,
+politics,
+environment
+and world rules.
 
 </p>
 
 <span class="status">
-Ready
+Core System
 </span>
 
 </div>
 
-<div class="card">
+<div class="module">
 
 <h2>
 👤 Character Engine
@@ -224,20 +348,22 @@ Ready
 
 <p>
 
-Store character emotions,
+Store emotions,
 habits,
 expressions,
-clothing and continuity.
+relationships,
+continuity
+and personalities.
 
 </p>
 
 <span class="status">
-Ready
+Character Database
 </span>
 
 </div>
 
-<div class="card">
+<div class="module">
 
 <h2>
 📖 Story Engine
@@ -245,21 +371,66 @@ Ready
 
 <p>
 
-Store scripts,
-scenes,
+Store screenplay,
+episodes,
 dialogues,
-timeline flow
+scene flow
 and cinematic writing.
 
 </p>
 
 <span class="status">
-Ready
+Story Storage
 </span>
 
 </div>
 
-<div class="card">
+<div class="module">
+
+<h2>
+🕒 Timeline
+</h2>
+
+<p>
+
+Track events,
+history,
+scene order,
+world continuity
+and progression logic.
+
+</p>
+
+<span class="status">
+Timeline Logic
+</span>
+
+</div>
+
+<div class="module">
+
+<h2>
+🖼 Assets
+</h2>
+
+<p>
+
+Store PNG images,
+references,
+backgrounds,
+flags,
+costumes
+and environments.
+
+</p>
+
+<span class="status">
+Asset Manager
+</span>
+
+</div>
+
+<div class="module">
 
 <h2>
 🎬 Generator
@@ -269,8 +440,9 @@ Ready
 
 Generate visuals,
 videos,
-frames
-and cinematic sequences.
+image-to-video,
+AI cinematic scenes
+and continuity-aware outputs.
 
 </p>
 
@@ -280,7 +452,7 @@ AI Ready
 
 </div>
 
-<div class="card">
+<div class="module">
 
 <h2>
 🎤 Voice Lab
@@ -288,9 +460,10 @@ AI Ready
 
 <p>
 
-Tamil + English voice support,
-emotion control
-and lip syncing systems.
+Tamil + English voice systems,
+emotion tones,
+voice cloning
+and lip sync workflow.
 
 </p>
 
@@ -300,28 +473,84 @@ Experimental
 
 </div>
 
-<div class="card">
+<div class="module">
 
 <h2>
-🖼 Assets
+📚 Comic Studio
 </h2>
 
 <p>
 
-Store PNG assets,
-references,
-backgrounds
-and cinematic resources.
+Create comic pages,
+panels,
+speech bubbles,
+layouts
+and manga flow systems.
 
 </p>
 
 <span class="status">
-Storage Ready
+Creative System
 </span>
 
 </div>
 
+</section>
+
+<!-- INFO -->
+
+<section class="info-grid">
+
+<div class="info-card">
+
+<h3>
+🧠 AI Continuity
+</h3>
+
+<p>
+
+Future AI memory system
+will track logic,
+scene continuity
+and emotional consistency.
+
+</p>
+
 </div>
+
+<div class="info-card">
+
+<h3>
+☁ Future Cloud Sync
+</h3>
+
+<p>
+
+Google cloud integration
+can later protect
+projects and assets safely.
+
+</p>
+
+</div>
+
+<div class="info-card">
+
+<h3>
+💾 Local Project Memory
+</h3>
+
+<p>
+
+Current version stores
+project structure locally
+inside browser memory.
+
+</p>
+
+</div>
+
+</section>
 
 <div class="footer">
 
@@ -329,23 +558,53 @@ EOH Studio Workspace © 2026
 
 </div>
 
+</div>
+
 <script>
 
 /* LOAD PROJECT */
 
-const project =
+const currentProject =
 JSON.parse(
 localStorage.getItem("current-project")
 );
 
 /* DISPLAY NAME */
 
-if(project){
+if(currentProject){
 
-document.getElementById("projectTitle")
-.innerText = project.name;
+document.getElementById("projectName")
+.innerText =
+currentProject.name;
 
 }
+
+/* UNDO / REDO */
+
+let undoStack = [];
+let redoStack = [];
+
+const undoBtn =
+document.getElementById("undoBtn");
+
+const redoBtn =
+document.getElementById("redoBtn");
+
+undoBtn.onclick = () => {
+
+alert(
+"Undo system foundation ready"
+);
+
+};
+
+redoBtn.onclick = () => {
+
+alert(
+"Redo system foundation ready"
+);
+
+};
 
 /* BACK */
 
