@@ -1,1 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EOH Project Workspace</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:'Poppins',sans-serif;
+
+background:#050505;
+
+color:white;
+
+padding:40px;
+}
+
+/* HEADER */
+
+.workspace-header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+margin-bottom:40px;
+}
+
+.workspace-title h1{
+
+font-size:42px;
+
+color:#d4af37;
+
+margin-bottom:10px;
+}
+
+.workspace-title p{
+
+color:#888;
+}
+
+/* GRID */
+
+.workspace-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(280px,1fr));
+
+gap:25px;
+}
+
+/* CARD */
+
+.workspace-card{
+
+background:
+linear-gradient(
+145deg,
+#111,
+#080808
+);
+
+padding:30px;
+
+border-radius:26px;
+
+border:
+1px solid rgba(212,175,55,0.15);
+
+transition:0.3s;
+}
+
+.workspace-card:hover{
+
+transform:translateY(-5px);
+
+border-color:#d4af37;
+}
+
+.workspace-card h2{
+
+color:#d4af37;
+
+margin-bottom:15px;
+}
+
+.workspace-card p{
+
+color:#999;
+
+line-height:1.7;
+
+font-size:14px;
+}
+
+/* BUTTON */
+
+.workspace-btn{
+
+margin-top:20px;
+
+padding:12px 18px;
+
+border:none;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+145deg,
+#d4af37,
+#f1cc56
+);
+
+color:black;
+
+font-weight:600;
+
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="workspace-header">
+
+<div class="workspace-title">
+
+<h1 id="projectTitle">
+Project
+</h1>
+
+<p>
+Cinematic continuity workspace
+</p>
+
+</div>
+
+</header>
+
+<section class="workspace-grid">
+
+<div class="workspace-card">
+
+<h2>World Engine</h2>
+
+<p>
+Create countries, cultures,
+timelines and environmental logic.
+</p>
+
+<button class="workspace-btn">
+Open World Engine
+</button>
+
+</div>
+
+<div class="workspace-card">
+
+<h2>Character Engine</h2>
+
+<p>
+Store emotions, habits,
+appearance and continuity.
+</p>
+
+<button class="workspace-btn">
+Open Character Engine
+</button>
+
+</div>
+
+<div class="workspace-card">
+
+<h2>Story Engine</h2>
+
+<p>
+Write scripts, timelines,
+dialogues and scene flow.
+</p>
+
+<button class="workspace-btn">
+Open Story Engine
+</button>
+
+</div>
+
+<div class="workspace-card">
+
+<h2>Visual Generator</h2>
+
+<p>
+Generate images and videos
+using continuity-aware systems.
+</p>
+
+<button class="workspace-btn">
+Open Generator
+</button>
+
+</div>
+
+</section>
+
+<script>
+
+/* LOAD CURRENT PROJECT */
+
+const currentProject =
+JSON.parse(localStorage.getItem("current-project"));
+
+if(currentProject){
+
+document.getElementById("projectTitle")
+.innerText = currentProject.name;
+
+}
+
+</script>
+
+</body>
+
+</html>
