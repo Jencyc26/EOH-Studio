@@ -75,13 +75,8 @@ alert(
 /* SETTINGS */
 
 function openSettings(){
-
-alert(
-"⚙ EOH Settings\n\nFuture Controls:\n• Tamil / English\n• Theme\n• Export Quality\n• AI Defaults"
-);
-
+window.location.href = "settings.html";
 }
-
 /* PAGE LOAD */
 
 window.onload = function(){
