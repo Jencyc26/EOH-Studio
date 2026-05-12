@@ -188,6 +188,8 @@ function goBack(){
 window.location.href="project.html";
 }
 
+/* SAVE SETTINGS */
+
 function saveSettings(){
 
 const settings = {
@@ -203,10 +205,76 @@ JSON.stringify(settings)
 );
 
 alert("Settings Saved");
+
+}
+
+/* EXPORT BACKUP */
+
+function exportBackup(){
+
+const data =
+JSON.stringify(localStorage);
+
+const blob =
+new Blob(
+[data],
+{type:"application/json"}
+);
+
+const link =
+document.createElement("a");
+
+link.href =
+URL.createObjectURL(blob);
+
+link.download =
+"EOH_Backup.json";
+
+link.click();
+
+}
+
+/* IMPORT BACKUP */
+
+function importBackup(){
+
+const file =
+document.getElementById("importFile").files[0];
+
+if(!file){
+
+alert("Choose backup file");
+
+return;
+
+}
+
+const reader =
+new FileReader();
+
+reader.onload = function(e){
+
+const data =
+JSON.parse(e.target.result);
+
+for(let key in data){
+
+localStorage.setItem(
+key,
+data[key]
+);
+
+}
+
+alert("Backup Restored");
+
+};
+
+reader.readAsText(file);
+
 }
 
 </script>
-
 <script src="../js/app.js"></script>
 
 </body>
