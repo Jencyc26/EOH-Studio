@@ -154,10 +154,26 @@ Configure language, visual defaults and generation behavior.
 </div>
 
 <div class="card">
-<h2>Save</h2>
+<h2>Project Backup</h2>
 
 <button onclick="saveSettings()">
 Save Settings
+</button>
+
+<br><br>
+
+<button onclick="exportBackup()">
+Export Project Backup
+</button>
+
+<br><br>
+
+<input type="file" id="importFile">
+
+<br><br>
+
+<button onclick="importBackup()">
+Import Backup
 </button>
 
 </div>
