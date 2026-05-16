@@ -11,16 +11,17 @@ font-family:Poppins;
 background:#050505;
 color:white;
 padding:30px;
+margin:0;
 }
 
 .container{
-max-width:1400px;
+max-width:1500px;
 margin:auto;
 }
 
 .grid{
 display:grid;
-grid-template-columns:380px 1fr;
+grid-template-columns:420px 1fr;
 gap:25px;
 }
 
@@ -39,6 +40,12 @@ background:#1a1a1a;
 border:none;
 border-radius:14px;
 color:white;
+font-family:Poppins;
+}
+
+textarea{
+height:90px;
+resize:none;
 }
 
 button{
@@ -52,46 +59,42 @@ cursor:pointer;
 
 .character-grid{
 display:grid;
-grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
 gap:18px;
 }
 
 .character-box{
 background:#1a1a1a;
-padding:20px;
-border-radius:18px;
-text-align:center;
-position:relative;
+padding:22px;
+border-radius:20px;
 }
 
 .avatar{
-width:90px;
-height:90px;
+width:95px;
+height:95px;
 border-radius:50%;
 background:#d4af37;
 margin:auto;
-margin-bottom:15px;
+margin-bottom:16px;
 }
 
 .role{
 display:inline-block;
 padding:6px 12px;
-border-radius:20px;
 background:#222;
 color:#d4af37;
+border-radius:20px;
 font-size:12px;
-margin-bottom:10px;
+margin-bottom:12px;
 }
 
-.actions{
-margin-top:15px;
-display:flex;
-gap:8px;
-justify-content:center;
+.detail{
+font-size:13px;
+color:#bbb;
+margin-top:6px;
 }
 </style>
 </head>
-
 <body>
 
 <div class="container">
@@ -103,19 +106,23 @@ justify-content:center;
 <div class="card">
 
 <input id="name" placeholder="Character Name">
+<input id="age" placeholder="Age">
+<input id="height" placeholder="Height">
 <input id="nation" placeholder="Nationality">
 <input id="eye" placeholder="Eye Color">
 <input id="hair" placeholder="Hair Color">
 
 <select id="role">
 <option>Main Character</option>
-<option>Supporting Role</option>
+<option>Supporting Character</option>
 <option>NPC</option>
 </select>
 
 <textarea id="behavior" placeholder="Behavior"></textarea>
+<textarea id="emotion" placeholder="Emotional Patterns"></textarea>
 
-<input type="file" id="charImage">
+<input id="scars" placeholder="Scars">
+<input id="moles" placeholder="Moles">
 
 <button onclick="saveCharacter()">
 Save Character
@@ -124,7 +131,9 @@ Save Character
 </div>
 
 <div class="card">
+
 <div id="characterList" class="character-grid"></div>
+
 </div>
 
 </div>
@@ -138,13 +147,20 @@ JSON.parse(localStorage.getItem("characters")) || [];
 
 function saveCharacter(){
 
-const char = {
+const char={
+
 name:name.value,
+age:age.value,
+height:height.value,
 nation:nation.value,
 eye:eye.value,
 hair:hair.value,
 role:role.value,
-behavior:behavior.value
+behavior:behavior.value,
+emotion:emotion.value,
+scars:scars.value,
+moles:moles.value
+
 };
 
 characters.push(char);
@@ -155,54 +171,42 @@ JSON.stringify(characters)
 );
 
 renderCharacters();
-}
 
-function deleteCharacter(i){
-
-characters.splice(i,1);
-
-localStorage.setItem(
-"characters",
-JSON.stringify(characters)
-);
-
-renderCharacters();
 }
 
 function renderCharacters(){
 
-const list =
-document.getElementById("characterList");
+characterList.innerHTML="";
 
-list.innerHTML="";
+characters.forEach(char=>{
 
-characters.forEach((char,i)=>{
+characterList.innerHTML += `
 
-list.innerHTML += `
 <div class="character-box">
 
 <div class="avatar"></div>
 
+<center>
 <div class="role">${char.role}</div>
+<h3 style="color:#d4af37;">${char.name}</h3>
+</center>
 
-<h3 style="color:#d4af37;">
-${char.name}
-</h3>
-
-<p>${char.nation}</p>
-
-<p style="font-size:13px;color:#888;">
-${char.behavior}
-</p>
-
-<div class="actions">
-<button onclick="deleteCharacter(${i})">Delete</button>
-</div>
+<div class="detail">Age: ${char.age}</div>
+<div class="detail">Height: ${char.height}</div>
+<div class="detail">Nationality: ${char.nation}</div>
+<div class="detail">Eyes: ${char.eye}</div>
+<div class="detail">Hair: ${char.hair}</div>
+<div class="detail">Behavior: ${char.behavior}</div>
+<div class="detail">Emotion: ${char.emotion}</div>
+<div class="detail">Scars: ${char.scars}</div>
+<div class="detail">Moles: ${char.moles}</div>
 
 </div>
+
 `;
 
 });
+
 }
 
 renderCharacters();
