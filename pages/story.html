@@ -1,358 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>EOH Story Engine</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
 body{
-font-family:'Poppins',sans-serif;
+font-family:Poppins;
 background:#050505;
 color:white;
+padding:30px;
+margin:0;
 }
-
-/* MAIN */
 
 .container{
-padding:35px;
+max-width:1450px;
+margin:auto;
 }
 
-/* TOPBAR */
-
-.topbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:40px;
-flex-wrap:wrap;
-gap:15px;
-}
-
-.title h1{
-font-size:38px;
-color:#d4af37;
-margin-bottom:8px;
-}
-
-.title p{
-color:#888;
-}
-
-/* BUTTONS */
-
-.button-group{
-display:flex;
-gap:12px;
-flex-wrap:wrap;
-}
-
-.btn{
-padding:14px 20px;
-border:none;
-border-radius:14px;
-cursor:pointer;
-font-weight:600;
-transition:0.3s;
-}
-
-.gold-btn{
-background:linear-gradient(145deg,#d4af37,#f1cc56);
-color:black;
-}
-
-.dark-btn{
-background:#151515;
-color:#d4af37;
-border:1px solid rgba(212,175,55,0.2);
-}
-
-.btn:hover{
-transform:translateY(-3px);
-}
-
-/* STORY GRID */
-
-.story-grid{
+.grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+grid-template-columns:400px 1fr;
 gap:25px;
 }
 
-/* CARD */
-
-.story-card{
+.card{
 background:#111;
-padding:26px;
-border-radius:22px;
-border:1px solid rgba(212,175,55,0.15);
-position:relative;
-transition:0.3s;
+padding:25px;
+border-radius:24px;
+border:1px solid rgba(212,175,55,.15);
 }
 
-.story-card:hover{
-transform:translateY(-5px);
-border-color:#d4af37;
-}
-
-.story-card h2{
-color:#d4af37;
-margin-bottom:12px;
-}
-
-.story-card p{
-color:#999;
-line-height:1.8;
-font-size:14px;
-white-space:pre-wrap;
-}
-
-/* TAG */
-
-.story-tag{
-display:inline-block;
-margin-top:16px;
-padding:8px 14px;
-border-radius:30px;
-background:#1b1b1b;
-color:#d4af37;
-font-size:12px;
-}
-
-/* ACTIONS */
-
-.card-actions{
-position:absolute;
-top:18px;
-right:18px;
-display:flex;
-gap:8px;
-}
-
-.action-btn{
+input,textarea,select{
+width:100%;
+padding:14px;
+margin-bottom:14px;
+background:#1a1a1a;
 border:none;
-padding:8px 10px;
-border-radius:10px;
+border-radius:14px;
+color:white;
+font-family:Poppins;
+}
+
+textarea{
+height:220px;
+resize:none;
+}
+
+button{
+padding:14px 18px;
+background:#d4af37;
+border:none;
+border-radius:14px;
+font-weight:600;
 cursor:pointer;
 }
 
-.delete-btn{
-background:#2a0000;
-color:#ff7070;
+.story-list{
+display:grid;
+gap:18px;
 }
 
-.edit-btn{
-background:#111827;
-color:#7dd3fc;
-}
-
-/* MODAL */
-
-.modal{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.75);
-display:none;
-justify-content:center;
-align-items:center;
+.story-box{
+background:#1a1a1a;
 padding:20px;
+border-radius:18px;
 }
 
-.modal-box{
-width:650px;
-max-height:90vh;
-overflow-y:auto;
-background:#111;
-padding:30px;
-border-radius:24px;
-border:1px solid rgba(212,175,55,0.2);
+.actions{
+margin-top:14px;
+display:flex;
+gap:10px;
 }
 
-.modal-box h2{
+h1{
 color:#d4af37;
 margin-bottom:20px;
 }
 
-.modal-box input,
-.modal-box textarea,
-.modal-box select{
-width:100%;
-padding:14px;
-margin-bottom:14px;
-border:none;
-border-radius:12px;
-background:#1b1b1b;
-color:white;
-font-family:'Poppins',sans-serif;
-}
-
-textarea{
-resize:none;
-height:120px;
-}
-
-/* FOOTER */
-
-.footer{
-margin-top:50px;
-text-align:center;
-color:#666;
-font-size:13px;
-}
-
-@media(max-width:700px){
-
-.container{
-padding:20px;
-}
-
-.modal-box{
-width:100%;
-}
-
+.mode-tag{
+display:inline-block;
+padding:6px 12px;
+background:#222;
+color:#d4af37;
+border-radius:20px;
+font-size:12px;
+margin-bottom:10px;
 }
 
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-<!-- TOPBAR -->
+<h1>📖 Story Engine</h1>
 
-<div class="topbar">
+<div class="grid">
 
-<div class="title">
+<!-- LEFT -->
 
-<h1>
-📖 Story Engine
-</h1>
+<div class="card">
 
-<p>
-Store screenplay, scenes and continuity logic
-</p>
+<input id="title" placeholder="Story Part / Chapter">
 
-</div>
-
-<div class="button-group">
-
-<button class="btn dark-btn"
-onclick="goBack()">
-
-← Workspace
-
-</button>
-
-<button class="btn dark-btn"
-id="undoBtn">
-
-↩ Undo Delete
-
-</button>
-
-<button class="btn gold-btn"
-id="openModal">
-
-+ Create Story
-
-</button>
-
-</div>
-
-</div>
-
-<!-- STORIES -->
-
-<section class="story-grid"
-id="storyGrid">
-
-</section>
-
-<div class="footer">
-EOH Story Engine © 2026
-</div>
-
-</div>
-
-<!-- MODAL -->
-
-<div class="modal"
-id="modal">
-
-<div class="modal-box">
-
-<h2>Create Story</h2>
-
-<input
-type="text"
-id="storyTitle"
-placeholder="Story / Episode Title"
->
-
-<select id="storyType">
-
-<option>Episode</option>
-<option>Arc</option>
-<option>Scene</option>
-<option>Dialogue Draft</option>
-<option>Screenplay</option>
-
+<select id="mode">
+<option>Story Mode</option>
+<option>Screenplay Mode</option>
+<option>Scene Breakdown</option>
+<option>Notes Mode</option>
 </select>
 
-<input
-type="text"
-id="storyCharacters"
-placeholder="Characters Involved"
->
+<textarea id="storyContent" placeholder="Write your story here..."></textarea>
 
-<textarea
-id="storyDescription"
-placeholder="Story Description"
-></textarea>
+<input id="sceneTag" placeholder="Scene Tag (Optional)">
 
-<textarea
-id="storyScene"
-placeholder="Scene / Screenplay"
-></textarea>
-
-<textarea
-id="storyEmotion"
-placeholder="Emotion Notes"
-></textarea>
-
-<textarea
-id="storyWorld"
-placeholder="World / Continuity Notes"
-></textarea>
-
-<button
-class="btn gold-btn"
-style="width:100%;margin-top:10px;"
-id="saveStory">
-
+<button onclick="saveStory()">
 Save Story
-
 </button>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="card">
+
+<div id="storyList" class="story-list"></div>
+
+</div>
 
 </div>
 
@@ -360,71 +140,45 @@ Save Story
 
 <script>
 
-/* CURRENT PROJECT */
-
-const currentProject =
-JSON.parse(
-localStorage.getItem("current-project")
-);
-
-/* STORAGE KEY */
-
-const storageKey =
-"stories-" + currentProject.name;
-
-/* STORAGE */
-
 let stories =
-JSON.parse(
-localStorage.getItem(storageKey)
-) || [];
-
-let deletedStory = null;
-
-let editingIndex = null;
-
-/* ELEMENTS */
-
-const modal =
-document.getElementById("modal");
-
-const openModal =
-document.getElementById("openModal");
-
-const saveStory =
-document.getElementById("saveStory");
-
-const storyGrid =
-document.getElementById("storyGrid");
-
-/* OPEN MODAL */
-
-openModal.onclick = () => {
-
-modal.style.display = "flex";
-
-};
-
-/* CLOSE */
-
-window.onclick = (e) => {
-
-if(e.target === modal){
-
-modal.style.display = "none";
-
-}
-
-};
+JSON.parse(localStorage.getItem("stories")) || [];
 
 /* SAVE */
 
-function saveStorage(){
+function saveStory(){
+
+const story = {
+
+title:title.value,
+mode:mode.value,
+content:storyContent.value,
+sceneTag:sceneTag.value
+
+};
+
+stories.push(story);
 
 localStorage.setItem(
-storageKey,
+"stories",
 JSON.stringify(stories)
 );
+
+renderStories();
+
+}
+
+/* DELETE */
+
+function deleteStory(i){
+
+stories.splice(i,1);
+
+localStorage.setItem(
+"stories",
+JSON.stringify(stories)
+);
+
+renderStories();
 
 }
 
@@ -432,255 +186,62 @@ JSON.stringify(stories)
 
 function renderStories(){
 
-storyGrid.innerHTML = "";
+const list =
+document.getElementById("storyList");
 
-stories.forEach((story,index)=>{
+list.innerHTML="";
 
-const card =
-document.createElement("div");
+stories.forEach((story,i)=>{
 
-card.classList.add("story-card");
+list.innerHTML += `
 
-card.innerHTML = `
+<div class="story-box">
 
-<div class="card-actions">
+<div class="mode-tag">
+${story.mode}
+</div>
 
-<button class="action-btn edit-btn">
-✎
-</button>
+<h3 style="color:#d4af37;">
+${story.title}
+</h3>
 
-<button class="action-btn delete-btn">
-✕
+<p style="
+margin-top:12px;
+color:#aaa;
+line-height:1.7;
+">
+${story.content.substring(0,250)}...
+</p>
+
+<p style="
+margin-top:12px;
+font-size:13px;
+color:#777;
+">
+${story.sceneTag}
+</p>
+
+<div class="actions">
+
+<button onclick="deleteStory(${i})">
+Delete
 </button>
 
 </div>
 
-<h2>${story.title}</h2>
-
-<p>
-
-Type: ${story.type}<br><br>
-
-Characters:
-${story.characters}<br><br>
-
-Description:
-${story.description}<br><br>
-
-Scene:
-${story.scene}
-
-</p>
-
-<span class="story-tag">
-${story.type}
-</span>
+</div>
 
 `;
-
-/* DELETE */
-
-card.querySelector(".delete-btn")
-.onclick = ()=>{
-
-deletedStory = story;
-
-stories.splice(index,1);
-
-saveStorage();
-
-renderStories();
-
-};
-
-/* EDIT */
-
-card.querySelector(".edit-btn")
-.onclick = ()=>{
-
-editingIndex = index;
-
-document.getElementById("storyTitle")
-.value = story.title;
-
-document.getElementById("storyType")
-.value = story.type;
-
-document.getElementById("storyCharacters")
-.value = story.characters;
-
-document.getElementById("storyDescription")
-.value = story.description;
-
-document.getElementById("storyScene")
-.value = story.scene;
-
-document.getElementById("storyEmotion")
-.value = story.emotion;
-
-document.getElementById("storyWorld")
-.value = story.world;
-
-modal.style.display = "flex";
-
-};
-
-storyGrid.appendChild(card);
 
 });
 
 }
 
-/* INITIAL */
-
 renderStories();
-
-/* SAVE STORY */
-
-saveStory.onclick = ()=>{
-
-const title =
-document.getElementById("storyTitle")
-.value.trim();
-
-const type =
-document.getElementById("storyType")
-.value;
-
-const characters =
-document.getElementById("storyCharacters")
-.value;
-
-const description =
-document.getElementById("storyDescription")
-.value;
-
-const scene =
-document.getElementById("storyScene")
-.value;
-
-const emotion =
-document.getElementById("storyEmotion")
-.value;
-
-const world =
-document.getElementById("storyWorld")
-.value;
-
-/* VALIDATION */
-
-if(title === ""){
-
-alert("Enter story title");
-
-return;
-
-}
-
-/* DUPLICATE */
-
-const duplicate =
-stories.some((story,i)=>
-
-story.title.toLowerCase()
-=== title.toLowerCase()
-
-&& i !== editingIndex
-
-);
-
-if(duplicate){
-
-alert(
-"Story already exists"
-);
-
-return;
-
-}
-
-/* OBJECT */
-
-const newStory = {
-
-title,
-type,
-characters,
-description,
-scene,
-emotion,
-world
-
-};
-
-/* EDIT */
-
-if(editingIndex !== null){
-
-stories[editingIndex] =
-newStory;
-
-editingIndex = null;
-
-}
-
-/* NEW */
-
-else{
-
-stories.push(newStory);
-
-}
-
-/* SAVE */
-
-saveStorage();
-
-renderStories();
-
-/* RESET */
-
-document.getElementById("storyTitle").value = "";
-document.getElementById("storyCharacters").value = "";
-document.getElementById("storyDescription").value = "";
-document.getElementById("storyScene").value = "";
-document.getElementById("storyEmotion").value = "";
-document.getElementById("storyWorld").value = "";
-
-modal.style.display = "none";
-
-};
-
-/* UNDO */
-
-document.getElementById("undoBtn")
-.onclick = ()=>{
-
-if(deletedStory){
-
-stories.push(deletedStory);
-
-saveStorage();
-
-renderStories();
-
-deletedStory = null;
-
-}
-
-};
-
-/* BACK */
-
-function goBack(){
-
-window.location.href =
-"project.html";
-
-}
 
 </script>
-<script src="../js/app.js"></script>
-</body>
 
+<script src="../js/app.js"></script>
+
+</body>
 </html>
