@@ -2,51 +2,33 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EOH Character Engine</title>
-
+<title>Character Engine</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
 body{
-font-family:'Poppins',sans-serif;
+font-family:Poppins;
 background:#050505;
 color:white;
-padding:35px;
+padding:30px;
 }
 
 .container{
-max-width:1200px;
+max-width:1400px;
 margin:auto;
-}
-
-h1{
-color:#d4af37;
-margin-bottom:12px;
-}
-
-.subtitle{
-color:#888;
-margin-bottom:35px;
 }
 
 .grid{
 display:grid;
-grid-template-columns:420px 1fr;
+grid-template-columns:380px 1fr;
 gap:25px;
 }
 
 .card{
 background:#111;
 padding:25px;
-border-radius:22px;
-border:1px solid rgba(212,175,55,0.15);
+border-radius:24px;
+border:1px solid rgba(212,175,55,.15);
 }
 
 input,select,textarea{
@@ -57,39 +39,55 @@ background:#1a1a1a;
 border:none;
 border-radius:14px;
 color:white;
-font-family:'Poppins',sans-serif;
-}
-
-textarea{
-height:120px;
-resize:none;
 }
 
 button{
 padding:14px 18px;
+background:#d4af37;
 border:none;
 border-radius:14px;
-cursor:pointer;
-background:linear-gradient(145deg,#d4af37,#f1cc56);
-color:black;
 font-weight:600;
+cursor:pointer;
 }
 
-.character-list{
+.character-grid{
 display:grid;
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
 gap:18px;
 }
 
 .character-box{
 background:#1a1a1a;
-padding:18px;
-border-radius:16px;
+padding:20px;
+border-radius:18px;
+text-align:center;
+position:relative;
 }
 
-.name{
+.avatar{
+width:90px;
+height:90px;
+border-radius:50%;
+background:#d4af37;
+margin:auto;
+margin-bottom:15px;
+}
+
+.role{
+display:inline-block;
+padding:6px 12px;
+border-radius:20px;
+background:#222;
 color:#d4af37;
-font-size:20px;
-margin-bottom:8px;
+font-size:12px;
+margin-bottom:10px;
+}
+
+.actions{
+margin-top:15px;
+display:flex;
+gap:8px;
+justify-content:center;
 }
 </style>
 </head>
@@ -98,34 +96,26 @@ margin-bottom:8px;
 
 <div class="container">
 
-<button onclick="goBack()">← Workspace</button>
-
-<h1>👤 Character Engine</h1>
-<p class="subtitle">
-Build persistent characters for continuity-aware storytelling.
-</p>
+<h1 style="color:#d4af37;">Character Engine</h1>
 
 <div class="grid">
 
 <div class="card">
 
 <input id="name" placeholder="Character Name">
-<input id="age" placeholder="Age">
-<input id="height" placeholder="Height">
+<input id="nation" placeholder="Nationality">
 <input id="eye" placeholder="Eye Color">
 <input id="hair" placeholder="Hair Color">
-<input id="nation" placeholder="Nationality">
 
 <select id="role">
 <option>Main Character</option>
-<option>Sub Character</option>
+<option>Supporting Role</option>
 <option>NPC</option>
 </select>
 
-<textarea id="behavior" placeholder="Behavior / quirks"></textarea>
+<textarea id="behavior" placeholder="Behavior"></textarea>
 
-<input id="scars" placeholder="Scars (optional)">
-<input id="moles" placeholder="Moles (optional)">
+<input type="file" id="charImage">
 
 <button onclick="saveCharacter()">
 Save Character
@@ -134,9 +124,7 @@ Save Character
 </div>
 
 <div class="card">
-
-<div id="characterList" class="character-list"></div>
-
+<div id="characterList" class="character-grid"></div>
 </div>
 
 </div>
@@ -145,29 +133,21 @@ Save Character
 
 <script>
 
-function goBack(){
-window.location.href="project.html";
-}
-
 let characters =
 JSON.parse(localStorage.getItem("characters")) || [];
 
 function saveCharacter(){
 
-const character = {
-name:document.getElementById("name").value,
-age:document.getElementById("age").value,
-height:document.getElementById("height").value,
-eye:document.getElementById("eye").value,
-hair:document.getElementById("hair").value,
-nation:document.getElementById("nation").value,
-role:document.getElementById("role").value,
-behavior:document.getElementById("behavior").value,
-scars:document.getElementById("scars").value,
-moles:document.getElementById("moles").value
+const char = {
+name:name.value,
+nation:nation.value,
+eye:eye.value,
+hair:hair.value,
+role:role.value,
+behavior:behavior.value
 };
 
-characters.push(character);
+characters.push(char);
 
 localStorage.setItem(
 "characters",
@@ -175,7 +155,18 @@ JSON.stringify(characters)
 );
 
 renderCharacters();
+}
 
+function deleteCharacter(i){
+
+characters.splice(i,1);
+
+localStorage.setItem(
+"characters",
+JSON.stringify(characters)
+);
+
+renderCharacters();
 }
 
 function renderCharacters(){
@@ -183,21 +174,35 @@ function renderCharacters(){
 const list =
 document.getElementById("characterList");
 
-list.innerHTML = "";
+list.innerHTML="";
 
-characters.forEach(character=>{
+characters.forEach((char,i)=>{
 
 list.innerHTML += `
 <div class="character-box">
-<div class="name">${character.name}</div>
-<p>${character.role}</p>
-<p>${character.nation}</p>
-<p>${character.behavior}</p>
+
+<div class="avatar"></div>
+
+<div class="role">${char.role}</div>
+
+<h3 style="color:#d4af37;">
+${char.name}
+</h3>
+
+<p>${char.nation}</p>
+
+<p style="font-size:13px;color:#888;">
+${char.behavior}
+</p>
+
+<div class="actions">
+<button onclick="deleteCharacter(${i})">Delete</button>
+</div>
+
 </div>
 `;
 
 });
-
 }
 
 renderCharacters();
