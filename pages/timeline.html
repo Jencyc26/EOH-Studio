@@ -1,691 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>EOH Timeline Engine</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Timeline Engine</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
 body{
-font-family:'Poppins',sans-serif;
+font-family:Poppins;
 background:#050505;
 color:white;
+padding:30px;
+margin:0;
 }
-
-/* MAIN */
-
 .container{
-padding:35px;
+max-width:1400px;
+margin:auto;
 }
-
-/* TOPBAR */
-
-.topbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:40px;
-flex-wrap:wrap;
-gap:15px;
-}
-
-.title h1{
-font-size:38px;
-color:#d4af37;
-margin-bottom:8px;
-}
-
-.title p{
-color:#888;
-}
-
-/* BUTTONS */
-
-.button-group{
-display:flex;
-gap:12px;
-flex-wrap:wrap;
-}
-
-.btn{
-padding:14px 20px;
-border:none;
-border-radius:14px;
-cursor:pointer;
-font-weight:600;
-transition:0.3s;
-}
-
-.gold-btn{
-background:linear-gradient(145deg,#d4af37,#f1cc56);
-color:black;
-}
-
-.dark-btn{
-background:#151515;
-color:#d4af37;
-border:1px solid rgba(212,175,55,0.2);
-}
-
-.btn:hover{
-transform:translateY(-3px);
-}
-
-/* GRID */
-
-.timeline-grid{
+.grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+grid-template-columns:400px 1fr;
 gap:25px;
 }
-
-/* CARD */
-
-.timeline-card{
+.card{
 background:#111;
-padding:26px;
-border-radius:22px;
-border:1px solid rgba(212,175,55,0.15);
-position:relative;
-transition:0.3s;
-}
-
-.timeline-card:hover{
-transform:translateY(-5px);
-border-color:#d4af37;
-}
-
-.timeline-card h2{
-color:#d4af37;
-margin-bottom:12px;
-}
-
-.timeline-card p{
-color:#999;
-line-height:1.8;
-font-size:14px;
-white-space:pre-wrap;
-}
-
-/* TAG */
-
-.timeline-tag{
-display:inline-block;
-margin-top:16px;
-padding:8px 14px;
-border-radius:30px;
-background:#1b1b1b;
-color:#d4af37;
-font-size:12px;
-}
-
-/* ACTIONS */
-
-.card-actions{
-position:absolute;
-top:18px;
-right:18px;
-display:flex;
-gap:8px;
-}
-
-.action-btn{
-border:none;
-padding:8px 10px;
-border-radius:10px;
-cursor:pointer;
-}
-
-.delete-btn{
-background:#2a0000;
-color:#ff7070;
-}
-
-.edit-btn{
-background:#111827;
-color:#7dd3fc;
-}
-
-/* MODAL */
-
-.modal{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.75);
-display:none;
-justify-content:center;
-align-items:center;
-padding:20px;
-}
-
-.modal-box{
-width:650px;
-max-height:90vh;
-overflow-y:auto;
-background:#111;
-padding:30px;
+padding:25px;
 border-radius:24px;
-border:1px solid rgba(212,175,55,0.2);
+border:1px solid rgba(212,175,55,.15);
 }
-
-.modal-box h2{
-color:#d4af37;
-margin-bottom:20px;
-}
-
-.modal-box input,
-.modal-box textarea,
-.modal-box select{
+input,textarea{
 width:100%;
 padding:14px;
 margin-bottom:14px;
+background:#1a1a1a;
 border:none;
-border-radius:12px;
-background:#1b1b1b;
+border-radius:14px;
 color:white;
-font-family:'Poppins',sans-serif;
 }
-
 textarea{
-resize:none;
-height:110px;
+height:120px;
 }
-
-/* FOOTER */
-
-.footer{
-margin-top:50px;
-text-align:center;
-color:#666;
-font-size:13px;
+button{
+padding:14px 18px;
+background:#d4af37;
+border:none;
+border-radius:14px;
+cursor:pointer;
 }
-
-@media(max-width:700px){
-
-.container{
+.event-box{
+background:#1a1a1a;
 padding:20px;
+border-radius:18px;
+margin-bottom:16px;
 }
-
-.modal-box{
-width:100%;
-}
-
-}
-
 </style>
-
 </head>
-
 <body>
 
 <div class="container">
 
-<!-- TOPBAR -->
+<h1 style="color:#d4af37;">Timeline Engine</h1>
 
-<div class="topbar">
+<div class="grid">
 
-<div class="title">
+<div class="card">
+<input id="eventTitle" placeholder="Event Title">
+<input id="year" placeholder="Year / Era">
+<textarea id="eventDesc" placeholder="Event Description"></textarea>
 
-<h1>
-🕒 Timeline Engine
-</h1>
-
-<p>
-Track continuity, chronology and event progression
-</p>
-
+<button onclick="saveTimeline()">Save Event</button>
 </div>
 
-<div class="button-group">
-
-<button class="btn dark-btn"
-onclick="goBack()">
-
-← Workspace
-
-</button>
-
-<button class="btn dark-btn"
-id="undoBtn">
-
-↩ Undo Delete
-
-</button>
-
-<button class="btn gold-btn"
-id="openModal">
-
-+ Create Event
-
-</button>
-
+<div class="card">
+<div id="timelineList"></div>
 </div>
 
 </div>
-
-<!-- TIMELINE GRID -->
-
-<section class="timeline-grid"
-id="timelineGrid">
-
-</section>
-
-<div class="footer">
-EOH Timeline Engine © 2026
-</div>
-
-</div>
-
-<!-- MODAL -->
-
-<div class="modal"
-id="modal">
-
-<div class="modal-box">
-
-<h2>Create Timeline Event</h2>
-
-<input
-type="text"
-id="eventTitle"
-placeholder="Event Title"
->
-
-<select id="eventType">
-
-<option>Main Event</option>
-<option>War</option>
-<option>Character Arc</option>
-<option>Flashback</option>
-<option>Political Event</option>
-<option>Emotional Event</option>
-
-</select>
-
-<input
-type="text"
-id="eventYear"
-placeholder="Year / Timeline"
->
-
-<input
-type="text"
-id="eventCharacters"
-placeholder="Characters Involved"
->
-
-<textarea
-id="eventDescription"
-placeholder="Event Description"
-></textarea>
-
-<textarea
-id="eventImpact"
-placeholder="Impact on Story / World"
-></textarea>
-
-<textarea
-id="eventContinuity"
-placeholder="Continuity Notes"
-></textarea>
-
-<button
-class="btn gold-btn"
-style="width:100%;margin-top:10px;"
-id="saveEvent">
-
-Save Event
-
-</button>
-
-</div>
-
 </div>
 
 <script>
 
-/* CURRENT PROJECT */
+let events =
+JSON.parse(localStorage.getItem("timeline")) || [];
 
-const currentProject =
-JSON.parse(
-localStorage.getItem("current-project")
-);
+function saveTimeline(){
 
-/* STORAGE KEY */
-
-const storageKey =
-"timeline-" + currentProject.name;
-
-/* STORAGE */
-
-let timelineEvents =
-JSON.parse(
-localStorage.getItem(storageKey)
-) || [];
-
-let deletedEvent = null;
-
-let editingIndex = null;
-
-/* ELEMENTS */
-
-const modal =
-document.getElementById("modal");
-
-const openModal =
-document.getElementById("openModal");
-
-const saveEvent =
-document.getElementById("saveEvent");
-
-const timelineGrid =
-document.getElementById("timelineGrid");
-
-/* OPEN */
-
-openModal.onclick = ()=>{
-
-modal.style.display = "flex";
-
-};
-
-/* CLOSE */
-
-window.onclick = (e)=>{
-
-if(e.target === modal){
-
-modal.style.display = "none";
-
-}
-
-};
-
-/* SAVE STORAGE */
-
-function saveStorage(){
+events.push({
+title:eventTitle.value,
+year:year.value,
+desc:eventDesc.value
+});
 
 localStorage.setItem(
-storageKey,
-JSON.stringify(timelineEvents)
+"timeline",
+JSON.stringify(events)
 );
 
+renderTimeline();
 }
-
-/* RENDER */
 
 function renderTimeline(){
 
-timelineGrid.innerHTML = "";
+timelineList.innerHTML="";
 
-timelineEvents.forEach((event,index)=>{
+events.forEach(event=>{
 
-const card =
-document.createElement("div");
-
-card.classList.add("timeline-card");
-
-card.innerHTML = `
-
-<div class="card-actions">
-
-<button class="action-btn edit-btn">
-✎
-</button>
-
-<button class="action-btn delete-btn">
-✕
-</button>
-
+timelineList.innerHTML+=`
+<div class="event-box">
+<h3 style="color:#d4af37;">${event.title}</h3>
+<p>${event.year}</p>
+<p>${event.desc}</p>
 </div>
-
-<h2>${event.title}</h2>
-
-<p>
-
-Type: ${event.type}<br><br>
-
-Timeline:
-${event.year}<br><br>
-
-Characters:
-${event.characters}<br><br>
-
-Description:
-${event.description}<br><br>
-
-Impact:
-${event.impact}
-
-</p>
-
-<span class="timeline-tag">
-${event.type}
-</span>
-
 `;
 
-/* DELETE */
-
-card.querySelector(".delete-btn")
-.onclick = ()=>{
-
-deletedEvent = event;
-
-timelineEvents.splice(index,1);
-
-saveStorage();
-
-renderTimeline();
-
-};
-
-/* EDIT */
-
-card.querySelector(".edit-btn")
-.onclick = ()=>{
-
-editingIndex = index;
-
-document.getElementById("eventTitle")
-.value = event.title;
-
-document.getElementById("eventType")
-.value = event.type;
-
-document.getElementById("eventYear")
-.value = event.year;
-
-document.getElementById("eventCharacters")
-.value = event.characters;
-
-document.getElementById("eventDescription")
-.value = event.description;
-
-document.getElementById("eventImpact")
-.value = event.impact;
-
-document.getElementById("eventContinuity")
-.value = event.continuity;
-
-modal.style.display = "flex";
-
-};
-
-timelineGrid.appendChild(card);
-
 });
-
 }
-
-/* INITIAL */
 
 renderTimeline();
-
-/* SAVE */
-
-saveEvent.onclick = ()=>{
-
-const title =
-document.getElementById("eventTitle")
-.value.trim();
-
-const type =
-document.getElementById("eventType")
-.value;
-
-const year =
-document.getElementById("eventYear")
-.value;
-
-const characters =
-document.getElementById("eventCharacters")
-.value;
-
-const description =
-document.getElementById("eventDescription")
-.value;
-
-const impact =
-document.getElementById("eventImpact")
-.value;
-
-const continuity =
-document.getElementById("eventContinuity")
-.value;
-
-/* VALIDATION */
-
-if(title === ""){
-
-alert("Enter event title");
-
-return;
-
-}
-
-/* DUPLICATE */
-
-const duplicate =
-timelineEvents.some((event,i)=>
-
-event.title.toLowerCase()
-=== title.toLowerCase()
-
-&& i !== editingIndex
-
-);
-
-if(duplicate){
-
-alert(
-"Event already exists"
-);
-
-return;
-
-}
-
-/* OBJECT */
-
-const newEvent = {
-
-title,
-type,
-year,
-characters,
-description,
-impact,
-continuity
-
-};
-
-/* EDIT */
-
-if(editingIndex !== null){
-
-timelineEvents[editingIndex] =
-newEvent;
-
-editingIndex = null;
-
-}
-
-/* NEW */
-
-else{
-
-timelineEvents.push(newEvent);
-
-}
-
-/* SAVE */
-
-saveStorage();
-
-renderTimeline();
-
-/* RESET */
-
-document.getElementById("eventTitle").value = "";
-document.getElementById("eventYear").value = "";
-document.getElementById("eventCharacters").value = "";
-document.getElementById("eventDescription").value = "";
-document.getElementById("eventImpact").value = "";
-document.getElementById("eventContinuity").value = "";
-
-modal.style.display = "none";
-
-};
-
-/* UNDO */
-
-document.getElementById("undoBtn")
-.onclick = ()=>{
-
-if(deletedEvent){
-
-timelineEvents.push(deletedEvent);
-
-saveStorage();
-
-renderTimeline();
-
-deletedEvent = null;
-
-}
-
-};
-
-/* BACK */
-
-function goBack(){
-
-window.location.href =
-"project.html";
-
-}
 
 </script>
-<script src="../js/app.js"></script>
-</body>
 
+<script src="../js/app.js"></script>
+
+</body>
 </html>
